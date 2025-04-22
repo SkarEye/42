@@ -1,0 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/11 17:07:26 by mattcarniel       #+#    #+#             */
+/*   Updated: 2025/04/13 09:58:36 by mattcarniel      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+
+int ft_lstsize(t_list *lst)
+{
+    int count;
+
+    count = 0;
+    while (lst)
+    {
+        count++;
+        lst = lst->next;
+    }
+    return (count);
+}
