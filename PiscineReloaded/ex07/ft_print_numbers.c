@@ -6,11 +6,11 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:31:55 by macarnie          #+#    #+#             */
-/*   Updated: 2025/04/22 12:34:29 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:28:46 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+void	ft_putchar(char c);
 
 void	ft_print_numbers(void)
 {
@@ -19,10 +19,9 @@ void	ft_print_numbers(void)
 	c = '0';
 	while (c <= '9')
 	{
-		write(1, &c, 1);
+		ft_putchar(c);
 		c++;
 	}
-	write(1, "\n", 1);
 }
 /*
 int	main(void)

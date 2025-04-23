@@ -6,16 +6,11 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 14:16:39 by macarnie          #+#    #+#             */
-/*   Updated: 2025/04/22 16:50:19 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:30:31 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
+void	ft_putchar(char c);
 
 void	ft_putstr(char *s)
 {

@@ -1,32 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_ft_itoa.c                                     :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 14:14:50 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/04/23 18:10:45 by macarnie         ###   ########.fr       */
+/*   Created: 2025/04/23 18:38:27 by macarnie          #+#    #+#             */
+/*   Updated: 2025/04/23 18:49:15 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
+#include <fcntl.h>
+#include <stdio.h>
 
 int	main(int argc, char **argv)
 {
+	int		fd;
+	char	*line;
+	size_t	count;
+
 	if (argc != 2)
 	{
-		printf("Usage: %s <number>\n", argv[0]);
+		if (argc < 2)
+			write(2, "File name missing.\n", 19);
+		else
+			write(2, "Too many arguments.\n", 20);
 		return (1);
 	}
-	int number = atoi(argv[1]);
-	char *result = ft_itoa(number);
-	if (!result)
+	fd = open(argv[1], O_RDONLY);
+	line = get_next_line(fd);
+	count = 0;
+	while (line)
 	{
-		write(2, "Memory allocation failed\n", 25);
-		return (1);
+		printf("Count : %zu.\nLine : %s\n", count, line);
+		line = get_next_line(fd);
 	}
-	printf("String representation of %d: %s\n", number, result);
-	free(result);
+	if (close(fd) < 0)
+		return (1);
 	return (0);
 }

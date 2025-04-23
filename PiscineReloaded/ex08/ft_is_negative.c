@@ -6,18 +6,18 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 12:34:58 by macarnie          #+#    #+#             */
-/*   Updated: 2025/04/22 12:40:59 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:29:39 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+void	ft_putchar(char c);
 
 void	ft_is_negative(int n)
 {
 	if (n < 0)
-		write(1, "N", 1);
+		ft_putchar('N');
 	else
-		write(1, "P", 1);
+		ft_putchar('P');
 }
 /*
 #include <stdlib.h>
