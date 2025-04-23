@@ -1,13 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.h                                           :+:      :+:    :+:   */
+/*   ft_dp.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/22 16:14:35 by macarnie          #+#    #+#             */
-/*   Updated: 2025/04/23 16:31:32 by macarnie         ###   ########.fr       */
+/*   Created: 2025/04/23 13:37:56 by macarnie          #+#    #+#             */
+/*   Updated: 2025/04/23 16:30:21 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define ABS(Value) ((Value) < 0 ? -(Value) : (Value))
+#ifndef FT_DP_H
+# define FT_DP_H
+
+# include <unistd.h>
+# include <fcntl.h>
+
+#endif
