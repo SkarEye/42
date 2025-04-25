@@ -6,98 +6,91 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:00:18 by macarnie          #+#    #+#             */
-/*   Updated: 2025/04/24 15:00:49 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/04/25 16:36:01 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_pf.h"
 
-size_t	ft_count_dec(int n, char pos)
+void	ft_putchar(char c)
 {
-	size_t	count;
-
-	count = 0;
-	if (pos == '+' || n < 0)
-		count += 1;
-	if (n == 0)
-		return (count + 1);
-	while (n != 0)
-	{
-		n /= 10;
-		count++;
-	}
-	return (count);
+	write(1, &c, 1);
 }
 
-char	*ft_itoa(int n, char pos)
+void	ft_putstr(char *s)
 {
-	char	*str;
-	size_t	size;
+	size_t	i;
 
-	size = ft_count_dec(n, pos);
-	str = (char *)malloc((size + 1) * sizeof(char));
-	if (!str)
-		return (NULL);
-	str[size--] = '\0';
-	if (n == 0)
-		str[size] = '0';
-	if (n < 0)
-		str[0] = '-';
-	else if (pos == '+')
-		str[0] = '+';
-	if (n > 0)
-		n *= -1;
-	while (n != 0)
-	{
-		str[size--] = '0' - (n % 10);
-		n /= 10;
-	}
-	return (str);
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
+		ft_putchar(s[i++]);
 }
 
-size_t	ft_count_hex(unsigned int n, char hash)
+void	ft_print_itoa(int n)
 {
-	size_t	count;
+	char	str[11];
+	size_t	i;
 
-	count = 0;
-	if (hash == '#')
-		count += 2;
 	if (n == 0)
-		return (count + 1);
-	while (n != 0)
+		ft_putchar('0');
+	else
 	{
-		n /= 16;
-		count++;
+		i = 0;
+		if (n < 0)
+			ft_putchar('-');
+		if (n > 0)
+			n *= -1;
+		while (n != 0)
+		{
+			str[i++] = '0' - (n % 10);
+			n /= 10;
+		}
+		while (i-- > 0)
+			ft_putchar(str[i]);
 	}
-	return (count);
 }
 
-
-char	*ft_itoh(unsigned int n, char hash, char c)
+void	ft_print_utoa(unsigned int n)
 {
-	char	*str;
-	size_t	size;
+	char	str[11];
+	size_t	i;
 
-	size = ft_count_hex(n, hash);
-	str = (char *)malloc((size + 1) * sizeof(char));
-	if (!str)
-		return (NULL);
-	if (hash == '#')
-	{
-		str[0] = '0';
-		printf("\n%c\n", c + 23);
-		str[1] = c + 23;
-	}
-	str[size--] = '\0';
 	if (n == 0)
-		str[size] = '0';
-	while (n != 0)
+		ft_putchar('0');
+	else
 	{
-		if (n % 16 < 10)
-			str[size--] = '0' + (n % 16);
-		else
-			str[size--] = c + (n % 16 - 10);
-		n /= 16;
+		i = 0;
+		while (n != 0)
+		{
+			str[i++] = '0' + (n % 10);
+			n /= 10;
+		}
+		while (i-- > 0)
+			ft_putchar(str[i]);
 	}
-	return (str);
+}
+
+void	ft_print_itoh(unsigned int n, char c)
+{
+	char	str[8];
+	size_t		i;
+
+	if (n == 0)
+		ft_putchar('0');
+	else
+	{
+		i = 0;
+		while (n != 0)
+		{
+			if (n % 16 < 10)
+				str[i++] = '0' + (n % 16);
+			else
+				str[i++] = c + (n % 16 - 10);
+			n /= 16;
+		}
+		while (i-- > 0)
+			ft_putchar(str[i]);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 10:27:23 by macarnie          #+#    #+#             */
-/*   Updated: 2025/04/24 14:56:10 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/04/25 16:19:54 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@
 
 # include <stdio.h>
 
-char	*ft_itoh(unsigned int n, char hash, char c);
-char	*ft_itoa(int n, char pos);
+void	ft_putchar(char c);
+void	ft_putstr(char *s);
+void	ft_print_itoa(int n);
+void	ft_print_utoa(unsigned int n);
+void	ft_print_itoh(unsigned int n, char c);
+
+int		ft_printf(const char *format, ...);
 
 #endif
