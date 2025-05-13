@@ -1,11 +1,12 @@
-NAME = ft_printf.a
+NAME = ft_pf.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I.
 AR = ar rcs
 RM = rm -f
 
-SRC = ft_printf.c \
-	  ft_vprintf.c
+SRC =   ft_toa_utils.c \
+        ft_printf.c
+
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

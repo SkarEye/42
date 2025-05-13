@@ -3,36 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 10:25:58 by macarnie          #+#    #+#             */
-/*   Updated: 2025/04/25 15:37:56 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/05/12 12:30:02 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_pf.h"
-
-size_t	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putstr(char *s)
-{
-	if (!s)
-		return ;
-	write(1, s, ft_strlen(s));
-}
 
 int	ft_printf(const char *format, ...)
 {
@@ -53,18 +31,18 @@ int	ft_printf(const char *format, ...)
 			else if (format[i] == 's')
 				ft_putstr(va_arg(args, char *));
 			else if (format[i] == 'd' || format[i] == 'i')
-			
-			else if (format[i] == 'p' || format[i] == )
+				ft_print_itoa(va_arg(args, int));
+			else if (format[i] == 'u')
+				ft_print_utoa(va_arg(args, unsigned int));
+			else if (format[i] == 'p' || format[i] == 'x')
+				ft_print_itoh(va_arg(args, unsigned int), 'a');
+			else if (format[i] == 'p' || format[i] == 'X')
+				ft_print_itoh(va_arg(args, unsigned int), 'A');
 		}
+		else
+			ft_putchar(format[i]);
+		i++;
 	}
+	va_end(args);
 	return (i);
 }
-/*
-int	main(int argc, char **argv)
-{
-	if (argc != 4)
-		return (1);
-	ft_printf("This is a test", argv[1]);
-	return (0);
-}
-*/

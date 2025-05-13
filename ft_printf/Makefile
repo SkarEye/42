@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g -I ft_printf
-PF = ft_printf/ft_pf.a
+PF = ft_printf/ft_printf.a
 
 SRC = main.c
 OBJ = $(SRC:.c=.o)

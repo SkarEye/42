@@ -3,46 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 10:25:58 by macarnie          #+#    #+#             */
-/*   Updated: 2025/04/25 16:32:15 by macarnie         ###   ########.fr       */
+/*   Created: 2025/05/12 09:07:48 by mattcarniel       #+#    #+#             */
+/*   Updated: 2025/05/12 14:01:30 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_pf.h"
+#include "ft_printf.h"
 
-int	ft_printf(const char *format, ...)
+int ft_snprintf(char *str, size_t maxlen, const char *format, ...)
 {
-	va_list	args;
-	int		i;
-	
+    va_list args;
+    int len;
+
+    va_start(args, format);
+    len = ft_vsnprintf(str, maxlen, format, args);
+    va_end(args);
+    return len;
+}
+
+int ft_sprintf(char *str, const char *format, ...)
+{
+    va_list args;
+    int len;
+
+    va_start(args, format);
+    len = ft_vsprintf(str, format, args);
+    va_end(args);
+    return len;
+}
+
+int ft_dprintf(int fd, const char *format, ...)
+{
+    va_list	args;
+    int		len;
+
+    va_start(args, format);
+    len = ft_vdprintf(fd, format, args);
+    va_end(args);
+    return (len);
+}
+
+int ft_printf(const char *format, ...)
+{
+	va_list args;
+	int len;
+
 	va_start(args, format);
-	i = 0;
-	while (format[i])
-	{
-		if (format[i] == '%')
-		{
-			i++;
-			if (format[i] == '%')
-				ft_putchar('%');
-			else if (format[i] == 'c')
-				ft_putchar(va_arg(args, int));
-			else if (format[i] == 's')
-				ft_putstr(va_arg(args, char *));
-			else if (format[i] == 'd' || format[i] == 'i')
-				ft_print_itoa(va_arg(args, int));
-			else if (format[i] == 'u')
-				ft_print_utoa(va_arg(args, unsigned int));
-			else if (format[i] == 'p' || format[i] == 'x')
-				ft_print_itoh(va_arg(args, unsigned int), 'a');
-			else if (format[i] == 'p' || format[i] == 'X')
-				ft_print_itoh(va_arg(args, unsigned int), 'A');
-		}
-		else
-			ft_putchar(format[i]);
-		i++;
-	}
+	len = ft_vprintf(format, args);
 	va_end(args);
-	return (i);
+	return (len);
 }
