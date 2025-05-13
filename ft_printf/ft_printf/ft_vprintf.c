@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_vprintf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:14:33 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/05/12 16:33:02 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/05/13 13:34:36 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,18 @@ int	ft_vsnprintf(char *str, size_t maxlen, const char *format, va_list args)
 		if (format[i] == '%')
 		{
 			ft_set_format(&f, format, &i, args);
-			if (f.specifier)
-				len += ft_convert(&f, str + len, (int)(maxlen - len), args);
-			i++;
+			if (f.specifier && len < maxlen)
+				len += ft_convert(&f, str + len, maxlen - len, args);
 		}
 		else if (len < maxlen)
 			str[len++] = format[i++];
+		else
+		{
+			len++;
+			i++;
+		}
 	}
-	if (len < maxlen)
+	if (len <= maxlen)
 		str[len] = '\0';
 	return (len);
 }
@@ -56,7 +60,7 @@ int ft_vdprintf(int fd, const char *format, va_list args)
 	va_end(args_copy);
 	if (len < (int)sizeof(s_buffer))
 		return (write(fd, s_buffer, len));
-	h_buffer = malloc(sizeof(char) *(len + 1));
+	h_buffer = malloc(sizeof(char) * (len + 1));
 	if (!h_buffer)
 		return (-1);
 	va_copy(args_copy, args);

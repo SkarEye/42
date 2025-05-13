@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_format.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 14:41:06 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/05/12 16:27:02 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/05/13 12:04:49 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void    ft_set_flags(t_format *format, const char *str, int *i)
+void    ft_set_flags(t_format *format, const char *str, size_t *i)
 {
     while (str[*i] && ft_strchr(FLAGS, str[*i]))
     {
@@ -29,7 +29,7 @@ void    ft_set_flags(t_format *format, const char *str, int *i)
         (*i)++;
     }
 }
-void    ft_set_width(t_format *format, const char *str, int *i, va_list args)
+void    ft_set_width(t_format *format, const char *str, size_t *i, va_list args)
 {
     if (str[*i] && str[*i] == '*')
     {
@@ -52,7 +52,7 @@ void    ft_set_width(t_format *format, const char *str, int *i, va_list args)
 }
 
 
-void    ft_set_precision(t_format *format, const char *str, int *i, va_list args)
+void    ft_set_precision(t_format *format, const char *str, size_t *i, va_list args)
 {
     if (str[*i] && str[*i] == '.')
     {
@@ -74,7 +74,7 @@ void    ft_set_precision(t_format *format, const char *str, int *i, va_list args
     }
 }
 
-void ft_set_specifier(t_format *format, const char *str, int *i)
+void ft_set_specifier(t_format *format, const char *str, size_t *i)
 {
     if (str[*i] && ft_strchr(SPECS, str[*i]))
     {
@@ -85,14 +85,17 @@ void ft_set_specifier(t_format *format, const char *str, int *i)
         format->specifier = 0;
 }
 
-void    ft_set_format(t_format *format, const char *str, int *i, va_list args)
+void    ft_set_format(t_format *format, const char *str, size_t *i, va_list args)
 {
-    format->flags = 0;
-    format->width = 0;
-    format->precision = -1;
-    format->specifier = 0;
-    ft_set_flags(format, str, i);
-    ft_set_width(format, str, i, args);
-    ft_set_precision(format, str, i, args);
-    ft_set_specifier(format, str, i);
+    (*i)++; // Skip the '%'
+    format->flags = 0; // Reset flags
+    format->width = 0; // Reset width
+    format->precision = -1; // Reset precision
+    format->specifier = 0; // Reset specifier
+    ft_set_flags(format, str, i); // Set flags
+    ft_set_width(format, str, i, args); // Set width
+    ft_set_precision(format, str, i, args); // Set precision
+    ft_set_specifier(format, str, i); // Set specifier
+    if (format->specifier == 0)
+        format->specifier = '%'; // Default to '%' if no specifier found
 }

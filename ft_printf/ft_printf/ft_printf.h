@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 08:58:08 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/05/12 16:43:02 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/05/13 13:27:29 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # define FLAGS " -+0#"
 # define SPECS "cspdiouxX%"
+# define HEX "0123456789abcdef"
 # define FLAG_MINUS (1 << 0)
 # define FLAG_PLUS (1 << 1)
 # define FLAG_ZERO (1 << 2)
@@ -27,7 +28,7 @@
 
 typedef struct s_format
 {
-	unsigned char	flags; // bitfield for flags
+	unsigned char	flags; // bitfield for flags 00011001
 	int				width;
 	int				precision;
 	char			specifier;
@@ -44,5 +45,9 @@ int	ft_vdprintf(int fd, const char *format, va_list args);
 int	ft_vprintf(const char *format, va_list args);
 
 int	ft_set_format(t_format *format, const char *str, int *i, va_list args);
+
+size_t	ft_int_countdigits(int n);
+size_t	ft_uint_countdigits(unsigned int n);
+size_t	ft_hex_countdigits(unsigned int n);
 
 #endif

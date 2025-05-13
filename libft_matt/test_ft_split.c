@@ -1,32 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_ft_itoa.c                                     :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/09 14:14:50 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/04/23 18:10:45 by macarnie         ###   ########.fr       */
+/*   Created: 2025/04/07 12:43:10 by mattcarniel       #+#    #+#             */
+/*   Updated: 2025/04/29 14:08:39 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdlib.h>
 
-int	main(int argc, char **argv)
+int main(int argc, char **argv)
 {
-	if (argc != 2)
+	if (argc != 3)
 	{
-		printf("Usage: %s <number>\n", argv[0]);
+		printf("Usage: %s <string> <delimiter>\n", argv[0]);
 		return (1);
 	}
-	int number = atoi(argv[1]);
-	char *result = ft_itoa(number);
+	if (argv[2][1] != '\0')
+	{
+		printf("Delimiter must be a single character\n");
+		return (1);
+	}
+
+	char **result = ft_split("This is a test", ' ');
 	if (!result)
 	{
 		write(2, "Memory allocation failed\n", 25);
 		return (1);
 	}
-	printf("String representation of %d: %s\n", number, result);
+	for (int i = 0; result[i] != NULL; i++)
+	{
+		printf("Word %d: %s\n", i, result[i]);
+		free(result[i]);
+	}
 	free(result);
 	return (0);
 }
