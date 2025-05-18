@@ -6,49 +6,49 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:07:48 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/05/12 14:01:30 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/05/15 14:27:57 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int ft_snprintf(char *str, size_t maxlen, const char *format, ...)
+int	ft_snprintf(char *str, size_t maxlen, const char *format, ...)
 {
-    va_list args;
-    int len;
+	va_list	args;
+	int		len;
 
-    va_start(args, format);
-    len = ft_vsnprintf(str, maxlen, format, args);
-    va_end(args);
-    return len;
+	va_start(args, format);
+	len = ft_vsnprintf(str, maxlen, format, args);
+	va_end(args);
+	return (len);
 }
 
-int ft_sprintf(char *str, const char *format, ...)
+int	ft_sprintf(char *str, const char *format, ...)
 {
-    va_list args;
-    int len;
+	va_list	args;
+	int		len;
 
-    va_start(args, format);
-    len = ft_vsprintf(str, format, args);
-    va_end(args);
-    return len;
+	va_start(args, format);
+	len = ft_vsprintf(str, format, args);
+	va_end(args);
+	return (len);
 }
 
-int ft_dprintf(int fd, const char *format, ...)
+int	ft_dprintf(int fd, const char *format, ...)
 {
-    va_list	args;
-    int		len;
+	va_list	args;
+	int		len;
 
-    va_start(args, format);
-    len = ft_vdprintf(fd, format, args);
-    va_end(args);
-    return (len);
+	va_start(args, format);
+	len = ft_vdprintf(fd, format, args);
+	va_end(args);
+	return (len);
 }
 
-int ft_printf(const char *format, ...)
+int	ft_printf(const char *format, ...)
 {
-	va_list args;
-	int len;
+	va_list	args;
+	int		len;
 
 	va_start(args, format);
 	len = ft_vprintf(format, args);

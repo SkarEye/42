@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 18:38:27 by macarnie          #+#    #+#             */
-/*   Updated: 2025/04/23 18:49:15 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/05/02 18:23:59 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,11 @@ int	main(int argc, char **argv)
 	}
 	fd = open(argv[1], O_RDONLY);
 	line = get_next_line(fd);
-	count = 0;
+	count = 1;
 	while (line)
 	{
-		printf("Count : %zu.\nLine : %s\n", count, line);
+		printf("Count : %zu.\nLine : %s\n", count++, line);
+		free(line);
 		line = get_next_line(fd);
 	}
 	if (close(fd) < 0)

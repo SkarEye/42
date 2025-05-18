@@ -1,11 +1,19 @@
-NAME = ft_printf.a
+NAME = libftprintf.a
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -I.
 AR = ar rcs
 RM = rm -f
 
 SRC = ft_printf.c \
-	  ft_vprintf.c
+	  ft_vprintf.c \
+	  ft_convert.c \
+	  ft_convert2.c \
+	  ft_format.c \
+	  ft_countdigits.c \
+	  ft_countlen.c \
+	  ft_toa.c \
+	  ft_utils.c
+	  
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
