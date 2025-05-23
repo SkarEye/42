@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_format.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 14:41:06 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/05/15 16:15:08 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/05/19 14:16:29 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,46 +30,53 @@ void	ft_set_flags(t_format *f, const char *str, size_t *i)
 	}
 }
 
-void	ft_set_width(t_format *f, const char *str, size_t *i, va_list *args)
+void	ft_set_width(t_format *f, const char *str, size_t *i, va_list args)
 {
+	int	width;
+
 	if (str[*i] && str[*i] == '*')
 	{
-		f->width = va_arg(*args, int);
-		if (f->width < 0)
+		width = va_arg(args, int);
+		if (width < 0)
 		{
 			f->flags |= FLAG_MINUS;
-			f->width = -f->width;
+			f->width = (size_t)(-width);
 		}
+		else
+			f->width = (size_t)width;
 		(*i)++;
 	}
 	else
 	{
 		while (str[*i] && (str[*i] >= '0' && str[*i] <= '9'))
-		{
-			f->width = f->width * 10 + (str[*i] - '0');
-			(*i)++;
-		}
+			f->width = f->width * 10 + (str[(*i)++] - '0');
 	}
 }
 
-void	ft_set_precision(t_format *f, const char *str, size_t *i, va_list *args)
+void	ft_set_precision(t_format *f, const char *str, size_t *i, va_list args)
 {
+	int	precision;
+
 	if (str[*i] && str[*i] == '.')
 	{
 		(*i)++;
 		f->flags |= FLAG_PRECISION;
 		if (str[*i] && str[*i] == '*')
 		{
-			f->precision = va_arg(*args, int);
+			precision = va_arg(args, int);
+			if (precision < 0)
+			{
+				f->flags &= ~FLAG_PRECISION;
+				f->precision = 0;
+			}
+			else
+				f->precision = (size_t)precision;
 			(*i)++;
 		}
 		else
 		{
 			while (str[*i] && (str[*i] >= '0' && str[*i] <= '9'))
-			{
-				f->precision = f->precision * 10 + (str[*i] - '0');
-				(*i)++;
-			}
+				f->precision = f->precision * 10 + (str[(*i)++] - '0');
 		}
 	}
 }
@@ -85,7 +92,7 @@ void	ft_set_specifier(t_format *f, const char *str, size_t *i)
 		f->specifier = 0;
 }
 
-void	ft_set_format(t_format *f, const char *str, size_t *i, va_list *args)
+void	ft_set_format(t_format *f, const char *str, size_t *i, va_list args)
 {
 	(*i)++;
 	f->flags = 0;

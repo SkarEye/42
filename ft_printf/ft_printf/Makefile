@@ -1,5 +1,5 @@
 NAME = libftprintf.a
-CC = gcc
+CC = cc
 CFLAGS = -Wall -Wextra -Werror -I.
 AR = ar rcs
 RM = rm -f
@@ -17,6 +17,8 @@ SRC = ft_printf.c \
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
+
+bonus: all
 
 $(NAME): $(OBJ)
 	$(AR) $(NAME) $(OBJ)
