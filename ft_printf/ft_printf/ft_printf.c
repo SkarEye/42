@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 09:07:48 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/05/15 14:27:57 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/05/19 12:07:41 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

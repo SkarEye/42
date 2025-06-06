@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_convert.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 16:42:55 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/05/15 16:18:30 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/05/23 15:21:04 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-size_t	ft_convert(t_format *f, char *str, size_t maxlen, va_list *args)
+size_t	ft_convert(t_format *f, char *str, size_t maxlen, va_list args)
 {
 	if (f->specifier == 'c')
 		return (ft_convert_char(f, str, maxlen, args));
@@ -31,12 +31,12 @@ size_t	ft_convert(t_format *f, char *str, size_t maxlen, va_list *args)
 	return (0);
 }
 
-size_t	ft_convert_char(t_format *f, char *str, size_t maxlen, va_list *args)
+size_t	ft_convert_char(t_format *f, char *str, size_t maxlen, va_list args)
 {
 	char	c;
 	size_t	width;
 
-	c = (char)va_arg(*args, int);
+	c = (char)va_arg(args, int);
 	width = ft_max(1, f->width);
 	if (width > maxlen)
 		return (width);
@@ -48,15 +48,35 @@ size_t	ft_convert_char(t_format *f, char *str, size_t maxlen, va_list *args)
 	return (width);
 }
 
-size_t	ft_convert_string(t_format *f, char *str, size_t maxlen, va_list *args)
+size_t	ft_convert_null(t_format *f, char *str, size_t maxlen)
+{
+	if (f->flags & FLAG_PRECISION && f->precision < 6)
+	{
+		if (f->width > maxlen)
+			return (f->width);
+		ft_memset(str, ' ', f->width);
+		return (f->width);
+	}
+	f->width = ft_max(6, f->width);
+	if (f->width > maxlen)
+		return (f->width);
+	ft_memset(str, ' ', f->width);
+	if (f->flags & FLAG_MINUS)
+		ft_memmove(str, NULL_STR, 6);
+	else
+		ft_memmove(str + f->width - 6, NULL_STR, 6);
+	return (f->width);
+}
+
+size_t	ft_convert_string(t_format *f, char *str, size_t maxlen, va_list args)
 {
 	char	*s;
 	size_t	len;
 	size_t	width;
 
-	s = va_arg(*args, char *);
+	s = va_arg(args, char *);
 	if (!s)
-		s = "(null)";
+		return (ft_convert_null(f, str, maxlen));
 	len = ft_strlen(s);
 	if (f->flags & FLAG_PRECISION && f->precision < len)
 		len = f->precision;

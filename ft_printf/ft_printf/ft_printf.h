@@ -3,24 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/12 08:58:08 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/05/15 16:19:06 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/05/22 10:28:47 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 # include <stdarg.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 # define FLAGS " -+0#"
 # define SPECS "cspdiuxX%"
 # define HEX "0123456789abcdef"
 # define HEX_UP "0123456789ABCDEF"
+# define NULL_STR "(null)"
+# define NIL_STR "(nil)"
 
 # define FLAG_MINUS 1
 # define FLAG_PLUS 2
@@ -47,17 +52,17 @@ int		ft_vsprintf(char *str, const char *format, va_list args);
 int		ft_vdprintf(int fd, const char *format, va_list args);
 int		ft_vprintf(const char *format, va_list args);
 
-void	ft_set_format(t_format *f, const char *str, size_t *i, va_list *args);
+void	ft_set_format(t_format *f, const char *str, size_t *i, va_list args);
 
-size_t	ft_convert(t_format *f, char *str, size_t maxlen, va_list *args);
-size_t	ft_convert_char(t_format *f, char *str, size_t maxlen, va_list *args);
-size_t	ft_convert_string(t_format *f, char *str, size_t maxlen, va_list *args);
+size_t	ft_convert(t_format *f, char *str, size_t maxlen, va_list args);
+size_t	ft_convert_char(t_format *f, char *str, size_t maxlen, va_list args);
+size_t	ft_convert_string(t_format *f, char *str, size_t maxlen, va_list args);
 size_t	ft_convert_percent(char *str, size_t maxlen);
 
-size_t	ft_convert_int(t_format *f, char *str, size_t maxlen, va_list *args);
-size_t	ft_convert_uint(t_format *f, char *str, size_t maxlen, va_list *args);
-size_t	ft_convert_hex(t_format *f, char *str, size_t maxlen, va_list *args);
-size_t	ft_convert_ptr(t_format *f, char *str, size_t maxlen, va_list *args);
+size_t	ft_convert_int(t_format *f, char *str, size_t maxlen, va_list args);
+size_t	ft_convert_uint(t_format *f, char *str, size_t maxlen, va_list args);
+size_t	ft_convert_hex(t_format *f, char *str, size_t maxlen, va_list args);
+size_t	ft_convert_ptr(t_format *f, char *str, size_t maxlen, va_list args);
 
 size_t	ft_ubase_countdigits(unsigned int n, size_t base);
 size_t	ft_ulbase_countdigits(unsigned long n, size_t base);
