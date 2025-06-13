@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:28:24 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/04 19:41:52 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/06/11 17:17:35 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

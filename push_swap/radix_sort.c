@@ -3,47 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   radix_sort.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:51:41 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/04 20:28:14 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/06/11 17:34:00 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int  get_max_int(t_stack *stack)
+static size_t get_max_bits(int size)
 {
-    t_node  *node;
-    int     max;
-
-    if (!stack || !stack->head)
-        return (0);
-    max = stack->head->value;
-    node = stack->head->next;
-    while (node)
-    {
-        if (node->value > max)
-            max = node->value;
-        node = node->next;
-    }
-    return (max);
-}
-
-static char get_max_bits(int max)
-{
-    char    bits;
+    size_t    bits;
 
     bits = 0;
-    while (max)
+    while (size)
     {
-        max >>= 1;
+        size >>= 1;
         bits++;
     }
     return (bits);
 }
 
-void    assign_index(t_stack *stack)
+static void    assign_index(t_stack *stack)
 {
     t_node  *node;
     int     *int_tab;
@@ -51,16 +33,9 @@ void    assign_index(t_stack *stack)
 
     if (!stack || stack->size == 0)
         return ;
-    int_tab = malloc(sizeof(int) * stack->size);
+    int_tab = create_int_tab_from_stack(stack);
     if (!int_tab)
         return ;
-    node = stack->head;
-    i = 0;
-    while (node)
-    {
-        int_tab[i++] = node->value;
-        node = node->next;
-    }
     sort_int_tab(int_tab, stack->size);
     node = stack->head;
     while (node)
@@ -74,5 +49,64 @@ void    assign_index(t_stack *stack)
     free(int_tab);
 }
 
+void    print_stacks(t_stack *a, t_stack *b)
+{
+    t_node  *na = a ? a->head : NULL;
+    t_node  *nb = b ? b->head : NULL;
 
-void    radix_sort();
+    printf("   A\t\tB\n");
+    printf("  ---\t\t---\n");
+    while (na || nb)
+    {
+        if (na)
+        {
+            printf("%5d", na->value);
+            na = na->next;
+        }
+        else
+            printf("     ");
+        printf("\t");
+        if (nb)
+        {
+            printf("%5d", nb->value);
+            nb = nb->next;
+        }
+        printf("\n");
+    }
+    printf("  ---\t\t---\n\n");
+}
+
+void    radix_sort(t_stack *a, t_stack *b)
+{
+    size_t  max_bits;
+    size_t  i;
+    size_t  j;
+
+    if (!a || !b || a->size < 2)
+        return ;
+    assign_index(a);
+    max_bits = get_max_bits(a->size - 1);
+    i = 0;
+    while (i < max_bits)
+    {
+        j = a->size;
+        while (j > 0)
+        {
+            static int step = 0;
+            printf("Step %d:\n", ++step);
+            print_stacks(a, b);
+            usleep(100000);
+            if ((a->head->index >> i) & 1)
+                ra(a);
+            else
+                pa(a, b);
+            printf("j = %zu\n", j);
+            print_stacks(a, b);
+            j--;
+        }
+
+        while (b->size > 0)
+            pb(a, b);
+        i++;
+    }
+}

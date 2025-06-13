@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   matt_sort.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 19:23:52 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/11 16:54:08 by macarnie         ###   ########.fr       */
+/*   Created: 2025/06/11 19:35:17 by macarnie          #+#    #+#             */
+/*   Updated: 2025/06/11 20:07:53 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "matt_sort.h"
 
-static void    push(t_stack *from, t_stack *to)
+void matt_sort(t_stack *a, t_stack *b)
 {
-    t_node  *node;
 
-    if (!from || !from->head)
-        return ;
-    node = pop_node_front(from);
-    add_to_front(to, node);
-}
-
-void    pa(t_stack *a, t_stack *b)
-{
-    push(a, b);
-    printf("pa\n");
-}
-
-void    pb(t_stack *a, t_stack *b)
-{
-    push(b, a);
-    printf("pb\n");
 }

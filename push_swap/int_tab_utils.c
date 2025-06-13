@@ -3,43 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   int_tab_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 13:05:51 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/04 19:59:30 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/06/11 17:17:23 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int ft_atoi(const char *str)
+static int ft_atoi_safe(const char *str, int *out)
 {
-    int sign;
-    int n;
+    long    n;
+    int     sign;
 
-    n = 0;
     sign = 1;
-    while (*str == ' ' || (*str >= 9 && *str <= 13))
-        str++;
+    if (!str || !*str)
+        return (0);
     if (*str == '-' || *str == '+')
     {
         if (*str == '-')
             sign = -1;
         str++;
     }
-    while (*str >= '0' && *str <= '9')
+    if (!*str)
+        return (0);
+    n = 0;
+    while (*str)
     {
-        n = n * 10 + (*str - '0');
-        str++;
+        if (*str < '0' || *str > '9')
+            return (0);
+        n = n * 10 + (*(str++) - '0');
+        if ((sign == 1 && n > INT_MAX) || (sign == -1 && -n < INT_MIN))
+            return (0);
     }
-    return (sign * n);
+    *out = sign * n;
+    return (1);
+}
+
+static int has_duplicates(int *tab, int n, size_t size)
+{
+    size_t i;
+
+    i = 0;
+    while (i < size)
+    {
+        if (tab[i] == n)
+            return (1);
+        i++;
+    }
+    return (0);
 }
 
 int *create_unique_int_tab(char **str_tab, size_t size)
 {
     int *int_tab;
+    int n;
     size_t i;
-    size_t j;
 
     int_tab = malloc(sizeof(int) * size);
     if (!int_tab)
@@ -47,14 +67,11 @@ int *create_unique_int_tab(char **str_tab, size_t size)
     i = 0;
     while (i < size)
     {
-        int_tab[i] = ft_atoi(str_tab[i]);
-        j = 0;
-        while (j < i)
-        {
-            if (int_tab[j] == int_tab[i])
-                return (free(int_tab), NULL);
-            j++;
-        }
+        if (!ft_atoi_safe(str_tab[i], &n))
+            return (free(int_tab), NULL);
+        int_tab[i] = n;
+        if (has_duplicates(int_tab, n, i))
+            return (free(int_tab), NULL);
         i++;
     }
     return (int_tab);

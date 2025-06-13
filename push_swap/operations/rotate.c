@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:30:22 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/03 19:31:08 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/06/11 17:24:38 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    rotate(t_stack *stack)
+static void    rotate(t_stack *stack)
 {
     t_node *node;
 
@@ -22,12 +22,21 @@ void    rotate(t_stack *stack)
     add_to_back(stack, node);
 }
 
-void    ra(t_stack *a) {rotate(a); }
+void    ra(t_stack *a)
+{
+    rotate(a);
+    printf("ra\n");
+}
 
-void    rb(t_stack *b) {rotate(b); }
+void    rb(t_stack *b)
+{
+    rotate(b);
+    printf("rb\n");
+}
 
 void    rr(t_stack *a, t_stack *b)
 {
-    ra(a);
-    rb(b);
+    rotate(a);
+    rotate(b);
+    printf("rr\n");
 }
