@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   matt_sort.c                                        :+:      :+:    :+:   */
+/*   random_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/11 19:35:17 by macarnie          #+#    #+#             */
-/*   Updated: 2025/06/11 20:07:53 by macarnie         ###   ########.fr       */
+/*   Created: 2025/06/16 13:52:01 by mattcarniel       #+#    #+#             */
+/*   Updated: 2025/06/17 19:18:57 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "matt_sort.h"
 
-void matt_sort(t_stack *a, t_stack *b)
+unsigned int	ft_abs(int n)
 {
-
+	if (n < 0)
+		return ((unsigned int)(~n + 1));
+	return ((unsigned int)n);
 }

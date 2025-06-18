@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   stack_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:52:00 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/11 17:40:47 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/06/15 12:30:53 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_stack *create_stack_from_int_tab(int *tab, size_t size)
         if (!new_node)
            return (free_stack(stack), NULL);
         new_node->value = tab[i++];
-        new_node->index = -1;
+        new_node->index = 0;
         add_to_back(stack, new_node);
     }
     return (stack);

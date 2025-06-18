@@ -3,16 +3,22 @@ NAME		= push_swap
 CC			= cc
 CFLAGS		= -Wall -Wextra -Werror -I.
 
-OPS			= ./operations
+OPS			= ./operations/
+ALGOS		= ./algorithms/
+UTILS		= ./utils/
 SRCS		= push_swap.c \
-			node_utils.c \
-			stack_utils.c \
-			int_tab_utils.c \
-			$(OPS)/push.c \
-			$(OPS)/rotate.c \
-			$(OPS)/rev_rotate.c \
-			$(OPS)/swap.c \
-			radix_sort.c
+			$(UTILS)node_utils.c \
+			$(UTILS)stack_utils.c \
+			$(UTILS)int_tab_utils.c \
+			$(UTILS)algo_utils.c \
+			$(OPS)push.c \
+			$(OPS)rotate.c \
+			$(OPS)rev_rotate.c \
+			$(OPS)swap.c \
+			$(ALGOS)radix_sort.c \
+			$(ALGOS)greedy_sort.c \
+			$(ALGOS)xtra_greedy_sort.c \
+			$(ALGOS)fatboi_sort.c \
 			
 OBJS		= $(SRCS:.c=.o)
 

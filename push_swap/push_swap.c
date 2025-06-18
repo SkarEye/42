@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:15:43 by macarnie          #+#    #+#             */
-/*   Updated: 2025/06/11 17:41:02 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:26:47 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-void is_sorted(t_stack *stack)
-{
-	t_node *current;
-
-	if (!stack || stack->size < 2)
-		return ;
-	current = stack->head;
-	while (current && current->next)
-	{
-		if (current->value > current->next->value)
-		{
-			write(1, FAILURE_MSG, sizeof(FAILURE_MSG) - 1);
-			return ;
-		}
-		current = current->next;
-	}
-	write(1, SUCCESS_MSG, sizeof(SUCCESS_MSG) - 1);
-}
 
 int main(int argc, char **argv)
 {
@@ -51,8 +32,9 @@ int main(int argc, char **argv)
 	b->head = NULL;
 	b->tail = NULL;
 	b->size = 0;
-	radix_sort(a, b);
-	is_sorted(a);
+	fatboi_sort(a, b);
+	is_sorted(a, 1, 1);
+	print_stacks(a, b);
 	free_stack(a);
 	free_stack(b);
 	free(tab);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:21:29 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/11 17:01:02 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:24:20 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,23 @@
 # define SUCCESS_MSG "OK\n"
 # define FAILURE_MSG "KO\n"
 
+# ifndef FATBOI_CHUNK
+#  define FATBOI_CHUNK 5
+# endif
+
+# define FLAG_PA 1
+# define FLAG_PB 2
+# define FLAG_RA 4
+# define FLAG_RB 8
+# define FLAG_RRA 16
+# define FLAG_RRB 32
+# define FLAG_SA 64
+# define FLAG_SB 128
+
 typedef struct	s_node
 {
 	int		value;
-	ssize_t	index;
+	size_t	index;
 	struct s_node	*prev;
 	struct s_node	*next;
 }				t_node;
@@ -65,6 +78,18 @@ void	rra(t_stack *a);
 void	rrb(t_stack *b);
 void	rrr(t_stack *a, t_stack *b);
 
+void    print_stacks(t_stack *a, t_stack *b);
+void	do_ops(t_stack *a, t_stack *b, unsigned char flags);
+void    assign_index(t_stack *stack);
+char	is_sorted(t_stack *stack, char dir, char error_msg);
+int		count_min_steps(t_stack *a, size_t index);
+void	get_to_index(t_stack *a, int steps, 
+		void (*r)(t_stack *), void (*rr)(t_stack *));
+int		is_index_in_stack(t_stack *stack, size_t index);
+
 void	radix_sort(t_stack *a, t_stack *b);
+void	greedy_sort(t_stack *a, t_stack *b);
+void	xtra_greedy_sort(t_stack *a, t_stack *b);
+void	fatboi_sort(t_stack *a, t_stack *b);
 
 #endif
