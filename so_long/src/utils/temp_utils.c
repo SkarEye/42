@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flood_fill.c                                       :+:      :+:    :+:   */
+/*   temp_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 16:03:48 by macarnie          #+#    #+#             */
-/*   Updated: 2025/06/21 14:49:18 by macarnie         ###   ########.fr       */
+/*   Created: 2025/06/21 10:58:02 by macarnie          #+#    #+#             */
+/*   Updated: 2025/06/21 11:22:19 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char	flood_fill(t_map *map)
+size_t	ft_strchrset(const char *str, const char *set)
 {
-	char	success;
-	
-}
+	size_t	i;
+	size_t	j;
 
-char	knight_flood_fill(t_map *map)
-{
-	
+	i = 0;
+	while (str[i])
+	{
+		j = 0;
+		while (set[j] && str[i] != set[j])
+			j++;
+		if (!set[j])
+			return (str[i]);
+		i++;
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 16:17:37 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/19 16:17:42 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/06/21 12:40:32 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ char	*extract_line(char *stash)
 		return (NULL);
 	i = 0;
 	while (stash[i] && stash[i] != '\n')
-		i++;
-	if (stash[i] == '\n')
 		i++;
 	line = malloc((i + 1) * sizeof(char));
 	if (!line)

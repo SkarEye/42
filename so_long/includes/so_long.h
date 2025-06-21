@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:50:38 by macarnie          #+#    #+#             */
-/*   Updated: 2025/06/19 16:17:10 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/06/21 15:52:03 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 # include "get_next_line.h"
 
 //messages
-# define INVALID_READ_MSG "Could not read file\n"
+# define INVALID_READ "Could not read file\n"
+# define INVALID_TEXT_FILE "The given file cannot bet made into a rectangular map.\n"
+# define INVALID_MALLOC "Memory allocation failed\n"
 
 typedef struct	s_coords {
 	size_t	x;
@@ -30,10 +32,17 @@ typedef struct	s_map {
 	char		**grid;
 	size_t		width;
 	size_t		height;
-	t_coords	*collectibles;
+	t_list		*collectibles;
 	t_coords	player;
 	t_coords	exit;
 }				t_map;
+
+typedef struct	s_list
+{
+	void			*data;
+	struct s_list	*next;
+}				t_list;
+
 
 //flood_fill.c
 char	is_valid_path
