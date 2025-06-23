@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 15:50:38 by macarnie          #+#    #+#             */
-/*   Updated: 2025/06/21 15:52:03 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/06/23 15:01:55 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ typedef struct	s_map {
 	size_t		width;
 	size_t		height;
 	t_list		*collectibles;
-	t_coords	player;
-	t_coords	exit;
+	t_coords	*player;
+	t_coords	*exit;
 }				t_map;
 
 typedef struct	s_list
