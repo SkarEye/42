@@ -1,0 +1,9 @@
+{
+	"files.associations": {
+		"list_utils.h": "c",
+		"cstdlib": "c",
+		"stdlib.h": "c",
+		"structures.h": "c",
+		"exit_utils.h": "c"
+	}
+}
