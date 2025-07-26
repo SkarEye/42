@@ -1,5 +1,6 @@
 NAME = libftprintf.a
 CC = cc
+
 CFLAGS = -Wall -Wextra -Werror -I.
 AR = ar rcs
 RM = rm -f
@@ -20,7 +21,7 @@ all: $(NAME)
 
 bonus: all
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) ft_printf.h
 	$(AR) $(NAME) $(OBJ)
 
 %.o: %.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   greedy_sort.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 05:54:40 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/18 11:26:25 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/06/18 14:05:00 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,11 @@ void    greedy_sort(t_stack *a, t_stack *b)
     index = 0;
     while (a->size > 0)
     {
-        get_to_index(a, index++, ra, rra);
-        pa(a, b);
+        get_to_index(a, count_min_steps(a, index), ra, rra);
+        pb(a, b);
+        index++;
     }
 
     while (b->size > 0)
-        pb(a, b);
+        pa(a, b);
 }

@@ -1,4 +1,0 @@
-Short line
-A bit longer line for testing
-Even longer line to see the behavior of your function with more content
-Last line here

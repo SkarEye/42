@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:23:52 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/11 16:54:08 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/06/18 13:26:17 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static void    push(t_stack *from, t_stack *to)
 
 void    pa(t_stack *a, t_stack *b)
 {
-    push(a, b);
+    push(b, a);
     printf("pa\n");
 }
 
 void    pb(t_stack *a, t_stack *b)
 {
-    push(b, a);
+    push(a, b);
     printf("pb\n");
 }

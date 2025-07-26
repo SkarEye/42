@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   random_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 13:52:01 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/17 19:18:57 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/06/19 14:30:46 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

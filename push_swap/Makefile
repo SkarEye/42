@@ -22,12 +22,19 @@ SRCS		= push_swap.c \
 			
 OBJS		= $(SRCS:.c=.o)
 
+HEADER 		= push_swap.h
+
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(HEADER)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.c push_swap.h
+	$(CC) $(CFLAGS) -c $< -o $@
+
+algorithms/fatboi_sort.o : algorithms/fatboi_sort.c push_swap.h
+
+$(OPS)%.o: $(OPS)%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:

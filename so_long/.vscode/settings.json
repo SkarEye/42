@@ -4,6 +4,12 @@
 		"cstdlib": "c",
 		"stdlib.h": "c",
 		"structures.h": "c",
-		"exit_utils.h": "c"
+		"exit_utils.h": "c",
+		"string.h": "c",
+		"render_utils.h": "c",
+		"text_utils.h": "c",
+		"shape_utils.h": "c",
+		"line_utils.h": "c",
+		"stdbool.h": "c"
 	}
 }

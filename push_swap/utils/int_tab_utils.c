@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 13:05:51 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/11 17:17:23 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/07/26 19:42:55 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static int has_duplicates(int *tab, int n, size_t size)
 {
     size_t i;
 
+    if (!tab)
+        return (0);
     i = 0;
     while (i < size)
     {
@@ -69,9 +71,9 @@ int *create_unique_int_tab(char **str_tab, size_t size)
     {
         if (!ft_atoi_safe(str_tab[i], &n))
             return (free(int_tab), NULL);
-        int_tab[i] = n;
         if (has_duplicates(int_tab, n, i))
             return (free(int_tab), NULL);
+        int_tab[i] = n;
         i++;
     }
     return (int_tab);

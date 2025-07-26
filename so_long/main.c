@@ -6,88 +6,92 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 15:21:10 by macarnie          #+#    #+#             */
-/*   Updated: 2025/07/16 14:26:17 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/07/26 16:43:24 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <mlx.h>
 #include <stdlib.h>
 #include <math.h>
+#include <so_long_params.h>
 #include "structures.h"
+#include "img_utils.h"
+#include "img_pool_utils.h"
+#include "text_utils.h"
+#include "render_utils.h"
+#include "exit_utils.h"
 
 #include <string.h>
+#include <stdio.h>
 #include <unistd.h>
 
-typedef struct s_vars
-{
-	void	*mlx;
-	void	*win;
-	t_data	data;
-	double	angle;
-}	t_vars;
+#define TEST_STR "How you doin' ?\nHellah hellah yea-eah !!!"
 
-void set_pixel(t_data *data, int x, int y, int color)
+int	handle_key(int keycode, void *param)
 {
-	char *dst;
+	t_game *game = (t_game *)param;
 
-	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int *)dst = color;
-}
-
-void draw_rotating_square(t_data *data, int center_x, int center_y, int size, double angle)
-{
-	usleep(33000);
-	int x, y;
-	int half_size = size / 2;
-	double rad_angle = angle * (3.14159265358979323846 / 180.0);
-	int color = 0x00FF00;
-	for (y = -half_size; y < half_size; y++)
+	printf("Keycode : %d\n", keycode);
+	if (keycode == 65307) // Escape
+		exit_game(ERR_NONE, NULL, game);
+	if (game->state == STATE_START)
 	{
-		for (x = -half_size; x < half_size; x++)
-		{
-			int rotated_x = (int)(x * cos(rad_angle) - y * sin(rad_angle)) + center_x;
-			int rotated_y = (int)(x * sin(rad_angle) + y * cos(rad_angle)) + center_y;
-			set_pixel(data, rotated_x, rotated_y, color);
-		}
+		if (keycode == 32) // Space key
+			game->state = STATE_MENU;
 	}
+	return (0);
 }
 
-int render_frame(void *param)
+int	init_game_pool(t_game *game)
 {
-	t_vars *vars;
+	t_data	*data;
+	t_text_info *txt_i;
 
-	vars = (t_vars *)param;
-	bzero(vars->data.addr, 800 * 600 * (vars->data.bits_per_pixel / 8));
-	draw_rotating_square(&vars->data, 400, 300, 100, vars->angle);
-	mlx_put_image_to_window(vars->mlx, vars->win, vars->data.img, 0, 0);
-	vars->angle += 1.0;
-	if (vars->angle >= 360.0)
-		vars->angle = 0.0;
-	return (0);
+	game->pool = init_image_pool();
+	if (!game->pool)
+		return (0);
+	data = get_image_from_xpm(game->mlx, "./assets/fonts/Scribe.xpm");
+	put_image_in_pool(game->mlx, game->pool, IMG_FONT, data);
+	data = get_image_from_xpm(game->mlx, "./assets/fonts/claire.xpm");
+	put_image_in_pool(game->mlx, game->pool, IMG_CLAIRE, data);
+	txt_i = set_text_info(600, 200, 0x00ff00, A_LEFT);
+	data = text_to_image(game->mlx, game->pool[IMG_FONT], TEST_STR, txt_i);
+	scale_image(game->mlx, &data, 2);
+	put_image_in_pool(game->mlx, game->pool, IMG_INIT_PARAGRAPH, data);
+	txt_i->color = 0x00aa00;
+	data = text_to_image(game->mlx, game->pool[IMG_FONT], TEST_STR, txt_i);
+	scale_image(game->mlx, &data, 2);
+	put_image_in_pool(game->mlx, game->pool, IMG_INIT_PAR2, data);
+	free(txt_i);
+	return (1);
 }
 
 int	main(void)
 {
-	t_vars	vars;
-
-	vars.mlx = mlx_init();
-	if (!vars.mlx)
+	t_game game;
+	
+	game.p_w = PXL_W;
+	game.p_h = PXL_H;
+	game.state = STATE_START;
+	game.mlx = mlx_init();
+	game.alpha = 0.0;
+	game.beta = 0.0;
+	if (!game.mlx)
 		return (1);
-	vars.win = mlx_new_window(vars.mlx, 800, 600, "Hello World");
-	if (!vars.win)
+	game.win = mlx_new_window(game.mlx, game.p_w, game.p_h, "Chess Scape");
+	if (!game.win)
 	{
-		mlx_destroy_display(vars.mlx);
-		free(vars.mlx);
+		mlx_destroy_display(game.mlx);
+		free(game.mlx);
 		return (1);
 	}
-	vars.data.img = mlx_new_image(vars.mlx, 800, 600);
-	vars.data.addr = mlx_get_data_addr(vars.data.img, &vars.data.bits_per_pixel,
-			&vars.data.line_length, &vars.data.endian);
-	vars.angle = 0.0;
-	mlx_loop_hook(vars.mlx, render_frame, &vars);
-	mlx_loop(vars.mlx);
-	mlx_destroy_window(vars.mlx, vars.win);
-	mlx_destroy_display(vars.mlx);
-	free(vars.mlx);
+	game.data = make_blank_image(game.mlx, PXL_W, PXL_H);
+	game.base = make_blank_image(game.mlx, PXL_W, PXL_H);
+	if (!game.data || !game.base)
+		return (1);
+	init_game_pool(&game);
+	mlx_loop_hook(game.mlx, render, &game);
+	mlx_key_hook(game.win, handle_key, &game);
+	mlx_loop(game.mlx);
 	return (0);
 }

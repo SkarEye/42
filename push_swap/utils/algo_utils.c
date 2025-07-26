@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   algo_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 16:39:36 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/18 11:23:22 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/07/11 20:22:12 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void    print_stacks(t_stack *a, t_stack *b)
 
 void    do_ops(t_stack *a, t_stack *b, unsigned char flags)
 {
-    printf("do_ops: flags = %u\n", flags);
     if (flags & FLAG_PA)
         return (pa(a, b));
     else if (flags & FLAG_PB)
@@ -141,16 +140,16 @@ int count_min_steps(t_stack *stack, size_t index)
 
 
 void    get_to_index(t_stack *stack, int steps,
-    void (*r)(t_stack *), void (*rr)(t_stack *))
+    void (*rotate)(t_stack *), void (*rev_rotate)(t_stack *))
 {
     while (steps > 0)
     {
-        r(stack);
+        rotate(stack);
         steps--;
     }
     while (steps < 0)
     {
-        rr(stack);
+        rev_rotate(stack);
         steps++;
     }
 }

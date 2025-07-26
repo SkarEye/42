@@ -1,7 +1,13 @@
+#. ▄▄·           ▄▄▌         ▐ ▄  ▄▄ • 
+#▐█ ▀. ▪         ██•  ▪     •█▌▐█▐█ ▀ ▪
+#▄▀▀▀█▄ ▄█▀▄     ██▪   ▄█▀▄ ▐█▐▐▌▄█ ▀█▄
+#▐█▄▪▐█▐█▌.▐▌    ▐█▌▐▌▐█▌.▐▌██▐█▌▐█▄▪▐█
+# ▀▀▀▀  ▀█▄▀▪    .▀▀▀  ▀█▄▀▪▀▀ █▪·▀▀▀▀ 
+
 # === Project name ===
 NAME := so_long
 
-# === Compiler and Flags ===
+# === Compiler and Flags ===                                                                                        
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -Iincludes -Imlx -MMD -MP
 RM := rm -f
@@ -22,7 +28,17 @@ SRC := \
 	src/gnl/get_next_line_utils.c \
 	src/utils/exit_utils.c \
 	src/utils/list_utils.c \
-	src/utils/map_utils.c
+	src/utils/map_utils.c \
+	src/renders/render_utils.c \
+	src/img/img_utils.c \
+	src/img/img_utils2.c \
+	src/img/shape_utils.c \
+	src/img/img_pool_utils.c \
+	src/img/pixel_utils.c \
+	src/img/color_utils.c \
+	src/text/line_utils.c \
+	src/text/text_utils.c \
+	src/animate/animate_utils.c
 
 # === Object and Dependency files ===
 OBJ := $(SRC:%.c=$(OBJ_DIR)/%.o)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 16:17:37 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/05/02 18:36:54 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/05/23 19:18:18 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	buffer_to_stash(char **stash, char *buffer)
 	char	*temp;
 
 	if (!*stash)
-		temp = ft_strdup(buffer);
+		temp = ft_strjoin(buffer, "");
 	else
 	{
 		temp = ft_strjoin(*stash, buffer);
@@ -38,9 +38,12 @@ int	buffer_to_stash(char **stash, char *buffer)
 
 char	*read_to_stash(int fd, char *stash)
 {
-	char	buffer[BUFFER_SIZE + 1];
-	int		bytes_read;
+	char		*buffer;
+	int			bytes_read;
 
+	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buffer)
+		return (NULL);
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	while (bytes_read > 0)
 	{
@@ -52,10 +55,10 @@ char	*read_to_stash(int fd, char *stash)
 		else
 			bytes_read = read(fd, buffer, BUFFER_SIZE);
 	}
+	free(buffer);
 	if (bytes_read == -1)
 	{
 		free(stash);
-		//stash = NULL;
 		return (NULL);
 	}
 	return (stash);
@@ -93,7 +96,7 @@ void	update_stash(char **stash)
 		i++;
 	if ((*stash)[i] == '\n')
 	{
-		temp = ft_strdup(*stash + i + 1);
+		temp = ft_strjoin(*stash + i + 1, "");
 		free(*stash);
 		if (!temp)
 		{

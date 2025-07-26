@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 16:07:33 by macarnie          #+#    #+#             */
-/*   Updated: 2025/07/11 20:18:08 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/07/26 12:54:54 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 #define FLAG_COLLECTIBLE 0x04
 
 // to be removed
-size_t	ft_strlen(const char *s)
+static size_t	ft_strlen(const char *s)
 {
 	size_t	len;
 
@@ -52,7 +52,7 @@ bool	is_valid_text_file(const char *filename, t_map *map)
 	{
 		if (map->width == 0)
 			map->width = ft_strlen(line);
-		else if (ft_strlen(line) != map->width)
+		else if ((int)ft_strlen(line) != map->width)
 		{
 			free(line);
 			return (print_error(ERR_NOT_RECT, SYS_IVTF), close(fd), false);
@@ -66,7 +66,7 @@ bool	is_valid_text_file(const char *filename, t_map *map)
 bool	create_grid(const char *filename, t_map *map)
 {
 	int		fd;
-	size_t	i;
+	int		i;
 	char	*line;
 
 	fd = open(filename, O_RDONLY);

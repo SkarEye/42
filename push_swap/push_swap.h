@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:21:29 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/18 11:24:20 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/06/19 14:30:51 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,6 @@
 # define ERROR_MSG "Error\n"
 # define SUCCESS_MSG "OK\n"
 # define FAILURE_MSG "KO\n"
-
-# ifndef FATBOI_CHUNK
-#  define FATBOI_CHUNK 5
-# endif
 
 # define FLAG_PA 1
 # define FLAG_PB 2

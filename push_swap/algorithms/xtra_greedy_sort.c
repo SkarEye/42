@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xtra_greedy_sort.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 05:54:40 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/18 11:25:36 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/06/18 13:28:08 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void  xg_push(t_stack *a, t_stack *b)
     while (a->size > 0)
     {
         get_to_index(a, xg_get_min_steps(a, min_i, max_i), ra, rra);
-        pa(a, b);
+        pb(a, b);
         if (b->head->index == min_i)
             min_i++;
         else
@@ -64,7 +64,7 @@ static void xg_push_back(t_stack *a, t_stack *b)
             rrb(b);
     }
     while (b->size > 0)
-        pb(a, b);
+        pa(a, b);
 }
 
 void    xtra_greedy_sort(t_stack *a, t_stack *b)

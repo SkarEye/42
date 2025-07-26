@@ -1,4 +1,0 @@
-Hello, World!
-This is a test.
-Testing get_next_line.
-End of the file.
