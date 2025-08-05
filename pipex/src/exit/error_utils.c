@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 10:27:38 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/02 15:34:51 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/08/05 18:10:27 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,17 @@
 #define NO_FILE_CONTEXT 	"no file context"
 #define NO_ERR_MSG			"Could not get error message.\n"
 
-static char	*get_syscontext(const char *file, int line)
+static char	*get_syscontext(t_debug dbg)
 {
 	char	*syscontext;
 	char	*str_line;
 
-	if (!file)
+	if (!dbg.file)
 		return (NULL);
-	str_line = ft_itoa(line);
+	str_line = ft_itoa(dbg.line);
 	if (!str_line)
 		return (NULL);
-	syscontext = ft_join(file, str_line, ':');
+	syscontext = ft_join(dbg.file, str_line, ':');
 	free(str_line);
 	if (!syscontext)
 		return (NULL);
@@ -47,10 +47,12 @@ static const char	*get_error_info(t_error err)
 		": Invalid 'Esacpe' character.\n",
 		": Missing starting double quote.\n",
 		": Missing ending double quote.\n",
-		": No valid result found.\n",
+		": No paths found.\n",
 		": Parsing failed.\n",
 		": Command not found.\n",
 		": execve failed.\n",
+		": Tried exiting child process while in parent.\n",
+		": Tried exiting parent process while in child.\n",
 		": Unknown error.\n"
 	};
 
@@ -68,14 +70,14 @@ static char	*get_error_message(const char *syscontext, t_error err)
 		return (ft_join(syscontext, get_error_info(err), '\0'));
 }
 
-void	print_error(const char *file, int line, t_error err, bool is_silent)
+void	print_error(t_debug dbg, t_error err, bool is_silent)
 {
 	char	*syscontext;
 	char	*err_msg;
 
-	if (is_silent)
+	if (is_silent || err == ERR_NONE)
 		return ;
-	syscontext = get_syscontext(file, line);
+	syscontext = get_syscontext(dbg);
 	err_msg = get_error_message(syscontext, err);
 	if (err == ERR_PERROR)
 	{

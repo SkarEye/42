@@ -3,24 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 14:32:09 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/02 13:43:29 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/08/05 17:47:49 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
+# include <stdbool.h>
+# include <sys/types.h>
+
 typedef struct	s_pipex
 {
 	char	**cmds;
+	int		n_cmds;
 	char	**envp;
 	char	**paths;
 
 	char	**cmd_args;
 	char	*cmd_path;
+
+	int		infile;
+	int		outfile;
+	bool	use_infile;
+	bool	use_outfile;
+
+	pid_t	*pids;
+	bool	is_child;
+	int		prev_pipe[2];
+	int		pipe[2];
 }				t_pipex;
 
 #endif
