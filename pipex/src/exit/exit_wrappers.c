@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_wrappers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 12:16:15 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/07 17:25:46 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/08/07 19:24:41 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <stdlib.h>
 
 #include "structures.h"
+#include "utils.h"
 #include "error_utils.h"
 #include "exit_utils.h"
 
@@ -31,6 +32,17 @@ void	*xmalloc(size_t size, t_debug dbg, t_pipex *p)
 	return (ptr);
 }
 
+void	*xcalloc(size_t size, t_debug dbg, t_pipex *p)
+{
+	void	*ptr;
+
+	ptr = malloc(size);
+	if (!ptr)
+		exit_current(dbg, ERR_PERROR, 1, p);
+	ft_bzero(ptr, size);
+	return (ptr);
+}
+
 int		xopen(const char *path, int flg, mode_t mode, t_debug dbg, t_pipex *p)
 {
 	int	fd;
@@ -41,8 +53,12 @@ int		xopen(const char *path, int flg, mode_t mode, t_debug dbg, t_pipex *p)
 	return (fd);
 }
 
-void	xclose(int fd, t_debug dbg, t_pipex *p)
+void	xclose(int *fd, t_debug dbg, t_pipex *p)
 {
-	if (close(fd) == -1)
-		exit_current(dbg, ERR_PERROR, 1, p);
+	if (*fd >= 0)
+	{
+		if (close(*fd) == -1)
+			exit_current(dbg, ERR_PERROR, 1, p);
+		*fd = -1;
+	}
 }

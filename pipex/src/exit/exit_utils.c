@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 13:59:20 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/07 17:22:52 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/08/07 18:20:19 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,11 @@ void	free_pipex(t_pipex *pipex)
 		return ;
 	if (pipex->cmds)
 		ft_free_strtab(pipex->cmds);
-	pipex->cmds = NULL;
 	pipex->n_cmds = 0;
-	pipex->envp = NULL;
 	if (pipex->pids)
 		free(pipex->pids);
-	pipex->pids = NULL;
 	ft_free_strtab(pipex->paths);
-	pipex->paths = NULL;
 	ft_free_strtab(pipex->cmd_args);
-	pipex->cmd_args = NULL;
 	if (pipex->cmd_path)
 		free(pipex->cmd_path);
 	pipex->cmd_path = NULL;
@@ -65,12 +60,16 @@ void	free_pipex(t_pipex *pipex)
 		close(pipex->infile);
 	if (pipex->outfile > 2)
 		close(pipex->outfile);
+	ft_bzero(pipex, sizeof(t_pipex));
+	free(pipex);
 }
 
 
 void	exit_child(t_debug dbg, t_error err, int exit_code, t_pipex *pipex)
 {
 	print_error(dbg, err, false);
+	if (!pipex)
+		exit(exit_code);
 	if (!pipex->is_child)
 	{
 		print_error(ERR_LOC, ERR_CHILD_EXIT, false);
@@ -86,6 +85,8 @@ void	exit_child(t_debug dbg, t_error err, int exit_code, t_pipex *pipex)
 void	exit_pipex(t_debug dbg, t_error err, int exit_code, t_pipex *pipex)
 {
 	print_error(dbg, err, false);
+	if (!pipex)
+		exit(exit_code);
 	if (pipex->is_child)
 	{
 		print_error(ERR_LOC, ERR_PARENT_EXIT, false);
@@ -99,6 +100,8 @@ void	exit_pipex(t_debug dbg, t_error err, int exit_code, t_pipex *pipex)
 
 void	exit_current(t_debug dbg, t_error err, int exit_code, t_pipex *pipex)
 {
+	if (!pipex)
+		exit(exit_code);
 	if (pipex->is_child)
 		exit_child(dbg, err, exit_code, pipex);
 	else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   path_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:26:45 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/07 16:36:32 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/08/07 19:03:48 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@
 
 #define PATH	"PATH="
 
-static void	get_custom_path(int n, t_pipex *pipex)
+static void	get_custom_path(t_pipex *pipex)
 {
 	size_t	i;
 
 	i= 0;
-	if (pipex->cmds[n][i] == '.' || pipex->cmds[n][i] == '/')
+	if (pipex->cmd_args[0][i] == '.' || pipex->cmd_args[0][i] == '/')
 	{
-		while (pipex->cmds[n][i] == '.')
+		while (pipex->cmd_args[0][i] == '.')
 			i++;
-		if (pipex->cmds[n][i] != '/')
+		if (pipex->cmd_args[0][i] != '/')
 			exit_child(ERR_LOC, ERR_NO_CMD, 127, pipex);
-		if (access(pipex->cmds[n], X_OK) == 0)
+		if (access(pipex->cmd_args[0], X_OK) == 0)
 		{
-			pipex->cmd_path = ft_strdup(pipex->cmds[n]);
+			pipex->cmd_path = ft_strdup(pipex->cmd_args[0]);
 			if (!pipex->cmd_path)
 				exit_child(ERR_LOC, ERR_PERROR, 1, pipex);
 			return ;
@@ -44,7 +44,7 @@ static void	get_custom_path(int n, t_pipex *pipex)
 	}
 }
 
-static void	find_path(int n, t_pipex *pipex)
+static void	find_path(t_pipex *pipex)
 {
 	size_t	i;
 
@@ -53,7 +53,7 @@ static void	find_path(int n, t_pipex *pipex)
 	i= 0;
 	while (pipex->paths[i])
 	{
-		pipex->cmd_path = ft_join(pipex->paths[i], pipex->cmds[n], '/');
+		pipex->cmd_path = ft_join(pipex->paths[i], pipex->cmd_args[0], '/');
 		if (!pipex->cmd_path)
 			exit_child(ERR_LOC, ERR_PERROR, 1, pipex);
 		if (access(pipex->cmd_path, X_OK) == 0)
@@ -63,6 +63,8 @@ static void	find_path(int n, t_pipex *pipex)
 	}
 	exit_child(ERR_LOC, ERR_NO_CMD, 127, pipex);
 }
+
+#include <stdio.h>
 
 void	get_paths(t_pipex *pipex)
 {
@@ -87,12 +89,12 @@ void	get_paths(t_pipex *pipex)
 	print_error(ERR_LOC, ERR_NO_PATH, SILENT);
 }
 
-void	get_cmd_path(int n, t_pipex *pipex)
+void	get_cmd_path(t_pipex *pipex)
 {
-	if (!pipex->cmds[n])
+	if (!pipex->cmd_args[0])
 		exit_child(ERR_LOC, ERR_BAD_ARGS, 1, pipex);
-	if (*pipex->cmds[n] == '.' || *pipex->cmds[n] == '/')
-		get_custom_path(n, pipex);
+	if (*pipex->cmd_args[0] == '.' || *pipex->cmd_args[0] == '/')
+		get_custom_path(pipex);
 	else
-		find_path(n, pipex);
+		find_path(pipex);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:21:44 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/07 17:21:38 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/08/07 18:10:19 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define UTILS_H
 
 #include <stddef.h>
+
+void	*ft_bzero(void *s, size_t n);
 
 void	ft_free_strtab(char **strtab);
 

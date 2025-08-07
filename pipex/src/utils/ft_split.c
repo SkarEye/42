@@ -3,80 +3,74 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:15:16 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/07 17:19:15 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/08/07 18:30:42 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
+#include <stddef.h>
 #include <stdlib.h>
 
 #include "utils.h"
 
-static ssize_t	count_words(const char *str, char c)
+static size_t	ft_countwords(char const *s, char c)
 {
-	ssize_t	count;
+	size_t	count;
 	size_t	i;
 
-	if (!str)
-		return (-1);
 	count = 0;
 	i = 0;
-	while (str[i])
+	while (s[i])
 	{
-		while (str[i] == c)
+		while (s[i] == c)
 			i++;
-		if (str[i])
+		if (s[i] != '\0')
 			count++;
-		while (str[i] && str[i] != c)
+		while (s[i] && s[i] != c)
 			i++;
 	}
 	return (count);
 }
 
-static char	*make_word(const char *str, size_t *parsed, char c)
+static char	*ft_makeword(const char *s, char c)
 {
 	char	*word;
-	size_t	i;
+	size_t	len;
 
-	if (*parsed < ft_strlen(str))
-		return (NULL); //Cannot write in str
-	while (str[*parsed] && str[*parsed] != c)
-		(*parsed)++;
-	word = (char *)malloc((*parsed + 1) * sizeof(char));
+	len = 0;
+	while (s[len] && s[len] != c)
+		len++;
+	word = (char *)malloc((len + 1) * sizeof(char));
 	if (!word)
 		return (NULL);
-	i = 0;
-	while (str[*parsed] && str[*parsed] != c)
-		word[i++] = str[(*parsed)++];
-	word[i] = '\0';
+	ft_strlcpy(word, s, len + 1);
 	return (word);
 }
 
-char	**ft_split(char const *str, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**split;
-	ssize_t	count;
 	size_t	n;
 	size_t	i;
 
-	count = count_words(str, c);
-	if (count < 0)
-		return (NULL);
-	split = (char **)malloc(sizeof(char *) * (count + 1));
+	split = (char **)malloc((ft_countwords(s, c) + 1) * sizeof(char *));
 	if (!split)
 		return (NULL);
 	n = 0;
 	i = 0;
-	while (n < (size_t)count)
+	while (s[i])
 	{
-		if (str[i] == c)
+		if (s[i] == c)
 			i++;
-		split[n] = make_word(str, &i, c);
-		if (!split[n])
-			return (ft_free_strtab(split), NULL);
+		else
+		{
+			split[n] = ft_makeword(&s[i], c);
+			if (!(split[n]))
+				return (ft_free_strtab(split), NULL);
+			i += ft_strlen(split[n++]);
+		}
 	}
 	split[n] = NULL;
 	return (split);

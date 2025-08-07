@@ -24,12 +24,14 @@ src/exit/error_utils.c \
 src/exit/exit_utils.c \
 src/exit/exit_wrappers.c \
 src/exit/exit_wrappers2.c \
+src/utils/ft_bzero.c \
 src/utils/ft_free_strtab.c \
 src/utils/ft_is_whitespace.c \
 src/utils/ft_itoa.c \
 src/utils/ft_join.c \
 src/utils/ft_split.c \
 src/utils/ft_strdup.c \
+src/utils/ft_strlcpy.c \
 src/utils/ft_strlen.c \
 src/utils/ft_strncmp.c \
 src/utils/ft_strtabndup.c \

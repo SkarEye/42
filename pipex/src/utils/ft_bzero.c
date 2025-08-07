@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path_utils.h                                       :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/06 10:26:21 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/07 18:57:13 by macarnie         ###   ########.fr       */
+/*   Created: 2025/08/07 18:08:56 by macarnie          #+#    #+#             */
+/*   Updated: 2025/08/07 18:09:52 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PATH_UTILS_H
-# define PATH_UTILS_H
+#include <stddef.h>
 
-#include "structures.h"
+void	*ft_bzero(void *s, size_t n)
+{
+	size_t	i;
 
-void	get_paths(t_pipex *pipex);
-void	get_cmd_path(t_pipex *pipex);
-
-#endif
+	i = 0;
+	while (i < n)
+		((unsigned char *)s)[i++] = 0;
+	return (s);
+}
