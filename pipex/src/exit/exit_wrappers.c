@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   exit_wrappers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 12:16:15 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/05 18:17:33 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/07 17:25:46 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include <unistd.h>
+#include <fcntl.h>
 #include <sys/types.h>
 #include <stdlib.h>
 

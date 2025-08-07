@@ -8,7 +8,7 @@ NAME := pipex
 
 # === Compiler and Flags ===                                                                                        
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -Iincludes
+CFLAGS := -Wall -Wextra -Werror -Iincludes -MMD
 RM := rm -f
 MKDIR := mkdir -p
 
@@ -18,7 +18,24 @@ MKDIR := mkdir -p
 OBJ_DIR := .objects
 
 # === Source files ===
-SRC := 
+SRC := \
+pipex.c \
+src/exit/error_utils.c \
+src/exit/exit_utils.c \
+src/exit/exit_wrappers.c \
+src/exit/exit_wrappers2.c \
+src/utils/ft_free_strtab.c \
+src/utils/ft_is_whitespace.c \
+src/utils/ft_itoa.c \
+src/utils/ft_join.c \
+src/utils/ft_split.c \
+src/utils/ft_strdup.c \
+src/utils/ft_strlen.c \
+src/utils/ft_strncmp.c \
+src/utils/ft_strtabndup.c \
+src/exec_utils.c \
+src/path_utils.c
+
 # === Object and Dependency files ===
 OBJ := $(SRC:%.c=$(OBJ_DIR)/%.o)
 DEP := $(OBJ:.o=.d)
@@ -40,7 +57,6 @@ $(OBJ_DIR)/%.o: %.c
 
 # === Cleaning ===
 clean:
-	$(MAKE) -C clean
 	$(RM) $(OBJ) $(DEP)
 	$(RM) -r $(OBJ_DIR)
 

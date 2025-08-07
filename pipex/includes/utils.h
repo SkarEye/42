@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:21:44 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/02 14:58:25 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/08/07 17:21:38 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,25 @@
 
 #include <stddef.h>
 
-size_t  ft_strlen(const char *str);
+void	ft_free_strtab(char **strtab);
+
+int		ft_is_whitespace(char c);
 
 char	*ft_itoa(int n);
+size_t	ft_sitoa(char *dst, int n);
 
 char	*ft_join(const char *first, const char *last, char c);
 
-void	free_split(char **split);
 char	**ft_split(const char *str, char c);
+
+char	*ft_strdup(const char *src);
+
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+
+size_t	ft_strlen(const char *str);
+
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
+
+char	**ft_strtabndup(char **srctab, size_t size);
 
 #endif

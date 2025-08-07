@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:15:16 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/02 18:44:03 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/08/07 17:19:15 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,18 +55,6 @@ static char	*make_word(const char *str, size_t *parsed, char c)
 	return (word);
 }
 
-void	free_split(char **split)
-{
-	size_t	i;
-
-	if (!split)
-		return ;
-	i = 0;
-	while (split[i])
-		free(split[i++]);
-	free(split);
-}
-
 char	**ft_split(char const *str, char c)
 {
 	char	**split;
@@ -88,7 +76,7 @@ char	**ft_split(char const *str, char c)
 			i++;
 		split[n] = make_word(str, &i, c);
 		if (!split[n])
-			return (free_split(split), NULL);
+			return (ft_free_strtab(split), NULL);
 	}
 	split[n] = NULL;
 	return (split);

@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   exit_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 13:59:20 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/05 18:16:41 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/07 17:22:52 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdlib.h>
 
 #include "structures.h"
 #include "utils.h"
@@ -20,7 +21,9 @@
 
 void	free_child(t_pipex *pipex)
 {
-	free_split(pipex->cmd_args);
+	if (!pipex)
+		return ;
+	ft_free_strtab(pipex->cmd_args);
 	pipex->cmd_args = NULL;
 	if (pipex->cmd_path)
 		free(pipex->cmd_path);
@@ -37,15 +40,19 @@ void	free_child(t_pipex *pipex)
 
 void	free_pipex(t_pipex *pipex)
 {
+	if (!pipex)
+		return ;
+	if (pipex->cmds)
+		ft_free_strtab(pipex->cmds);
 	pipex->cmds = NULL;
 	pipex->n_cmds = 0;
 	pipex->envp = NULL;
 	if (pipex->pids)
 		free(pipex->pids);
 	pipex->pids = NULL;
-	free_split(pipex->paths);
+	ft_free_strtab(pipex->paths);
 	pipex->paths = NULL;
-	free_split(pipex->cmd_args);
+	ft_free_strtab(pipex->cmd_args);
 	pipex->cmd_args = NULL;
 	if (pipex->cmd_path)
 		free(pipex->cmd_path);
@@ -73,6 +80,7 @@ void	exit_child(t_debug dbg, t_error err, int exit_code, t_pipex *pipex)
 	if (exit_code < 0 || exit_code > 255)
 		exit_code = 1;
 	exit(exit_code);
+	// do I set pipex->is_child to false ?
 }
 
 void	exit_pipex(t_debug dbg, t_error err, int exit_code, t_pipex *pipex)

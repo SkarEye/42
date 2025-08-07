@@ -1,18 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cmd.h                                         :+:      :+:    :+:   */
+/*   path_utils.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/01 10:20:45 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/01 10:21:54 by mattcarniel      ###   ########.fr       */
+/*   Created: 2025/08/06 10:26:21 by mattcarniel       #+#    #+#             */
+/*   Updated: 2025/08/06 11:00:47 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXEC_CMD_H
-# define EXEC_CMD_H
+#ifndef PATH_UTILS_H
+# define PATH_UTILS_H
 
-void    exec_cmd(char *cmd_str, char **envp);
+#include "structures.h"
+
+void	get_paths(t_pipex *pipex);
+void	get_cmd_path(int n, t_pipex *pipex);
 
 #endif
