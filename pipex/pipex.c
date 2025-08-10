@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 14:45:56 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/10 16:48:39 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/10 17:56:52 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc < 5)
 		exit_pipex(ERR_LOC, ERR_BAD_ARGS, 1, pipex);
 	if (!envp || !*envp)
-		exit_pipex(ERR_LOC, ERR_BAD_ARGS, 1, pipex);
+		exit_pipex(ERR_LOC, ERR_BAD_ARGS, 1, pipex); //other exit_code ?
 	if (ft_strncmp(argv[1], HERE_DOC, 9) == 0)
 	{
 		if (argc < 6)

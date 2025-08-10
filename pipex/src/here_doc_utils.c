@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 16:28:27 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/10 17:38:25 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/10 18:11:05 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,46 @@
 
 static ssize_t	get_line(char **ptr, t_pipex *pipex)
 {
-	char	*buf;
+	char	*temp;
 	size_t	buf_size;
 	size_t	pos;
 	char	c;
+	ssize_t	r;
 
 	if (!ptr)
-		exit_pipex(ERR_LOC, ERR_PERROR, 1, pipex);
+		exit_pipex(ERR_LOC, ERR_PERROR, 1, pipex); //change here
 	buf_size = BUFFER_SIZE;
-	if (!*ptr)
-		buf = xmalloc(sizeof(char) * buf_size, ERR_LOC, pipex);
-	else
-		buf = *ptr;
+	*ptr = xmalloc(sizeof(char) * buf_size, ERR_LOC, pipex); //careful here
 	pos = 0;
-	while (read(0, &c, 1) == 1)
+	r = read(0, &c, 1);
+	while (r == 1)
 	{
 		if (pos > buf_size)
-
-
-	
+		{
+			buf_size += BUFFER_SIZE;
+			temp = malloc(sizeof(char) * buf_size);
+			if (!temp)
+			{
+				free(*ptr);
+			}
+			ft_strlcpy(temp, *ptr, buf_size);
+			free(*ptr);
+			*ptr = temp;
+		}
+		(*ptr)[pos++] = c;
+		if (c == '\n')
+			r = 0;
+		else
+			r = read(0, &c, 1);
+	}
+	if (r == -1 || (r == 0 && pos == 0))
+	{
+		free(*ptr);
+		*ptr = NULL;
+		return (-1);
+	}
+	(*ptr)[pos] = '\0';
+	return ((ssize_t)pos);
 }
 
 void	get_here_doc(const char *dlmt, t_pipex *pipex)
