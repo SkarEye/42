@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 12:16:15 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/07 19:24:41 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/10 17:12:27 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,3 +62,4 @@ void	xclose(int *fd, t_debug dbg, t_pipex *p)
 		*fd = -1;
 	}
 }
+

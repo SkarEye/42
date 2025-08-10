@@ -6,11 +6,12 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:45:24 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/07 19:25:39 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/10 16:09:34 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <fcntl.h>
 
 #include "structures.h"
 #include "path_utils.h"
@@ -24,19 +25,17 @@
 static void	exec_cmd(int n, t_pipex *pipex)
 {
 	pipex->cmd_args = ft_split(pipex->cmds[n], ' ');
-	if (!pipex->cmd_args || !pipex->cmd_args[0])
+	if (!pipex->cmd_args)
 		exit_child(ERR_LOC, ERR_PERROR, 1, pipex);
+	if (!pipex->cmd_args[0])
+		exit_child(ERR_LOC, ERR_NO_CMD, 1, pipex);
 	get_cmd_path(pipex);
 	if (execve(pipex->cmd_path, pipex->cmd_args, pipex->envp) == -1)
 		exit_child(ERR_LOC, ERR_BAD_EXECVE, 126, pipex);
 }
 
-#include <stdio.h>
-#include <fcntl.h>
-
 static void	setup_child(int n, t_pipex *pipex)
 {
-	dprintf(2, "child alive\n");
 	if (n == 0)
 	{
 		xdup2(pipex->infile, STDIN_FILENO, ERR_LOC, pipex);
@@ -46,6 +45,7 @@ static void	setup_child(int n, t_pipex *pipex)
 		xdup2(pipex->prev_pipe[0], STDIN_FILENO, ERR_LOC, pipex);
 	if (n == pipex->n_cmds - 1)
 	{
+		pipex->outfile = xopen(pipex->out_path, O_WRONLY | O_CREAT | O_TRUNC, 0644, ERR_LOC, pipex);
 		xdup2(pipex->outfile, STDOUT_FILENO, ERR_LOC, pipex);
 		xclose(&pipex->outfile, ERR_LOC, pipex);
 	}
@@ -59,7 +59,6 @@ static void	setup_child(int n, t_pipex *pipex)
 		xclose(&pipex->prev_pipe[1], ERR_LOC, pipex);
 	}
 }
-
 
 static void	spawn_child(int n, t_pipex *pipex)
 {
@@ -95,6 +94,7 @@ void	exec_cmds(t_pipex *pipex)
 	while (pipex->cmds[i])
 		spawn_child(i++, pipex);
 	xclose(&pipex->prev_pipe[0], ERR_LOC, pipex);
+	xclose(&pipex->prev_pipe[1], ERR_LOC, pipex);
 	xclose(&pipex->infile, ERR_LOC, pipex);
 	xclose(&pipex->outfile, ERR_LOC, pipex);
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:26:45 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/07 19:03:48 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/08 13:49:30 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ static void	get_custom_path(t_pipex *pipex)
 	}
 }
 
+#include <stdio.h>
+
 static void	find_path(t_pipex *pipex)
 {
 	size_t	i;
@@ -53,12 +55,15 @@ static void	find_path(t_pipex *pipex)
 	i= 0;
 	while (pipex->paths[i])
 	{
+
 		pipex->cmd_path = ft_join(pipex->paths[i], pipex->cmd_args[0], '/');
 		if (!pipex->cmd_path)
 			exit_child(ERR_LOC, ERR_PERROR, 1, pipex);
 		if (access(pipex->cmd_path, X_OK) == 0)
 			return ;
-		free(pipex->cmd_path);
+		if (pipex->cmd_path)
+			free(pipex->cmd_path);
+		pipex->cmd_path = NULL;
 		i++;
 	}
 	exit_child(ERR_LOC, ERR_NO_CMD, 127, pipex);

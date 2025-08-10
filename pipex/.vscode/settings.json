@@ -4,6 +4,8 @@
         "utils.h": "c",
         "exit_wrappers.h": "c",
         "stdbool.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "error_utils.h": "c",
+        "structures.h": "c"
     }
 }

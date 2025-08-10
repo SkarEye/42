@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 12:12:05 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/05 18:17:28 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/07 20:45:33 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ pid_t	xfork(t_debug dbg, t_pipex *p)
 	pid = fork();
 	if (pid == -1)
 		exit_current(dbg, ERR_PERROR, 1, p);
+	p->is_child = true;
 	return (pid);
 }
 

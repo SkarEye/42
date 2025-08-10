@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 14:32:09 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/05 17:47:49 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/10 15:13:42 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ typedef struct	s_pipex
 	int		outfile;
 	bool	use_infile;
 	bool	use_outfile;
+	char	*in_path;
+	char	*out_path;
 
 	pid_t	*pids;
 	bool	is_child;

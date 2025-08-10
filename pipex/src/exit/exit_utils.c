@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 13:59:20 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/07 18:20:19 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/10 13:55:25 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include "error_utils.h"
 
 #include "exit_utils.h"
+
+#include <stdio.h>
 
 void	free_child(t_pipex *pipex)
 {
@@ -51,7 +53,6 @@ void	free_pipex(t_pipex *pipex)
 	ft_free_strtab(pipex->cmd_args);
 	if (pipex->cmd_path)
 		free(pipex->cmd_path);
-	pipex->cmd_path = NULL;
 	if (pipex->pipe[0] > 2)
 		close(pipex->pipe[0]);
 	if (pipex->pipe[1] > 2)
@@ -64,7 +65,6 @@ void	free_pipex(t_pipex *pipex)
 	free(pipex);
 }
 
-
 void	exit_child(t_debug dbg, t_error err, int exit_code, t_pipex *pipex)
 {
 	print_error(dbg, err, false);
@@ -75,11 +75,11 @@ void	exit_child(t_debug dbg, t_error err, int exit_code, t_pipex *pipex)
 		print_error(ERR_LOC, ERR_CHILD_EXIT, false);
 		return ;
 	}
-	free_child(pipex);
+	pipex->is_child = false;
+	free_pipex(pipex);
 	if (exit_code < 0 || exit_code > 255)
 		exit_code = 1;
 	exit(exit_code);
-	// do I set pipex->is_child to false ?
 }
 
 void	exit_pipex(t_debug dbg, t_error err, int exit_code, t_pipex *pipex)
