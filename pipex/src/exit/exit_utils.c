@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 13:59:20 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/10 13:55:25 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/11 19:28:42 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ void	free_pipex(t_pipex *pipex)
 	pipex->n_cmds = 0;
 	if (pipex->pids)
 		free(pipex->pids);
+	if (pipex->stash)
+		free(pipex->stash);
+	if (pipex->line)
+		free(pipex->line);
 	ft_free_strtab(pipex->paths);
 	ft_free_strtab(pipex->cmd_args);
 	if (pipex->cmd_path)

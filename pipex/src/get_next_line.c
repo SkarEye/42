@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:20:51 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/11 17:04:52 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/11 19:50:20 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include <unistd.h>
 #include <stdbool.h>
 #include <stdlib.h>
 
@@ -19,6 +19,8 @@
 #include "error_utils.h"
 #include "exit_utils.h"
 #include "exit_wrappers.h"
+
+#include "get_next_line.h"
 
 #define BUFFER_SIZE	128
 
@@ -34,7 +36,7 @@ static bool	buffer_to_stash(char *buf, t_pipex *pipex)
 	}
 	else
 	{
-		temp = ft_join(pipex->stash, buf, "");
+		temp = ft_join(pipex->stash, buf, '\0');
 		free(pipex->stash);
 		if (!temp)
 			return (false);
@@ -46,7 +48,6 @@ static bool	buffer_to_stash(char *buf, t_pipex *pipex)
 static void	read_to_stash(int fd, t_pipex *pipex)
 {
 	char	*buf;
-	char	*temp;
 	int		bytes_read;
 	
 	buf = xmalloc(sizeof(char) * (BUFFER_SIZE + 1), ERR_LOC, pipex);
@@ -69,9 +70,8 @@ static void	read_to_stash(int fd, t_pipex *pipex)
 		exit_pipex(ERR_LOC, ERR_PERROR, 1, pipex);
 }
 
-static char	*extract_line(t_pipex *pipex)
+static size_t	extract_line(t_pipex *pipex)
 {
-	char	*line;
 	char	*temp;
 	size_t	i;
 
@@ -80,8 +80,8 @@ static char	*extract_line(t_pipex *pipex)
 		i++;
 	if (pipex->stash[i] == '\n')
 		i++;
-	line = xmalloc((sizeof(char)) * (i + 1), ERR_LOC, pipex);
-	ft_strlcpy(line, pipex->stash, i);
+	pipex->line = xmalloc((sizeof(char)) * (i + 1), ERR_LOC, pipex);
+	ft_strlcpy(pipex->line, pipex->stash, i);
 	if (pipex->stash[i] == '\n')
 	{
 		temp = ft_strdup(pipex->stash + i);
@@ -95,15 +95,12 @@ static char	*extract_line(t_pipex *pipex)
 		free(pipex->stash);
 		pipex->stash = NULL;
 	}
-	return (line);
+	return (i);
 }
 
-char	*get_next_line(int fd, t_pipex *pipex)
+size_t	get_next_line(int fd, t_pipex *pipex)
 {
-	char		*line;
-
 	if (!pipex->stash || !ft_strchr(pipex->stash, '\n'))
 		read_to_stash(fd, pipex);
-	line = extract_line(pipex);
-	return (line);
+	return (extract_line(pipex));
 }
