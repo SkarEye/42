@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:21:44 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/10 17:07:05 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/11 14:25:36 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*ft_itoa(int n);
 size_t	ft_sitoa(char *dst, int n);
 
 char	*ft_join(const char *first, const char *last, char c);
+
+void	*ft_memcpy(void *dest, const void *src, size_t n);
 
 char	**ft_split(const char *str, char c);
 

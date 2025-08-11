@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 16:28:27 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/10 18:11:05 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/11 11:14:58 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static ssize_t	get_line(char **ptr, t_pipex *pipex)
 			if (!temp)
 			{
 				free(*ptr);
+				exit_pipex(ERR_LOC, ERR_PERROR, 1, pipex);
 			}
 			ft_strlcpy(temp, *ptr, buf_size);
 			free(*ptr);

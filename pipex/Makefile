@@ -29,6 +29,7 @@ src/utils/ft_free_strtab.c \
 src/utils/ft_is_whitespace.c \
 src/utils/ft_itoa.c \
 src/utils/ft_join.c \
+src/utils/ft_memcpy.c \
 src/utils/ft_split.c \
 src/utils/ft_strcmp.c \
 src/utils/ft_strdup.c \

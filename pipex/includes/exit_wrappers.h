@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 12:15:36 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/07 19:24:47 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/11 14:49:24 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 void	*xmalloc(size_t size, t_debug dbg, t_pipex *p);
 void	*xcalloc(size_t size, t_debug dbg, t_pipex *p);
+void	*xrealloc(void *ptr, size_t old, size_t new, t_debug dbg, t_pipex *p);
 int		xopen(const char *path, int flg, mode_t mode, t_debug dbg, t_pipex *p);
 void	xclose(int *fd, t_debug dbg, t_pipex *p);
 

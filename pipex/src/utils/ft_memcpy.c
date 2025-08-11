@@ -1,44 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structures.h                                       :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/01 14:32:09 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/11 12:01:54 by macarnie         ###   ########.fr       */
+/*   Created: 2025/08/11 14:25:05 by macarnie          #+#    #+#             */
+/*   Updated: 2025/08/11 14:25:16 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef STRUCTURES_H
-# define STRUCTURES_H
+#include <stddef.h>
 
-# include <stdbool.h>
-# include <sys/types.h>
-
-typedef struct	s_pipex
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	char	**cmds;
-	int		n_cmds;
-	char	**envp;
-	char	**paths;
+	size_t	i;
 
-	char	**cmd_args;
-	char	*cmd_path;
-
-	int		infile;
-	int		outfile;
-	bool	use_infile;
-	bool	use_outfile;
-	char	*in_path;
-	char	*out_path;
-
-	char	*stash;
-
-	pid_t	*pids;
-	bool	is_child;
-	int		prev_pipe[2];
-	int		pipe[2];
-}				t_pipex;
-
-#endif
+	i = 0;
+	while (dest != src && i < n)
+	{
+		((unsigned char *)dest)[i] = ((unsigned char *)src)[i];
+		i++;
+	}
+	return (dest);
+}
