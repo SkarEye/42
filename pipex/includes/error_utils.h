@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 10:37:59 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/07 21:11:35 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/13 17:32:24 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,14 @@
 
 # include <stdbool.h>
 
-# ifndef SILENT
-#  define SILENT	false
-# endif
-
-typedef struct	s_debug
+typedef struct s_debug
 {
 	const char	*file;
 	int			line;
 }				t_debug;
 
-# define ERR_LOC	(t_debug){__FILE__, __LINE__}
+# define F	__FILE__
+# define L	__LINE__
 
 typedef enum e_error
 {
@@ -43,8 +40,9 @@ typedef enum e_error
 	ERR_UNKNOWN,
 	ERR_COUNT,
 	ERR_PERROR
-} t_error;
+}	t_error;
 
+t_debug	loc(const char *file, int line);
 void	print_error(t_debug dbg, t_error err, bool is_silent);
 
 #endif

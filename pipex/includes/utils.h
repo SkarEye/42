@@ -6,14 +6,14 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:21:44 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/11 19:51:53 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/13 17:19:05 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-#include <stddef.h>
+# include <stddef.h>
 
 void	*ft_bzero(void *s, size_t n);
 

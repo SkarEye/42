@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 16:44:54 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/06 12:36:03 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/08/13 17:41:53 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,18 @@ char	*ft_itoa(int n)
 
 size_t	ft_sitoa(char *dst, int n)
 {
-	size_t	pow;
+	int		pow;
 	size_t	i;
 
-	pow = get_pow(n);
-	if (n > 0)
-		n *= -1;
-	i = 0;
 	if (!dst)
 		return (get_size(n));
+	pow = get_pow(n);
+	i = 0;
 	if (n < 0)
 		dst[i++] = '-';
-	else if (n == 0)
-		dst[i++] = '0';
-	else while (n != 0)
+	else
+		n *= -1;
+	while (pow != 0)
 	{
 		dst[i++] = '0' - (n / pow);
 		n %= pow;

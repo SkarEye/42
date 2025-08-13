@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 13:59:20 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/11 19:28:42 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/13 17:31:58 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	free_child(t_pipex *pipex)
 		close(pipex->pipe[0]);
 	if (pipex->pipe[1] > 2)
 		close(pipex->pipe[1]);
-	if (pipex->use_infile && pipex->infile > 2)
+	if (pipex->infile > 2)
 		close(pipex->infile);
-	if (pipex->use_outfile && pipex->outfile > 2)
+	if (pipex->outfile > 2)
 		close(pipex->outfile);
 }
 
@@ -76,7 +76,7 @@ void	exit_child(t_debug dbg, t_error err, int exit_code, t_pipex *pipex)
 		exit(exit_code);
 	if (!pipex->is_child)
 	{
-		print_error(ERR_LOC, ERR_CHILD_EXIT, false);
+		print_error(loc(F, L), ERR_CHILD_EXIT, false);
 		return ;
 	}
 	pipex->is_child = false;
@@ -93,7 +93,7 @@ void	exit_pipex(t_debug dbg, t_error err, int exit_code, t_pipex *pipex)
 		exit(exit_code);
 	if (pipex->is_child)
 	{
-		print_error(ERR_LOC, ERR_PARENT_EXIT, false);
+		print_error(loc(F, L), ERR_PARENT_EXIT, false);
 		return ;
 	}
 	free_pipex(pipex);

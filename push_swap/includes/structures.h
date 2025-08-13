@@ -1,18 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/11 19:12:19 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/13 17:19:19 by macarnie         ###   ########.fr       */
+/*   Created: 2025/08/13 18:01:43 by macarnie          #+#    #+#             */
+/*   Updated: 2025/08/13 18:02:25 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef STRUCTURES_H
+# define STRUCTURES_H
 
-size_t	get_next_line(int fd, t_pipex *pipex);
+# include <stddef.h>
+
+typedef struct	s_node
+{
+	int		value;
+	size_t	index;
+	struct s_node	*prev;
+	struct s_node	*next;
+}				t_node;
+
+typedef struct	s_stack
+{
+	t_node	*head;
+	t_node	*tail;
+	size_t	size;
+}				t_stack;
 
 #endif

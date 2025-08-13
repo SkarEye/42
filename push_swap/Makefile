@@ -1,12 +1,27 @@
-NAME		= push_swap
+#  ______  _     _    _    _     _       _    _  _  _        ______  
+# (_____ \| |   | |  | |  | |   | |     | |  | || || |  /\  (_____ \ 
+#  _____) ) |   | |   \ \ | |__ | |      \ \ | || || | /  \  _____) )
+# |  ____/| |   | |    \ \|  __)| |       \ \| ||_|| |/ /\ \|  ____/ 
+# | |     | |___| |_____) ) |   | |   _____) ) |___| | |__| | |      
+# |_|      \______(______/|_|   |_|  (______/ \______|______|_|      
 
-CC			= cc
-CFLAGS		= -Wall -Wextra -Werror -I.
+# === Project name ===
+NAME		:= push_swap
 
-OPS			= ./operations/
-ALGOS		= ./algorithms/
-UTILS		= ./utils/
-SRCS		= push_swap.c \
+# === Compiler and Flags ===
+CC			:= cc
+CFLAGS		:= -Wall -Wextra -Werror -Iincludes -MMD
+RM			:= rm -f
+MKDIR		:= mkdir -p
+
+# === Object folder ===
+OBJ_DIR		:= .objects/
+
+# === Source files ===
+OPS			:= ./operations/
+ALGOS		:= ./algorithms/
+UTILS		:= ./utils/
+SRC		:= push_swap.c \
 			$(UTILS)node_utils.c \
 			$(UTILS)stack_utils.c \
 			$(UTILS)int_tab_utils.c \
@@ -19,26 +34,30 @@ SRCS		= push_swap.c \
 			$(ALGOS)greedy_sort.c \
 			$(ALGOS)xtra_greedy_sort.c \
 			$(ALGOS)fatboi_sort.c \
-			
-OBJS		= $(SRCS:.c=.o)
 
-HEADER 		= push_swap.h
+# === Object and Dependency files ===
+OBJ		:= $(SRC:%.c=$(OBJ_DIR)%.o)
+DEP		:= $(OBJ:.o=.d)
 
+# === Default target ===
 all: $(NAME)
 
-$(NAME): $(OBJS) $(HEADER)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.c push_swap.h
+# === Linking ===
+$(NAME): $(OBJ)
+	$(CC) $(CFLAGS) -o $@ $^
+
+# === Compilation rule ===
+$(OBJ_DIR)%.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-algorithms/fatboi_sort.o : algorithms/fatboi_sort.c push_swap.h
+# === Include dependencies ===
+-include $(DEP)
 
-$(OPS)%.o: $(OPS)%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
+# === Cleaning ===
 clean:
-	rm -f $(OBJS)
+	$(RM) $(OBJ) $(DEP)
+	$(RM) -r $(OBJ_DIR)
 
 fclean: clean
 	rm -f $(NAME)

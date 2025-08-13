@@ -6,11 +6,14 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:15:43 by macarnie          #+#    #+#             */
-/*   Updated: 2025/07/26 19:36:00 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/13 18:43:59 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <stdlib.h>
+
+#include "structures.h"
+#include "error_utils.h"
 
 int main(int argc, char **argv)
 {
@@ -22,13 +25,13 @@ int main(int argc, char **argv)
 		return (0);
 	tab = create_unique_int_tab(argv + 1, argc - 1);
 	if (!tab)
-		return (write(2, ERROR_MSG, sizeof(ERROR_MSG) - 1), 1);
+		return (print_error(ERROR), 1);
 	a = create_stack_from_int_tab(tab, argc - 1);
 	if (!a)
-		return (free(tab), write(2, ERROR_MSG, sizeof(ERROR_MSG) - 1), 1);
+		return (free(tab), print_error(ERROR), 1);
 	b = (t_stack *)malloc(sizeof(t_stack));
 	if (!b)
-		return (free_stack(a), write(2, ERROR_MSG, sizeof(ERROR_MSG) - 1), 1);
+		return (free(tab), free_stack(a), print_error(ERROR), 1);
 	b->head = NULL;
 	b->tail = NULL;
 	b->size = 0;

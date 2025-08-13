@@ -6,11 +6,13 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 09:28:24 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/11 17:17:35 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/13 18:46:06 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <stddef.h>
+
+#include "structures.h"
 
 void   add_to_front(t_stack *stack, t_node *new_node)
 {

@@ -6,12 +6,13 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:45:24 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/10 16:09:34 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/13 17:31:38 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <fcntl.h>
+#include <sys/wait.h>
 
 #include "structures.h"
 #include "path_utils.h"
@@ -22,82 +23,90 @@
 
 #include "exec_utils.h"
 
-static void	exec_cmd(int n, t_pipex *pipex)
+static void	exec_cmd(int n, t_pipex *p)
 {
-	pipex->cmd_args = ft_split(pipex->cmds[n], ' ');
-	if (!pipex->cmd_args)
-		exit_child(ERR_LOC, ERR_PERROR, 1, pipex);
-	if (!pipex->cmd_args[0])
-		exit_child(ERR_LOC, ERR_NO_CMD, 1, pipex);
-	get_cmd_path(pipex);
-	if (execve(pipex->cmd_path, pipex->cmd_args, pipex->envp) == -1)
-		exit_child(ERR_LOC, ERR_BAD_EXECVE, 126, pipex);
+	p->cmd_args = ft_split(p->cmds[n], ' ');
+	if (!p->cmd_args)
+		exit_child(loc(F, L), ERR_PERROR, 1, p);
+	if (!p->cmd_args[0])
+		exit_child(loc(F, L), ERR_NO_CMD, 1, p);
+	get_cmd_path(p);
+	if (execve(p->cmd_path, p->cmd_args, p->envp) == -1)
+		exit_child(loc(F, L), ERR_BAD_EXECVE, 126, p);
 }
 
-static void	setup_child(int n, t_pipex *pipex)
+static void	setup_child(int n, t_pipex *p)
 {
 	if (n == 0)
+		xdup2(p->infile, STDIN_FILENO, loc(F, L), p);
+	else
+		xdup2(p->prev_pipe[0], STDIN_FILENO, loc(F, L), p);
+	if (n == p->n_cmds - 1)
 	{
-		xdup2(pipex->infile, STDIN_FILENO, ERR_LOC, pipex);
-		xclose(&pipex->infile, ERR_LOC, pipex);
+		if (p->is_here_doc)
+			p->outfile = open(p->outpath, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		else
+			p->outfile = open(p->outpath, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (p->outfile == -1)
+			exit_child(loc(F, L), ERR_PERROR, 1, p);
+		xdup2(p->outfile, STDOUT_FILENO, loc(F, L), p);
+		xclose(&p->outfile, loc(F, L), p);
 	}
 	else
-		xdup2(pipex->prev_pipe[0], STDIN_FILENO, ERR_LOC, pipex);
-	if (n == pipex->n_cmds - 1)
-	{
-		pipex->outfile = xopen(pipex->out_path, O_WRONLY | O_CREAT | O_TRUNC, 0644, ERR_LOC, pipex);
-		xdup2(pipex->outfile, STDOUT_FILENO, ERR_LOC, pipex);
-		xclose(&pipex->outfile, ERR_LOC, pipex);
-	}
-	else
-		xdup2(pipex->pipe[1], STDOUT_FILENO, ERR_LOC, pipex);
-	xclose(&pipex->pipe[0], ERR_LOC, pipex);
-	xclose(&pipex->pipe[1], ERR_LOC, pipex);
+		xdup2(p->pipe[1], STDOUT_FILENO, loc(F, L), p);
+	xclose(&p->pipe[0], loc(F, L), p);
+	xclose(&p->pipe[1], loc(F, L), p);
 	if (n != 0)
 	{
-		xclose(&pipex->prev_pipe[0], ERR_LOC, pipex);
-		xclose(&pipex->prev_pipe[1], ERR_LOC, pipex);
+		xclose(&p->prev_pipe[0], loc(F, L), p);
+		xclose(&p->prev_pipe[1], loc(F, L), p);
 	}
 }
 
-static void	spawn_child(int n, t_pipex *pipex)
+static void	spawn_child(int n, t_pipex *p)
 {
-	xpipe(pipex->pipe, ERR_LOC, pipex);
-	pipex->pids[n] = xfork(ERR_LOC, pipex);
-	if (pipex->pids[n] == 0)
+	xpipe(p->pipe, loc(F, L), p);
+	p->pids[n] = xfork(loc(F, L), p);
+	if (p->pids[n] == 0)
 	{
-		setup_child(n, pipex);
-		exec_cmd(n, pipex);
+		setup_child(n, p);
+		exec_cmd(n, p);
 	}
 	else
 	{
+		if (p->is_here_doc)
+			xclose(&p->infile, loc(F, L), p);
 		if (n != 0)
 		{
-			xclose(&pipex->prev_pipe[0], ERR_LOC, pipex);
-			xclose(&pipex->prev_pipe[1], ERR_LOC, pipex);
+			xclose(&p->prev_pipe[0], loc(F, L), p);
+			xclose(&p->prev_pipe[1], loc(F, L), p);
 		}
-		xclose(&pipex->pipe[1], ERR_LOC, pipex);
-		pipex->prev_pipe[0] = pipex->pipe[0];
-		pipex->prev_pipe[1] = pipex->pipe[1];
+		xclose(&p->pipe[1], loc(F, L), p);
+		p->prev_pipe[0] = p->pipe[0];
+		p->prev_pipe[1] = p->pipe[1];
 	}
-	pipex->is_child = false;
+	p->is_child = false;
 }
 
-void	exec_cmds(t_pipex *pipex)
+int	exec_cmds(t_pipex *p)
 {
 	int	i;
 	int	status;
 
-	get_paths(pipex);
-	pipex->pids = xmalloc((sizeof(pid_t) * pipex->n_cmds), ERR_LOC, pipex);
+	get_paths(p);
+	p->pids = xmalloc((sizeof(pid_t) * p->n_cmds), loc(F, L), p);
 	i = 0;
-	while (pipex->cmds[i])
-		spawn_child(i++, pipex);
-	xclose(&pipex->prev_pipe[0], ERR_LOC, pipex);
-	xclose(&pipex->prev_pipe[1], ERR_LOC, pipex);
-	xclose(&pipex->infile, ERR_LOC, pipex);
-	xclose(&pipex->outfile, ERR_LOC, pipex);
+	while (p->cmds[i])
+		spawn_child(i++, p);
+	xclose(&p->prev_pipe[0], loc(F, L), p);
+	xclose(&p->prev_pipe[1], loc(F, L), p);
+	xclose(&p->infile, loc(F, L), p);
+	xclose(&p->outfile, loc(F, L), p);
 	i = 0;
-	while (i < pipex->n_cmds)
-		xwaitpid(pipex->pids[i++], &status, 0, ERR_LOC, pipex);
+	while (i < p->n_cmds)
+	{
+		if (waitpid(p->pids[i++], &status, 0) == -1)
+			exit_pipex(loc(F, L), ERR_PERROR, 1, p);
+	}
+	return ((status >> 8) & 0xFF);
 }

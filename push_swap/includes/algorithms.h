@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   algorithms.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/11 19:12:19 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/13 17:19:19 by macarnie         ###   ########.fr       */
+/*   Created: 2025/08/13 17:58:59 by macarnie          #+#    #+#             */
+/*   Updated: 2025/08/13 18:01:08 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef ALGORITHMS_H
+# define ALGORITHMS_H
 
-size_t	get_next_line(int fd, t_pipex *pipex);
+#include "structures.h"
+
+void	radix_sort(t_stack *a, t_stack *b);
+void	greedy_sort(t_stack *a, t_stack *b);
+void	xtra_greedy_sort(t_stack *a, t_stack *b);
+void	fatboi_sort(t_stack *a, t_stack *b);
 
 #endif

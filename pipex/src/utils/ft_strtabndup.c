@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtabndup.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 15:58:15 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/07 17:26:09 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/08/13 16:21:30 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 
 #include "utils.h"
 
-
 char	**ft_strtabndup(char **srctab, size_t n)
 {
-	char 	**dsttab;
+	char	**dsttab;
 	size_t	i;
 
 	if (!srctab || !*srctab)
-		return (NULL); 
+		return (NULL);
 	i = 0;
 	while (srctab[i])
 		i++;

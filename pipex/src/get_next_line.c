@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:20:51 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/11 19:50:20 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/13 17:31:55 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 static bool	buffer_to_stash(char *buf, t_pipex *pipex)
 {
-	char *	temp;
-	
+	char	*temp;
+
 	if (!pipex->stash)
 	{
 		pipex->stash = ft_strdup(buf);
@@ -49,8 +49,8 @@ static void	read_to_stash(int fd, t_pipex *pipex)
 {
 	char	*buf;
 	int		bytes_read;
-	
-	buf = xmalloc(sizeof(char) * (BUFFER_SIZE + 1), ERR_LOC, pipex);
+
+	buf = xmalloc(sizeof(char) * (BUFFER_SIZE + 1), loc(F, L), pipex);
 	bytes_read = read(fd, buf, BUFFER_SIZE);
 	while (bytes_read > 0)
 	{
@@ -58,7 +58,7 @@ static void	read_to_stash(int fd, t_pipex *pipex)
 		if (!buffer_to_stash(buf, pipex))
 		{
 			free(buf);
-			exit_pipex(ERR_LOC, ERR_PERROR, 1, pipex);
+			exit_pipex(loc(F, L), ERR_PERROR, 1, pipex);
 		}
 		if (ft_strchr(pipex->stash, '\n'))
 			bytes_read = 0;
@@ -67,7 +67,7 @@ static void	read_to_stash(int fd, t_pipex *pipex)
 	}
 	free(buf);
 	if (bytes_read == -1)
-		exit_pipex(ERR_LOC, ERR_PERROR, 1, pipex);
+		exit_pipex(loc(F, L), ERR_PERROR, 1, pipex);
 }
 
 static size_t	extract_line(t_pipex *pipex)
@@ -80,13 +80,13 @@ static size_t	extract_line(t_pipex *pipex)
 		i++;
 	if (pipex->stash[i] == '\n')
 		i++;
-	pipex->line = xmalloc((sizeof(char)) * (i + 1), ERR_LOC, pipex);
+	pipex->line = xmalloc((sizeof(char)) * (i + 1), loc(F, L), pipex);
 	ft_strlcpy(pipex->line, pipex->stash, i);
 	if (pipex->stash[i] == '\n')
 	{
 		temp = ft_strdup(pipex->stash + i);
 		if (!temp)
-			exit_pipex(ERR_LOC, ERR_PERROR, 1, pipex);
+			exit_pipex(loc(F, L), ERR_PERROR, 1, pipex);
 		free(pipex->stash);
 		pipex->stash = temp;
 	}

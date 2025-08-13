@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 18:55:14 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/05 15:14:16 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/13 16:20:01 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 size_t	ft_strlen(const char *str)
 {
 	size_t	len;
-	
+
 	if (!str)
 		return (0);
 	len = 0;

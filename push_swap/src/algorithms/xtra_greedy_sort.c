@@ -6,11 +6,13 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 05:54:40 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/18 13:28:08 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/13 18:48:01 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <stddef.h>
+
+#include "structures.h"
 
 
 static int    xg_get_min_steps(t_stack *a, size_t min_i, size_t max_i)

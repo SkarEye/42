@@ -6,11 +6,28 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 16:39:36 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/07/11 20:22:12 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/13 18:13:04 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <stdio.h>  // to be rm-ed
+#include "structures.h"
+
+# define FLAG_PA 1
+# define FLAG_PB 2
+# define FLAG_RA 4
+# define FLAG_RB 8
+# define FLAG_RRA 16
+# define FLAG_RRB 32
+# define FLAG_SA 64
+# define FLAG_SB 128
+
+unsigned int	ft_abs(int n)
+{
+	if (n < 0)
+		return ((unsigned int)(~n + 1));
+	return ((unsigned int)n);
+}
 
 void    print_stacks(t_stack *a, t_stack *b)
 {

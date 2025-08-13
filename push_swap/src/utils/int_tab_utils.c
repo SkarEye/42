@@ -6,17 +6,20 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 13:05:51 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/07/26 19:42:55 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/13 19:25:13 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <stddef.h>
+#include <limits.h>
+
+#include "structures.h"
 
 static int ft_atoi_safe(const char *str, int *out)
 {
     long    n;
     int     sign;
-
+    
     sign = 1;
     if (!str || !*str)
         return (0);

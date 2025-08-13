@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_strtab.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 16:10:56 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/07 16:11:50 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/08/13 16:20:47 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

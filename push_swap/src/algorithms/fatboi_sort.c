@@ -6,13 +6,13 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/16 16:55:38 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/30 21:25:42 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/13 17:59:37 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-size_t dynamic_chunk_size(t_stack *stack, size_t index)
+static size_t dynamic_chunk_size(t_stack *stack, size_t index)
 {
     if (stack->size <= 100)
         return (10);
@@ -22,7 +22,7 @@ size_t dynamic_chunk_size(t_stack *stack, size_t index)
         return (30);
 }
 
-int fb_find_closest(t_stack *stack, size_t index, size_t chunk_size)
+static int fb_find_closest(t_stack *stack, size_t index, size_t chunk_size)
 {
     t_node *node;
     int steps_rotate;
@@ -48,7 +48,7 @@ int fb_find_closest(t_stack *stack, size_t index, size_t chunk_size)
         return (steps_reverse_rotate);
 }
 
-size_t fb_push_chunk(t_stack *a, t_stack *b, size_t index, size_t chunk_size)
+static size_t fb_push_chunk(t_stack *a, t_stack *b, size_t index, size_t chunk_size)
 {
     size_t i;
 

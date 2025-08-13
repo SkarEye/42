@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   error_utils.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/11 19:12:19 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/13 17:19:19 by macarnie         ###   ########.fr       */
+/*   Created: 2025/08/13 18:13:37 by macarnie          #+#    #+#             */
+/*   Updated: 2025/08/13 18:36:34 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef ERROR_UTILS_H
+# define ERROR_UTILS_H
 
-size_t	get_next_line(int fd, t_pipex *pipex);
+typedef enum e_result
+{
+	SUCCESS,
+	FAILURE,
+	ERROR,
+	UNKNOWN
+}	t_result;
+
+void	print_error(t_result res);
 
 #endif

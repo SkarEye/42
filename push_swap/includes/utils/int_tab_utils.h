@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   random_utils.c                                     :+:      :+:    :+:   */
+/*   int_tab_utils.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/16 13:52:01 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/19 14:30:46 by macarnie         ###   ########.fr       */
+/*   Created: 2025/08/13 18:09:26 by macarnie          #+#    #+#             */
+/*   Updated: 2025/08/13 18:10:04 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef INT_TAB_UTILS_H
+# define INT_TAB_UTILS_H
 
-unsigned int	ft_abs(int n)
-{
-	if (n < 0)
-		return ((unsigned int)(~n + 1));
-	return ((unsigned int)n);
-}
+#include <stddef.h>
+
+int		*create_unique_int_tab(char **str_tab, size_t size);
+void	sort_int_tab(int *tab, size_t size);
+
+#endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_utils.c                                      :+:      :+:    :+:   */
+/*   error_utilsTEMP.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 10:27:38 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/06 17:47:33 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/08/13 16:54:17 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,31 @@
 #include "error_utils.h"
 
 #define NO_FILE_CONTEXT 	"no file context"
-#define	THREE_DOT			"..."
+#define NO_ERR_MSG			"Could not get error message.\n"
 
-#define MSG_LIMIT			128
-#define FILE_LIMIT			16
-#define	INFO_LIMIT			96
+static char	*get_syscontext(t_debug dbg)
+{
+	char	*syscontext;
+	char	*str_line;
+
+	if (!dbg.file)
+		return (NULL);
+	str_line = ft_itoa(dbg.line);
+	if (!str_line)
+		return (NULL);
+	syscontext = ft_join(dbg.file, str_line, ':');
+	free(str_line);
+	if (!syscontext)
+		return (NULL);
+	return (syscontext);
+}
 
 static const char	*get_error_info(t_error err)
 {
-	const char *error_info[] = {
+	const char	*error_info[] = {
 		": Success !\n",
 		": Invalid arguments.\n",
-		": Invalid 'Esacpe' character.\n",
+		": Invalid 'Escape' character.\n",
 		": Missing starting double quote.\n",
 		": Missing ending double quote.\n",
 		": No paths found.\n",
@@ -45,54 +58,42 @@ static const char	*get_error_info(t_error err)
 
 	if (err < 0 || err >= ERR_COUNT)
 		return (error_info[ERR_UNKNOWN]);
-	
 	return (error_info[err]);
 }
 
-static size_t	get_syscontext(char *sys_context, t_debug dbg)
+static char	*get_error_message(const char *syscontext, t_error err)
 {
-	size_t	i;
-
-	i = ft_strlcpy(sys_context, dbg.file, FILE_LIMIT + 1);
-	if (i > FILE_LIMIT)
-		i = FILE_LIMIT + ft_strlcpy(&sys_context[FILE_LIMIT], THREE_DOT, 4);
-	if (dbg.line > 0)
-	{
-		sys_context[i++] = ':';
-		i+= ft_sitoa(&sys_context[i], dbg.line);
-	}
-	return (i);
-}
-
-static size_t get_error_message(char *err_msg, t_error err, t_debug dbg)
-{
-	size_t	i;
-	size_t	copied;
-
-	i = get_syscontext(err_msg, dbg);
-	copied = ft_strlcpy(&err_msg[i], get_error_info(err), INFO_LIMIT + 1);
-	if (copied > INFO_LIMIT)
-		i += INFO_LIMIT + ft_strlcpy(&err_msg[i + INFO_LIMIT], THREE_DOT, 4);
+	if (!syscontext)
+		return (ft_join(NO_FILE_CONTEXT, get_error_info(err), '\0'));
 	else
-		i += copied;
-	return (i);
+		return (ft_join(syscontext, get_error_info(err), '\0'));
 }
 
 void	print_error(t_debug dbg, t_error err, bool is_silent)
 {
-	char	str[MSG_LIMIT];
-	size_t	size;
+	char	*syscontext;
+	char	*err_msg;
 
 	if (is_silent || err == ERR_NONE)
 		return ;
+	syscontext = get_syscontext(dbg);
+	err_msg = get_error_message(syscontext, err);
 	if (err == ERR_PERROR)
 	{
-		get_syscontext(str, dbg);
-		return (perror(str));
+		if (syscontext)
+			perror(syscontext);
+		else
+			perror(NO_FILE_CONTEXT);
 	}
 	else
 	{
-		size = get_error_message(str, err, dbg);
-		write(2, str, size);
+		if (err_msg)
+			write(2, err_msg, ft_strlen(err_msg));
+		else
+			write(2, NO_ERR_MSG, ft_strlen(NO_ERR_MSG));
 	}
+	if (syscontext)
+		free(syscontext);
+	if (err_msg)
+		free(err_msg);
 }

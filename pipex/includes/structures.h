@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 14:32:09 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/11 19:23:56 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/13 17:18:24 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <stdbool.h>
 # include <sys/types.h>
 
-typedef struct	s_pipex
+typedef struct s_pipex
 {
 	char	**cmds;
 	int		n_cmds;
@@ -28,11 +28,10 @@ typedef struct	s_pipex
 
 	int		infile;
 	int		outfile;
-	bool	use_infile;
-	bool	use_outfile;
-	char	*in_path;
-	char	*out_path;
+	char	*outpath;
 
+	bool	is_here_doc;
+	char	*lmt;
 	char	*stash;
 	char	*line;
 
