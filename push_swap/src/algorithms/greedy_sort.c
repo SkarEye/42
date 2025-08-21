@@ -6,11 +6,15 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 05:54:40 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/06/18 14:05:00 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/19 12:38:54 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <stddef.h>
+
+#include "structures.h"
+#include "operations.h"
+#include "algo_helper.h"
 
 void    greedy_sort(t_stack *a, t_stack *b)
 {
@@ -18,7 +22,6 @@ void    greedy_sort(t_stack *a, t_stack *b)
 
     if (!a || !b || a->size < 2)
         return ;
-    assign_index(a);
     index = 0;
     while (a->size > 0)
     {

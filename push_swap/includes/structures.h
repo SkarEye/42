@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:01:43 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/13 18:02:25 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/16 20:04:47 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,12 @@ typedef struct	s_stack
 	t_node	*tail;
 	size_t	size;
 }				t_stack;
+
+typedef struct	s_push_swap
+{
+	t_stack	*a;
+	t_stack	*b;
+}				t_push_swap;
+
 
 #endif

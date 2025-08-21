@@ -10,7 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include <stddef.h>
+
+#include "structures.h"
+#include "operations.h"
+#include "algo_helper.h"
 
 static size_t get_max_bits(int size)
 {
@@ -33,7 +37,6 @@ void    radix_sort(t_stack *a, t_stack *b)
 
     if (!a || !b || a->size < 2)
         return ;
-    assign_index(a);
     max_bits = get_max_bits(a->size - 1);
     i = 0;
     while (i < max_bits)

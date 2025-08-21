@@ -29,6 +29,7 @@ SRC := \
 	src/utils/exit_utils.c \
 	src/utils/list_utils.c \
 	src/utils/map_utils.c \
+	src/renders/render_init.c \
 	src/renders/render_utils.c \
 	src/img/img_utils.c \
 	src/img/img_utils2.c \
@@ -38,7 +39,7 @@ SRC := \
 	src/img/color_utils.c \
 	src/text/line_utils.c \
 	src/text/text_utils.c \
-	src/animate/animate_utils.c
+	src/animate/fade_utils.c
 
 # === Object and Dependency files ===
 OBJ := $(SRC:%.c=$(OBJ_DIR)/%.o)

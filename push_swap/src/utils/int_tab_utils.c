@@ -6,12 +6,13 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 13:05:51 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/13 19:25:13 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/19 12:36:54 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include <limits.h>
+#include <stdlib.h>
 
 #include "structures.h"
 

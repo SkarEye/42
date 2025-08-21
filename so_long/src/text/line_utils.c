@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 14:20:12 by macarnie          #+#    #+#             */
-/*   Updated: 2025/07/25 15:17:22 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/07 21:33:00 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ size_t	get_pixel_offset(const char *str, t_text_info *txt_i)
 {
 	size_t	pixel_offset;
 
-	pixel_offset = get_line_len(str, txt_i->width) * GLYPH_WIDTH;
+	pixel_offset = txt_i->width - get_line_len(str, txt_i->width) * GLYPH_WIDTH;
 	if (txt_i->align == A_RIGHT)
 		return (pixel_offset);
 	if (txt_i->align == A_CENTERED)

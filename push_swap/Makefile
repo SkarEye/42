@@ -18,22 +18,25 @@ MKDIR		:= mkdir -p
 OBJ_DIR		:= .objects/
 
 # === Source files ===
+SRC_DIR		:= ./src/
 OPS			:= ./operations/
 ALGOS		:= ./algorithms/
 UTILS		:= ./utils/
-SRC		:= push_swap.c \
-			$(UTILS)node_utils.c \
-			$(UTILS)stack_utils.c \
-			$(UTILS)int_tab_utils.c \
-			$(UTILS)algo_utils.c \
-			$(OPS)push.c \
-			$(OPS)rotate.c \
-			$(OPS)rev_rotate.c \
-			$(OPS)swap.c \
-			$(ALGOS)radix_sort.c \
-			$(ALGOS)greedy_sort.c \
-			$(ALGOS)xtra_greedy_sort.c \
-			$(ALGOS)fatboi_sort.c \
+SRC		:=	push_swap.c \
+			$(SRC_DIR)$(UTILS)int_tab_utils.c \
+			$(SRC_DIR)$(UTILS)node_utils.c \
+			$(SRC_DIR)$(UTILS)stack_utils.c \
+			$(SRC_DIR)$(OPS)push.c \
+			$(SRC_DIR)$(OPS)rev_rotate.c \
+			$(SRC_DIR)$(OPS)rotate.c \
+			$(SRC_DIR)$(OPS)swap.c \
+			$(SRC_DIR)$(ALGOS)algo_helper.c \
+			$(SRC_DIR)$(ALGOS)small_sort.c \
+			$(SRC_DIR)$(ALGOS)radix_sort.c \
+			$(SRC_DIR)$(ALGOS)greedy_sort.c \
+			$(SRC_DIR)$(ALGOS)xtra_greedy_sort.c \
+			$(SRC_DIR)$(ALGOS)fatboi_sort.c \
+			$(SRC_DIR)error_utils.c
 
 # === Object and Dependency files ===
 OBJ		:= $(SRC:%.c=$(OBJ_DIR)%.o)
@@ -49,6 +52,7 @@ $(NAME): $(OBJ)
 
 # === Compilation rule ===
 $(OBJ_DIR)%.o: %.c
+	@$(MKDIR) $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 # === Include dependencies ===

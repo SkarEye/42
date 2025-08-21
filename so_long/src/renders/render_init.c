@@ -6,11 +6,15 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 16:47:28 by macarnie          #+#    #+#             */
-/*   Updated: 2025/07/26 16:50:36 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/05 14:45:58 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structures.h"
+#include "animate_utils.h"
+#include "img_utils.h"
+
+#include "render_helper.h"
 
 void	render_init(t_game *game)
 {

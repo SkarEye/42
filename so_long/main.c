@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 15:21:10 by macarnie          #+#    #+#             */
-/*   Updated: 2025/07/26 16:43:24 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/08 15:04:36 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#define TEST_STR "How you doin' ?\nHellah hellah yea-eah !!!"
+#define TEST_STR "La poire William est delicieuse, MMMMMMMMMMMMMMMMMMM"
 
 int	handle_key(int keycode, void *param)
 {
@@ -54,9 +54,9 @@ int	init_game_pool(t_game *game)
 	put_image_in_pool(game->mlx, game->pool, IMG_FONT, data);
 	data = get_image_from_xpm(game->mlx, "./assets/fonts/claire.xpm");
 	put_image_in_pool(game->mlx, game->pool, IMG_CLAIRE, data);
-	txt_i = set_text_info(600, 200, 0x00ff00, A_LEFT);
+	txt_i = set_text_info(200, 200, 0xffff00, A_LEFT);
 	data = text_to_image(game->mlx, game->pool[IMG_FONT], TEST_STR, txt_i);
-	scale_image(game->mlx, &data, 2);
+	scale_image(game->mlx, &data, 3);
 	put_image_in_pool(game->mlx, game->pool, IMG_INIT_PARAGRAPH, data);
 	txt_i->color = 0x00aa00;
 	data = text_to_image(game->mlx, game->pool[IMG_FONT], TEST_STR, txt_i);

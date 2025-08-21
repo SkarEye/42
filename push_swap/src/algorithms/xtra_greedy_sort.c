@@ -6,14 +6,15 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/15 05:54:40 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/13 18:48:01 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/19 12:39:46 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
 #include "structures.h"
-
+#include "operations.h"
+#include "algo_helper.h"
 
 static int    xg_get_min_steps(t_stack *a, size_t min_i, size_t max_i)
 {
@@ -22,7 +23,7 @@ static int    xg_get_min_steps(t_stack *a, size_t min_i, size_t max_i)
     
     min_steps = count_min_steps(a, min_i);
     max_steps = count_min_steps(a, max_i);
-    if (abs(min_steps) < abs(max_steps) + 2)
+    if (ft_abs(min_steps) < ft_abs(max_steps) + 2)
         return (min_steps);
     else
         return (max_steps);
@@ -73,7 +74,6 @@ void    xtra_greedy_sort(t_stack *a, t_stack *b)
 {
     if (!a || !b || a->size < 2)
         return ;
-    assign_index(a);
     xg_push(a, b);
     xg_push_back(a, b);
 }
