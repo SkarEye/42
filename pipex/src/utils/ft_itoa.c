@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 16:44:54 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/13 17:41:53 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/21 18:40:54 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
+/***
+ * @param dst Destination buffer
+ * @param n The integer to convert
+ * @return Length of the integer representation
+ */
 size_t	ft_sitoa(char *dst, int n)
 {
 	int		pow;

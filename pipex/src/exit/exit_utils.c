@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/02 13:59:20 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/13 17:31:58 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/21 19:41:25 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,16 @@ void	free_child(t_pipex *pipex)
 		close(pipex->pipe[0]);
 	if (pipex->pipe[1] > 2)
 		close(pipex->pipe[1]);
-	if (pipex->infile > 2)
-		close(pipex->infile);
-	if (pipex->outfile > 2)
-		close(pipex->outfile);
+	if (pipex->io[0] > 2)
+		close(pipex->io[0]);
+	if (pipex->io[1] > 2)
+		close(pipex->io[1]);
 }
 
 void	free_pipex(t_pipex *pipex)
 {
 	if (!pipex)
 		return ;
-	if (pipex->cmds)
-		ft_free_strtab(pipex->cmds);
-	pipex->n_cmds = 0;
 	if (pipex->pids)
 		free(pipex->pids);
 	if (pipex->stash)
@@ -61,10 +58,10 @@ void	free_pipex(t_pipex *pipex)
 		close(pipex->pipe[0]);
 	if (pipex->pipe[1] > 2)
 		close(pipex->pipe[1]);
-	if (pipex->infile > 2)
-		close(pipex->infile);
-	if (pipex->outfile > 2)
-		close(pipex->outfile);
+	if (pipex->io[0] > 2)
+		close(pipex->io[0]);
+	if (pipex->io[1] > 2)
+		close(pipex->io[1]);
 	ft_bzero(pipex, sizeof(t_pipex));
 	free(pipex);
 }

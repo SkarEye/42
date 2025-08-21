@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:56:06 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/19 12:05:01 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/21 15:48:09 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ unsigned int	ft_abs(int n)
 	return ((unsigned int)n);
 }
 
-int count_min_steps(t_stack *stack, size_t index)
+int	count_min_steps(t_stack *stack, size_t index)
 {
 	int		steps_forwards;
 	int		steps_backwards;
@@ -47,7 +47,6 @@ int count_min_steps(t_stack *stack, size_t index)
 		return (steps_backwards);
 }
 
-
 void	get_to_index(t_stack *stack, int steps,
 	void (*rotate)(t_stack *), void (*rev_rotate)(t_stack *))
 {
@@ -63,10 +62,10 @@ void	get_to_index(t_stack *stack, int steps,
 	}
 }
 
-int is_index_in_stack(t_stack *stack, size_t index)
+int	is_index_in_stack(t_stack *stack, size_t index)
 {
 	t_node	*current;
-	
+
 	if (!stack || stack->size == 0)
 		return (0);
 	current = stack->head;

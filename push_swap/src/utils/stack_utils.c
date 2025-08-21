@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:52:00 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/19 16:47:04 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/21 16:12:11 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ static bool	assign_index(t_stack *stack, int *tab, size_t size)
 
 t_stack	*init_stack(void)
 {
-	t_stack *stack;
-	
+	t_stack	*stack;
+
 	stack = malloc(sizeof(t_stack));
 	if (!stack)
 		return (NULL);
@@ -96,7 +96,7 @@ t_stack	*create_stack_from_args(char **str_tab, size_t size)
 	{
 		new_node = malloc(sizeof(t_node));
 		if (!new_node)
-		   return (free(tab), free_stack(stack), NULL);
+			return (free(tab), free_stack(stack), NULL);
 		new_node->value = tab[i++];
 		add_to_back(stack, new_node);
 	}

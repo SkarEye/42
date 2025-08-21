@@ -8,7 +8,7 @@ NAME := pipex
 
 # === Compiler and Flags ===                                                                                        
 CC := cc
-CFLAGS := -Wall -Wextra -Werror -Iincludes -MMD
+CFLAGS := -Wall -Wextra -Werror -Iincludes -MMD -Wpadded
 RM := rm -f
 MKDIR := mkdir -p
 

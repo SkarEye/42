@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:23:52 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/19 18:25:20 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/21 17:54:25 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "operations.h"
 #include "utils/node_utils.h"
 
-static void	push(t_stack *from, t_stack *to)
+void	push(t_stack *from, t_stack *to)
 {
 	t_node	*node;
 

@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 22:45:24 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/13 17:31:38 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/21 19:40:36 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,19 @@ static void	exec_cmd(int n, t_pipex *p)
 static void	setup_child(int n, t_pipex *p)
 {
 	if (n == 0)
-		xdup2(p->infile, STDIN_FILENO, loc(F, L), p);
+		xdup2(p->io[0], STDIN_FILENO, loc(F, L), p);
 	else
 		xdup2(p->prev_pipe[0], STDIN_FILENO, loc(F, L), p);
 	if (n == p->n_cmds - 1)
 	{
 		if (p->is_here_doc)
-			p->outfile = open(p->outpath, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			p->io[1] = open(p->outpath, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		else
-			p->outfile = open(p->outpath, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (p->outfile == -1)
+			p->io[1] = open(p->outpath, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		if (p->io[1] == -1)
 			exit_child(loc(F, L), ERR_PERROR, 1, p);
-		xdup2(p->outfile, STDOUT_FILENO, loc(F, L), p);
-		xclose(&p->outfile, loc(F, L), p);
+		xdup2(p->io[1], STDOUT_FILENO, loc(F, L), p);
+		xclose(&p->io[1], loc(F, L), p);
 	}
 	else
 		xdup2(p->pipe[1], STDOUT_FILENO, loc(F, L), p);
@@ -75,7 +75,7 @@ static void	spawn_child(int n, t_pipex *p)
 	else
 	{
 		if (p->is_here_doc)
-			xclose(&p->infile, loc(F, L), p);
+			xclose(&p->io[0], loc(F, L), p);
 		if (n != 0)
 		{
 			xclose(&p->prev_pipe[0], loc(F, L), p);
@@ -96,17 +96,17 @@ int	exec_cmds(t_pipex *p)
 	get_paths(p);
 	p->pids = xmalloc((sizeof(pid_t) * p->n_cmds), loc(F, L), p);
 	i = 0;
-	while (p->cmds[i])
+	while (i < p->n_cmds)
 		spawn_child(i++, p);
 	xclose(&p->prev_pipe[0], loc(F, L), p);
 	xclose(&p->prev_pipe[1], loc(F, L), p);
-	xclose(&p->infile, loc(F, L), p);
-	xclose(&p->outfile, loc(F, L), p);
+	xclose(&p->io[0], loc(F, L), p);
+	xclose(&p->io[1], loc(F, L), p);
 	i = 0;
 	while (i < p->n_cmds)
 	{
 		if (waitpid(p->pids[i++], &status, 0) == -1)
 			exit_pipex(loc(F, L), ERR_PERROR, 1, p);
 	}
-	return ((status >> 8) & 0xFF);
+	return (WEXITSTATUS(status));
 }

@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:31:28 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/19 18:27:14 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/21 14:52:27 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "operations.h"
 #include "utils/node_utils.h"
 
-static void	rev_rotate(t_stack *stack)
+void	rev_rotate(t_stack *stack)
 {
 	t_node	*node;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/01 10:27:38 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/20 16:55:01 by mattcarniel      ###   ########.fr       */
+/*   Created: 2025/08/01 10:27:38 by macarnie          #+#    #+#             */
+/*   Updated: 2025/08/21 18:51:17 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

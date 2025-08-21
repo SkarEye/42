@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 12:15:36 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/13 17:13:18 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/21 14:46:41 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <sys/types.h>
 
 # include "structures.h"
+# include "error_utils.h"
 
 void	*xmalloc(size_t size, t_debug dbg, t_pipex *p);
 void	*xcalloc(size_t size, t_debug dbg, t_pipex *p);

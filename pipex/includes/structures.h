@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 14:32:09 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/13 17:18:24 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/21 19:44:36 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,28 @@
 typedef struct s_pipex
 {
 	char	**cmds;
-	int		n_cmds;
 	char	**envp;
 	char	**paths;
 
 	char	**cmd_args;
 	char	*cmd_path;
 
-	int		infile;
-	int		outfile;
 	char	*outpath;
-
-	bool	is_here_doc;
+	
 	char	*lmt;
 	char	*stash;
 	char	*line;
-
+	
 	pid_t	*pids;
-	bool	is_child;
+	
+	int		io[2];
 	int		prev_pipe[2];
 	int		pipe[2];
+	int		n_cmds;
+	bool	is_here_doc;
+	bool	is_child;
+	
+	char	reserved[2];
 }				t_pipex;
 
 #endif

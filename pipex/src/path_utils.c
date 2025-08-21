@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 10:26:45 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/13 17:31:53 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/21 19:26:52 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	get_custom_path(t_pipex *pipex)
 				exit_child(loc(F, L), ERR_PERROR, 1, pipex);
 			return ;
 		}
-		exit_child(loc(F, L), ERR_NO_CMD, 127, pipex);
+		exit_child(loc(F, L), ERR_BAD_EXECVE, 126, pipex);
 	}
 }
 

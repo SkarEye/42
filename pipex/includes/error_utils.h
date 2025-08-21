@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 10:37:59 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/13 17:32:24 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/21 19:44:55 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ typedef struct s_debug
 {
 	const char	*file;
 	int			line;
+
+	char		reserved[4];
 }				t_debug;
 
 # define F	__FILE__

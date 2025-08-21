@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 19:27:32 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/19 18:25:59 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/21 16:15:24 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "operations.h"
 #include "utils/node_utils.h"
 
-static void	swap(t_stack *stack)
+void	swap(t_stack *stack)
 {
 	t_node	*first;
 	t_node	*second;
@@ -38,8 +38,7 @@ void	sa(t_stack *a)
 void	sb(t_stack *b)
 {
 	swap(b);
-    write(1, SB, 3);
-
+	write(1, SB, 3);
 }
 
 void	ss(t_stack *a, t_stack *b)

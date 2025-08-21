@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 13:24:53 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/19 18:35:01 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/21 17:04:58 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,41 +15,38 @@
 
 #include "structures.h"
 #include "operations.h"
-#include "algo_helper.h"
-
-#define SOL_021	(t_do_op[]){DO_RRA, DO_SA, STOP}
-#define SOL_120	(t_do_op[]){DO_RRA, STOP}
-#define SOL_102	(t_do_op[]){DO_SA, STOP}
-#define SOL_210	(t_do_op[]){DO_SA, DO_RRA, STOP}
-#define SOL_201	(t_do_op[]){DO_RA, STOP}
+#include "utils/algo_helper.h"
 
 static void	three_sort(t_stack *a, t_stack *b, size_t offset)
 {
-	t_do_op	*ops;
-	size_t	i;
-	
+	const t_do_op	ops[][3] = {
+	{DO_RRA, DO_SA, STOP},
+	{DO_RRA, STOP, STOP},
+	{DO_SA, STOP, STOP},
+	{DO_SA, DO_RRA, STOP},
+	{DO_RA, STOP, STOP}
+	};
+
 	if (a->size != 3)
 		return ;
 	if (a->head->index == offset && a->tail->index == offset + 1)
-		ops = SOL_021;
+		print_ops(a, b, ops[0]);
 	else if (a->head->index == offset + 1 && a->tail->index == offset)
-		ops = SOL_120;
+		print_ops(a, b, ops[1]);
 	else if (a->head->index == offset + 1 && a->tail->index == offset + 2)
-		ops = SOL_102;
+		print_ops(a, b, ops[2]);
 	else if (a->head->index == offset + 2 && a->tail->index == offset)
-		ops = SOL_210;
+		print_ops(a, b, ops[3]);
 	else if (a->head->index == offset + 2 && a->tail->index == offset + 1)
-		ops = SOL_201;
+		print_ops(a, b, ops[4]);
 	else
 		return ;
-	i = 0;
-	while (ops[i] != STOP)
-		do_op(a, b, ops[i++]);
 }
 
 void	small_sort(t_stack *a, t_stack *b)
 {
 	size_t	i;
+
 	if (!a || !b || a->size < 2)
 		return ;
 	if (a->size == 2 && a->head->index == 1 && a->tail->index == 0)

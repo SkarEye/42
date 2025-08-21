@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 17:26:51 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/19 17:50:34 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/21 16:16:16 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ static char	*extract_line(char *stash)
 	if (!line)
 		return (NULL);
 	ft_strlcpy(line, stash, i);
-	if (stash[i] == '\n')
+	if (stash[i])
 	{
 		temp = ft_strdup(stash + i);
 		free_stash(stash);
@@ -93,7 +93,6 @@ static char	*extract_line(char *stash)
 		free_stash(stash);
 	return (line);
 }
-
 
 char	*get_next_line(int fd)
 {

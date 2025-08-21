@@ -6,6 +6,7 @@
         "stdbool.h": "c",
         "stdio.h": "c",
         "error_utils.h": "c",
-        "structures.h": "c"
+        "structures.h": "c",
+        "exit_utils.h": "c"
     }
 }
