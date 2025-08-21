@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 10:27:38 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/13 17:30:23 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/20 16:55:01 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static size_t	get_error_message(char *err_msg, t_error err, t_debug dbg)
 
 t_debug	loc(const char *file, int line)
 {
-	t_debug dbg;
+	t_debug	dbg;
 
 	dbg.file = file;
 	dbg.line = line;

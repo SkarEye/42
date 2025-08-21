@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 14:45:56 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/13 17:32:06 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/20 17:10:40 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,15 @@
 #include "exec_utils.h"
 #include "utils.h"
 #include "get_next_line.h"
+#include "exit_wrappers.h"
 #include "error_utils.h"
 #include "exit_utils.h"
-#include "exit_wrappers.h"
 
 #define DEV_NULL	"/dev/null"
 
 #define HERE_DOC	"here_doc"
 
-#define HD_PROMPT		"heredoc>"
+#define HD_PROMPT	"here_doc>"
 
 static void	get_here_doc(t_pipex *pipex)
 {
