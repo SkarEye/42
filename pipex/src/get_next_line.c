@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:20:51 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/13 17:31:55 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/20 17:06:11 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ static size_t	extract_line(t_pipex *pipex)
 		i++;
 	pipex->line = xmalloc((sizeof(char)) * (i + 1), loc(F, L), pipex);
 	ft_strlcpy(pipex->line, pipex->stash, i);
-	if (pipex->stash[i] == '\n')
+	if (pipex->stash[i])
 	{
 		temp = ft_strdup(pipex->stash + i);
 		if (!temp)
