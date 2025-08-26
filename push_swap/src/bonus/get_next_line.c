@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 17:26:51 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/21 16:16:16 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/25 16:43:24 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,26 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
+#include "bonus/gnl_utils.h"
+
 #define BUFFER_SIZE	128
 
-static void	free_stash(char *stash)
-{
-	if (stash)
-		free(stash);
-	stash = NULL;
-}
-
-static bool	buffer_to_stash(char *stash, char *buffer)
+static bool	buffer_to_stash(char **stash, char *buffer)
 {
 	char	*temp;
 
-	if (!stash)
-		temp = ft_strdup(buffer, "");
+	if (!*stash)
+		temp = ft_strdup(buffer);
 	else
 	{
-		temp = ft_strjoin(stash, buffer);
-		free_stash(stash);
+		temp = ft_strjoin(*stash, buffer);
+		free(*stash);
 	}
 	if (!temp)
+	{
+		*stash = NULL;
 		return (false);
+	}
 	else
 	{
 		*stash = temp;
@@ -43,7 +41,7 @@ static bool	buffer_to_stash(char *stash, char *buffer)
 	}
 }
 
-static char	*read_to_stash(int fd, char *stash)
+char	*read_to_stash(int fd, char *stash)
 {
 	char		*buffer;
 	int			bytes_read;
@@ -64,34 +62,56 @@ static char	*read_to_stash(int fd, char *stash)
 	}
 	free(buffer);
 	if (bytes_read == -1)
-		return (free_stash(stash), NULL);
+		return (free(stash), NULL);
 	return (stash);
 }
 
-static char	*extract_line(char *stash)
+char	*extract_line(char *stash)
 {
 	char	*line;
-	char	*temp;
 	int		i;
 
+	if (!stash || !*stash)
+		return (NULL);
 	i = 0;
 	while (stash[i] && stash[i] != '\n')
+		i++;
+	if (stash[i] == '\n')
 		i++;
 	line = malloc((i + 1) * sizeof(char));
 	if (!line)
 		return (NULL);
-	ft_strlcpy(line, stash, i);
-	if (stash[i])
+	ft_strlcpy(line, stash, i + 1);
+	line[i] = '\0';
+	return (line);
+}
+
+void	update_stash(char **stash)
+{
+	char	*temp;
+	int		i;
+
+	if (!*stash)
+		return ;
+	i = 0;
+	while ((*stash)[i] && (*stash)[i] != '\n')
+		i++;
+	if ((*stash)[i] == '\n')
 	{
-		temp = ft_strdup(stash + i);
-		free_stash(stash);
+		temp = ft_strdup(*stash + i + 1);
+		free(*stash);
 		if (!temp)
-			return (free(line), NULL);
-		stash = temp;
+		{
+			*stash = NULL;
+			return ;
+		}
+		*stash = temp;
 	}
 	else
-		free_stash(stash);
-	return (line);
+	{
+		free(*stash);
+		*stash = NULL;
+	}
 }
 
 char	*get_next_line(int fd)
@@ -103,12 +123,17 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if (!stash || !(ft_strchr(stash, '\n')))
 	{
-		read_to_stash(fd, stash);
+		stash = read_to_stash(fd, stash);
 		if (!stash)
 			return (NULL);
 	}
 	line = extract_line(stash);
 	if (!line)
-		return (free_stash(stash), NULL);
+	{
+		free(stash);
+		stash = NULL;
+		return (NULL);
+	}
+	update_stash(&stash);
 	return (line);
 }

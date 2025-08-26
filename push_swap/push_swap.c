@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/10 16:15:43 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/21 17:06:26 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/25 14:31:42 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ int main(int argc, char **argv)
 	if (push_swap->a->size <= 5)
 		small_sort(push_swap->a, push_swap->b);
 	else
-		radix_sort(push_swap->a, push_swap->b);
+		turk_sort(push_swap->a, push_swap->b);
 	return (free_push_swap(push_swap), 0);
 }

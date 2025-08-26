@@ -37,12 +37,20 @@ SRC			:= \
 			$(SRC_DIR)$(OPS)swap.c \
 			$(SRC_DIR)$(OPS)op_utils.c \
 			$(SRC_DIR)$(ALGOS)algo_helper.c \
+			$(SRC_DIR)$(ALGOS)math_helper.c \
 			$(SRC_DIR)$(ALGOS)small_sort.c \
 			$(SRC_DIR)$(ALGOS)radix_sort.c \
 			$(SRC_DIR)$(ALGOS)greedy_sort.c \
 			$(SRC_DIR)$(ALGOS)xtra_greedy_sort.c \
 			$(SRC_DIR)$(ALGOS)fatboi_sort.c \
-			$(SRC_DIR)$(BONUS)get_next_line.c
+			$(SRC_DIR)$(ALGOS)turk_sort.c \
+			$(SRC_DIR)$(BONUS)get_next_line.c \
+			$(SRC_DIR)$(BONUS)$(UTILS)ft_strchr.c \
+			$(SRC_DIR)$(BONUS)$(UTILS)ft_strdup.c \
+			$(SRC_DIR)$(BONUS)$(UTILS)ft_strjoin.c \
+			$(SRC_DIR)$(BONUS)$(UTILS)ft_strlcpy.c \
+			$(SRC_DIR)$(BONUS)$(UTILS)ft_strlen.c
+
 SRC_PUSH	:= push_swap.c
 SRC_CHECKER	:= checker.c
 

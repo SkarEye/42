@@ -1,26 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algorithms.h                                       :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/13 17:58:59 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/25 14:31:48 by macarnie         ###   ########.fr       */
+/*   Created: 2025/08/25 11:05:34 by macarnie          #+#    #+#             */
+/*   Updated: 2025/08/25 11:05:37 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALGORITHMS_H
-# define ALGORITHMS_H
+#include <stddef.h>
 
-# include "structures.h"
+size_t	ft_strlen(const char *str)
+{
+	size_t	len;
 
-void	small_sort(t_stack *a, t_stack *b);
-
-void	radix_sort(t_stack *a, t_stack *b);
-void	greedy_sort(t_stack *a, t_stack *b);
-void	xtra_greedy_sort(t_stack *a, t_stack *b);
-void	fatboi_sort(t_stack *a, t_stack *b);
-void	turk_sort(t_stack *a, t_stack *b);
-
-#endif
+	if (!str)
+		return (0);
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
+}

@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algorithms.h                                       :+:      :+:    :+:   */
+/*   math_helper.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/13 17:58:59 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/25 14:31:48 by macarnie         ###   ########.fr       */
+/*   Created: 2025/08/25 14:24:29 by macarnie          #+#    #+#             */
+/*   Updated: 2025/08/25 16:24:34 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALGORITHMS_H
-# define ALGORITHMS_H
+unsigned int	ft_abs(int n)
+{
+	if (n < 0)
+		return ((unsigned int)(~n + 1));
+	return ((unsigned int)n);
+}
 
-# include "structures.h"
+unsigned int	ft_max(unsigned int a, unsigned int b)
+{
+	if (a > b)
+		return (a);
+	return (b);
+}
 
-void	small_sort(t_stack *a, t_stack *b);
-
-void	radix_sort(t_stack *a, t_stack *b);
-void	greedy_sort(t_stack *a, t_stack *b);
-void	xtra_greedy_sort(t_stack *a, t_stack *b);
-void	fatboi_sort(t_stack *a, t_stack *b);
-void	turk_sort(t_stack *a, t_stack *b);
-
-#endif
+unsigned int	ft_min(unsigned int a, unsigned int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}

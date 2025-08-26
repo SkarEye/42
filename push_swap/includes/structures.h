@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/13 18:01:43 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/21 16:17:41 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/25 12:38:56 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 typedef struct s_node
 {
 	int				value;
+	int				cost;
 	size_t			index;
 	struct s_node	*prev;
 	struct s_node	*next;

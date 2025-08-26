@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/19 17:53:56 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/21 16:32:32 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/25 16:51:43 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,27 +34,27 @@ bool	do_op(t_stack *a, t_stack *b, const char *op)
 {
 	if (!a || !b || !op)
 		return (false);
-	if (ft_strcmp(op, PA))
+	if (!ft_strcmp(op, PA))
 		return (push(b, a), true);
-	else if (ft_strcmp(op, PB))
+	else if (!ft_strcmp(op, PB))
 		return (push(a, b), true);
-	else if (ft_strcmp(op, SA))
+	else if (!ft_strcmp(op, SA))
 		return (swap(a), true);
-	else if (ft_strcmp(op, SB))
+	else if (!ft_strcmp(op, SB))
 		return (swap(b), true);
-	else if (ft_strcmp(op, SS))
+	else if (!ft_strcmp(op, SS))
 		return (swap(a), swap(b), true);
-	else if (ft_strcmp(op, RA))
+	else if (!ft_strcmp(op, RA))
 		return (rotate(a), true);
-	else if (ft_strcmp(op, RB))
+	else if (!ft_strcmp(op, RB))
 		return (rotate(b), true);
-	else if (ft_strcmp(op, RR))
+	else if (!ft_strcmp(op, RR))
 		return (rotate(a), rotate(b), true);
-	else if (ft_strcmp(op, RRA))
+	else if (!ft_strcmp(op, RRA))
 		return (rev_rotate(a), true);
-	else if (ft_strcmp(op, RRB))
+	else if (!ft_strcmp(op, RRB))
 		return (rev_rotate(b), true);
-	else if (ft_strcmp(op, RRR))
+	else if (!ft_strcmp(op, RRR))
 		return (rev_rotate(a), rev_rotate(b), true);
 	return (false);
 }

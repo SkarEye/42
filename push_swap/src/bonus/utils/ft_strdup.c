@@ -1,26 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algorithms.h                                       :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/13 17:58:59 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/25 14:31:48 by macarnie         ###   ########.fr       */
+/*   Created: 2025/08/25 10:53:17 by macarnie          #+#    #+#             */
+/*   Updated: 2025/08/25 11:05:16 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALGORITHMS_H
-# define ALGORITHMS_H
+#include <stddef.h>
+#include <stdlib.h>
 
-# include "structures.h"
+#include "bonus/gnl_utils.h"
 
-void	small_sort(t_stack *a, t_stack *b);
+char	*ft_strdup(const char *src)
+{
+	size_t	i;
+	char	*dst;
 
-void	radix_sort(t_stack *a, t_stack *b);
-void	greedy_sort(t_stack *a, t_stack *b);
-void	xtra_greedy_sort(t_stack *a, t_stack *b);
-void	fatboi_sort(t_stack *a, t_stack *b);
-void	turk_sort(t_stack *a, t_stack *b);
-
-#endif
+	dst = (char *)malloc((ft_strlen(src) + 1) * (sizeof(char)));
+	if (!dst)
+		return (NULL);
+	i = 0;
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
+}

@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   algorithms.h                                       :+:      :+:    :+:   */
+/*   gnl_utils.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/13 17:58:59 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/25 14:31:48 by macarnie         ###   ########.fr       */
+/*   Created: 2025/08/25 10:56:00 by macarnie          #+#    #+#             */
+/*   Updated: 2025/08/25 11:06:08 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALGORITHMS_H
-# define ALGORITHMS_H
+#ifndef GNL_UTILS_H
+# define GNL_UTILS_H
 
-# include "structures.h"
+# include <stddef.h>
 
-void	small_sort(t_stack *a, t_stack *b);
-
-void	radix_sort(t_stack *a, t_stack *b);
-void	greedy_sort(t_stack *a, t_stack *b);
-void	xtra_greedy_sort(t_stack *a, t_stack *b);
-void	fatboi_sort(t_stack *a, t_stack *b);
-void	turk_sort(t_stack *a, t_stack *b);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *src);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+size_t	ft_strlen(const char *str);
 
 #endif
