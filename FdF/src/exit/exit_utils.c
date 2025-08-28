@@ -1,0 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   exit_utils.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/27 13:28:51 by macarnie          #+#    #+#             */
+/*   Updated: 2025/08/27 13:30:57 by macarnie         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdlib.h>
+
+#include "structures.h"
+#include "error_utils.h"
+
+void	exit_fdf(t_debug dbg, t_error err, int exit_code, t_fdf *fdf)
+{
+	print_error(dbg, err, false);
+	if (fdf)
+	{
+		if (fdf->mlx)
+			mlx_destroy_display(fdf->mlx);
+		free(fdf);
+	}
+	exit(exit_code);
+}

@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 19:56:06 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/25 16:28:30 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/27 09:01:32 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ size_t	find_max_index(t_stack *stack)
 	if (!stack || !stack->size)
 		return (0);
 	current = stack->head;
-	max_index = 0;
+	max_index = current->index;
 	while (current)
 	{
 		if (current->index > max_index)
@@ -97,7 +97,7 @@ size_t	find_min_index(t_stack *stack)
 	if (!stack || !stack->size)
 		return (0);
 	current = stack->head;
-	min_index = stack->size - 1;
+	min_index = current->index;
 	while (current)
 	{
 		if (current->index < min_index)
