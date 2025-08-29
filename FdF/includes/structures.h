@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:27:31 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/27 13:48:45 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/29 09:39:30 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_fdf
 
 	size_t	map_w;
 	size_t	map_h;
+	int		**map;
 }	t_fdf;
 
 #endif

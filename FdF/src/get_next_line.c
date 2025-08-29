@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:20:51 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/27 13:39:50 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/29 10:01:46 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,25 +73,24 @@ static size_t	extract_line(t_fdf *fdf)
 	size_t	i;
 
 	i = 0;
+	if (!fdf->stash)
+		return (0);
 	while (fdf->stash[i] && fdf->stash[i] != '\n')
 		i++;
 	if (fdf->stash[i] == '\n')
 		i++;
 	fdf->line = xmalloc((sizeof(char)) * (i + 1), loc(F, L), fdf);
-	ft_strlcpy(fdf->line, fdf->stash, i);
+	ft_strlcpy(fdf->line, fdf->stash, i + 1);
 	if (fdf->stash[i])
 	{
 		temp = ft_strdup(fdf->stash + i);
 		if (!temp)
 			exit_fdf(loc(F, L), ERR_PERROR, 1, fdf);
-		free(fdf->stash);
-		fdf->stash = temp;
 	}
 	else
-	{
-		free(fdf->stash);
-		fdf->stash = NULL;
-	}
+		temp = NULL;
+	free(fdf->stash);
+	fdf->stash = temp;
 	return (i);
 }
 
