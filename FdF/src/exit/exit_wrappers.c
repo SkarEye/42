@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_wrappers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:31:43 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/27 13:34:45 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/30 10:31:24 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <stdlib.h>
 
 #include "structures.h"
+#include "utils.h"
 #include "error_utils.h"
 #include "exit_utils.h"
 
@@ -38,14 +39,34 @@ void	*xcalloc(size_t size, t_debug dbg, t_fdf *fdf)
 	return (ptr);
 }
 
-//idk
-// int	xopen(int *fd, const char *filename, int flags, t_debug dbg, t_fdf *fdf)
-// {
-// 	*fd = open(filename, flags);
-// 	if (*fd == -1)
-// 		exit_fdf(dbg, ERR_PERROR, 1, fdf);
-// 	return (*fd);
-// }
+char	**xsplit(const char *s, char c, t_debug dbg, t_fdf *fdf)
+{
+	char	**ptr;
+
+	ptr = ft_split(s, c);
+	if (!ptr)
+		exit_fdf(dbg, ERR_PERROR, 1, fdf);
+	return (ptr);
+}
+
+void	xfree(void **ptr)
+{
+	if (ptr && *ptr)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
+}
+
+int	xopen(const char *filename, int flags, t_debug dbg, t_fdf *fdf)
+{
+	int	fd;
+
+	fd = open(filename, flags);
+	if (fd == -1)
+		exit_fdf(dbg, ERR_PERROR, 1, fdf);
+	return (fd);
+}
 
 void	xclose(int *fd, t_debug dbg, t_fdf *fdf)
 {

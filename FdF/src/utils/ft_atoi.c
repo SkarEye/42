@@ -1,24 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 12:23:51 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/30 09:57:02 by mattcarniel      ###   ########.fr       */
+/*   Created: 2025/08/30 10:29:32 by mattcarniel       #+#    #+#             */
+/*   Updated: 2025/08/30 10:29:43 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
-
-# include <stddef.h>
-
-size_t	ft_countwords(char const *s, char c);
-char	**ft_split(char const *s, char c);
-void	ft_free_strtab(char **strtab);
-size_t	ft_strlen(const char *s);
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-
-#endif

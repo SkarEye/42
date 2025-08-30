@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   isometric.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/27 12:23:51 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/30 09:57:02 by mattcarniel      ###   ########.fr       */
+/*   Created: 2025/08/30 14:03:14 by mattcarniel       #+#    #+#             */
+/*   Updated: 2025/08/30 14:15:31 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include <math.h>
 
-# include <stddef.h>
+#include "structures.h"
 
-size_t	ft_countwords(char const *s, char c);
-char	**ft_split(char const *s, char c);
-void	ft_free_strtab(char **strtab);
-size_t	ft_strlen(const char *s);
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+void	isometric(t_fdf *fdf)
+{
+	size_t	i;
+	t_point	*p;
+	double	a;
 
-#endif
+	i = 0;
+	a = 30 * M_PI / 180;
+	while (i < fdf->map_h * fdf->map_w)
+	{
+		*p = fdf->map[i];
+		p->p_x = (p->x - p->y) * cos(a);
+		p->p_y = (p->x + p->y) * sin(a) - p->z;
+		i++;
+	}
+}
