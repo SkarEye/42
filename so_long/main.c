@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/15 15:21:10 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/08 15:04:36 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/08/27 09:33:40 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ int	main(void)
 	game.p_h = PXL_H;
 	game.state = STATE_START;
 	game.mlx = mlx_init();
-	game.alpha = 0.0;
-	game.beta = 0.0;
 	if (!game.mlx)
 		return (1);
 	game.win = mlx_new_window(game.mlx, game.p_w, game.p_h, "Chess Scape");

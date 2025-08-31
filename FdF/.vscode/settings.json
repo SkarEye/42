@@ -1,5 +1,7 @@
 {
 	"files.associations": {
-		"error_utils.h": "c"
+		"error_utils.h": "c",
+		"cmath": "c",
+		"math.h": "c"
 	}
 }

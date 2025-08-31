@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.h                                        :+:      :+:    :+:   */
+/*   math_helper.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/30 13:53:02 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/31 17:03:06 by macarnie         ###   ########.fr       */
+/*   Created: 2025/08/31 14:07:49 by macarnie          #+#    #+#             */
+/*   Updated: 2025/08/31 14:08:58 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_UTILS_H
-# define MAP_UTILS_H
+#ifndef MATH_HELPER_H
 
-# include "structures.h"
+# define MATH_HELPER_H
 
-void	set_point(int x, int y, const char *str, t_fdf *fdf);
-t_point	get_point(int x, int y, t_fdf *fdf);
-void	set_map(const char *filename, t_fdf *fdf);
+# define PI	3.14159265358979323846
+
+inline double	rad(double deg);
+inline double	deg(double rad);
 
 #endif

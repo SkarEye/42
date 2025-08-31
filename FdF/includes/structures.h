@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:27:31 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/30 18:48:44 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/08/31 14:24:11 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,38 @@
 
 # include <stddef.h>
 
+# define PXL_W	800
+# define PXL_H	600
+
 typedef struct s_point
 {
-	int x;
-	int	y;
-	int	z;
+	int 	x;
+	int		y;
+	int		z;
 	
-	int	color;
-}	t_point;
+	unsigned int	color;
+}			t_point;
+
+typedef struct s_pov
+{
+	double	x;
+	double	y;
+	double	z;
+
+	double	u;
+	double	v;
+	double	w;
+
+	double	fov;
+}			t_pov;
 
 typedef struct s_pixel
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
-	int	color;
-}	t_pixel;
-
-typedef struct s_b_line
-{
-	t_pixel	dp;
-	t_pixel	ds;
-
-	int	
-
-}
+	unsigned int	color;
+}			t_pixel;
 
 typedef struct	s_data {
 	void	*img;
@@ -49,7 +56,7 @@ typedef struct	s_data {
 	int		bits_pxl;
 	int		line_length;
 	int		endian;
-}				t_data;
+}			t_data;
 
 typedef struct s_fdf
 {
@@ -62,9 +69,11 @@ typedef struct s_fdf
 	char	*stash;
 	char	*line;
 
+	t_pov	cam;
+
 	size_t	map_w;
 	size_t	map_h;
 	t_point	*map;
-}	t_fdf;
+}			t_fdf;
 
 #endif

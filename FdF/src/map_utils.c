@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:37:23 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/30 13:59:16 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/08/31 17:02:36 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,20 +44,20 @@ static void	get_map_size(const char *filename, t_fdf *fdf)
 		exit_fdf(loc(F, L), ERR_INVALID_MAP, 1, fdf);
 }
 
-static t_point	set_point(int x, int y, const char *str)
+void	set_point(int x, int y, const char *str, t_fdf *fdf)
 {
-	t_point	point;
 	char	*comma;
+	size_t	pos;
 
-	point.x = x;
-	point.y = y;
-	point.z = ft_atoi(str);
+	pos = y * fdf->map_w + x;
+	fdf->map[pos].x = x;
+	fdf->map[pos].y = y;
+	fdf->map[pos].z = ft_atoi(str);
 	comma = ft_strchr(str, ',');
 	if (comma)
-		point.color = ft_atoh(comma + 1);
+		fdf->map[pos].color = ft_atoh(comma + 1);
 	else
-		point.color = 0xFFFFFF;
-	return (point);
+		fdf->map[pos].color = 0xFFFFFF;
 }
 
 t_point	get_point(int x, int y, t_fdf *fdf)
@@ -67,7 +67,7 @@ t_point	get_point(int x, int y, t_fdf *fdf)
 	return (fdf->map[y * fdf->map_w + x]);
 }
 
-void	get_map(const char *filename, t_fdf *fdf)
+void	set_map(const char *filename, t_fdf *fdf)
 {
 	int		fd;
 	char	**split;
@@ -85,7 +85,7 @@ void	get_map(const char *filename, t_fdf *fdf)
 		i = 0;
 		while (split[i])
 		{
-			fdf->map[j * fdf->map_w + i] = set_point(i, j, split[j]);
+			set_point(i, j, split[i], fdf);
 			i++;
 		}
 		ft_free_strtab(split);

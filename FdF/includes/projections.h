@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.h                                        :+:      :+:    :+:   */
+/*   projections.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/30 13:53:02 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/31 17:03:06 by macarnie         ###   ########.fr       */
+/*   Created: 2025/08/31 14:14:01 by macarnie          #+#    #+#             */
+/*   Updated: 2025/08/31 14:28:50 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_UTILS_H
-# define MAP_UTILS_H
+#ifndef PROJECTIONS_H
+# define PROJECTIONS_H
 
 # include "structures.h"
 
-void	set_point(int x, int y, const char *str, t_fdf *fdf);
-t_point	get_point(int x, int y, t_fdf *fdf);
-void	set_map(const char *filename, t_fdf *fdf);
+void	bresenham_line(t_pixel a, t_pixel b, t_fdf *fdf);
+t_pixel	project(t_point p, t_fdf *fdf);
 
 #endif

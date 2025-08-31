@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   isometric.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/30 14:03:14 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/30 14:15:31 by mattcarniel      ###   ########.fr       */
+/*   Created: 2025/08/06 11:11:31 by mattcarniel       #+#    #+#             */
+/*   Updated: 2025/08/27 12:24:39 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
+#include <stddef.h>
 
-#include "structures.h"
+#include "ft_utils.h"
 
-void	isometric(t_fdf *fdf)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
-	t_point	*p;
-	double	a;
 
+	if (size == 0)
+		return (ft_strlen(src));
 	i = 0;
-	a = 30 * M_PI / 180;
-	while (i < fdf->map_h * fdf->map_w)
+	while (i < size - 1 && src[i])
 	{
-		*p = fdf->map[i];
-		p->p_x = (p->x - p->y) * cos(a);
-		p->p_y = (p->x + p->y) * sin(a) - p->z;
+		dst[i] = src[i];
 		i++;
 	}
+	dst[i] = '\0';
+	return (ft_strlen(src));
 }

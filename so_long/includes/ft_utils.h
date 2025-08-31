@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.h                                        :+:      :+:    :+:   */
+/*   ft_utils.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/30 13:53:02 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/31 17:03:06 by macarnie         ###   ########.fr       */
+/*   Created: 2025/08/27 12:23:51 by macarnie          #+#    #+#             */
+/*   Updated: 2025/08/27 12:32:26 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_UTILS_H
-# define MAP_UTILS_H
+#ifndef FT_UTILS_H
+# define FT_UTILS_H
 
-# include "structures.h"
+# include <stddef.h>
 
-void	set_point(int x, int y, const char *str, t_fdf *fdf);
-t_point	get_point(int x, int y, t_fdf *fdf);
-void	set_map(const char *filename, t_fdf *fdf);
+size_t	ft_strlen(const char *s);
+size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 
 #endif

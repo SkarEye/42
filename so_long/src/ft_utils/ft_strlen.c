@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.h                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/30 13:53:02 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/31 17:03:06 by macarnie         ###   ########.fr       */
+/*   Created: 2025/08/01 18:55:14 by mattcarniel       #+#    #+#             */
+/*   Updated: 2025/08/27 12:24:50 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_UTILS_H
-# define MAP_UTILS_H
+#include <stddef.h>
 
-# include "structures.h"
+size_t	ft_strlen(const char *str)
+{
+	size_t	len;
 
-void	set_point(int x, int y, const char *str, t_fdf *fdf);
-t_point	get_point(int x, int y, t_fdf *fdf);
-void	set_map(const char *filename, t_fdf *fdf);
-
-#endif
+	if (!str)
+		return (0);
+	len = 0;
+	while (str[len])
+		len++;
+	return (len);
+}
