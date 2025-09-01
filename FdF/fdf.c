@@ -6,17 +6,21 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 14:19:55 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/31 17:04:47 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/01 15:11:15 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
+#include <mlx.h>
 
 #include "structures.h"
 #include "map_utils.h"
 #include "projections.h"
+#include "image.h"
 
-void	render(t_fdf *fdf)
+#define FDF	"FdF"
+
+int	render(t_fdf *fdf)
 {
 	size_t	i;
 	size_t	j;
@@ -42,6 +46,7 @@ void	render(t_fdf *fdf)
 			}
 		}
 	}
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -49,12 +54,12 @@ int	main(int argc, char **argv)
 	t_fdf	fdf;
 
 	if (argc != 2)
-		return (1); //error handling?
+		return (1);
 	fdf.mlx = mlx_init();
-	fdf.win = mlx_new_window(fdf.mlx, PXL_W, PXL_H, "FdF");
+	fdf.win = mlx_new_window(fdf.mlx, PXL_W, PXL_H, FDF);
 	set_map(argv[1], &fdf);
-	
-
+	fdf.data = make_blank_image(fdf.mlx, PXL_W, PXL_H);
+	set_isometric_cam(&fdf);
 	mlx_loop_hook(fdf.mlx, render, &fdf);
 	mlx_loop(fdf.mlx);
 	return 0;

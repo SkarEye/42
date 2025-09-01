@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_helper.h                                      :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/31 14:07:49 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/01 12:36:38 by macarnie         ###   ########.fr       */
+/*   Created: 2025/08/07 18:08:56 by macarnie          #+#    #+#             */
+/*   Updated: 2025/08/13 16:21:40 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATH_HELPER_H
+#include <stddef.h>
 
-# define MATH_HELPER_H
+void	*ft_bzero(void *s, size_t n)
+{
+	size_t	i;
 
-# define INT_MAX	2147483647
-# define INT_MIN	-2147483648
-# define PI	3.14159265358979323846
-
-
-double	rad(double deg);
-double	deg(double rad);
-int		abs(int n);
-
-#endif
+	i = 0;
+	while (i < n)
+		((unsigned char *)s)[i++] = 0;
+	return (s);
+}

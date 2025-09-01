@@ -6,11 +6,12 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:28:51 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/27 13:30:57 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/01 14:02:27 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <mlx.h>
 
 #include "structures.h"
 #include "error_utils.h"

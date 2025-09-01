@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 12:07:48 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/31 17:05:48 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/01 11:10:47 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,34 @@ static void	get_matrix(double m[3][3], t_pov c)
 	m[2][2] = c_u * c_v;
 }
 
-void	set_
+void	set_cam(double pos[3], double ang[3], double fov, t_fdf *fdf)
+{
+	fdf->cam.x = pos[0];
+	fdf->cam.y = pos[1];
+	fdf->cam.z = pos[2];
+	fdf->cam.u = ang[0];
+	fdf->cam.v = ang[1];
+	fdf->cam.w = ang[2];
+	fdf->cam.fov = fov;
+}
+
+void	set_isometric_cam(t_fdf *fdf)
+{
+	double	pos[3] = {
+		0, 0, -10};
+	double	ang[3] = {
+		rad(35.264), 0, rad(45)};
+		set_cam(pos, ang, 120, fdf);
+}
+
+void	set_spawned_cam(t_fdf *fdf)
+{
+	double	pos[3] = {
+		fdf->map_w / 2, 10, fdf->map_h / 2};
+	double	ang[3] = {
+		rad(-20), 0, 0};
+		set_cam(pos, ang, 120, fdf);
+}
 
 t_pixel	project(t_point p, t_fdf *fdf)
 {
@@ -54,6 +81,7 @@ t_pixel	project(t_point p, t_fdf *fdf)
 	double	scale;
 
 	c = fdf->cam;
+	get_matrix(m, c);
 	px = m[0][0] * (p.x - c.x) + m[0][1] * (p.y - c.y) + m[0][2] * (p.z - c.z);
 	py = m[1][0] * (p.x - c.x) + m[1][1] * (p.y - c.y) + m[1][2] * (p.z - c.z);
 	pz = m[2][0] * (p.x - c.x) + m[2][1] * (p.y - c.y) + m[2][2] * (p.z - c.z);

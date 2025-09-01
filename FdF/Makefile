@@ -25,7 +25,36 @@ MLX_FLAGS := -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 OBJ_DIR := objects
 
 # === Source files ===
-SRC := 
+SRC_DIR := src/
+EXIT	:= exit/
+IMG		:= image/
+PROJ	:= projections/
+UTILS	:= utils/
+SRC := \
+	fdf.c \
+	$(SRC_DIR)$(UTILS)ft_atoi.c \
+	$(SRC_DIR)$(UTILS)ft_bzero.c \
+	$(SRC_DIR)$(UTILS)ft_htoui.c \
+	$(SRC_DIR)$(UTILS)ft_itoa.c \
+	$(SRC_DIR)$(UTILS)ft_join.c \
+	$(SRC_DIR)$(UTILS)ft_split.c \
+	$(SRC_DIR)$(UTILS)ft_strchr.c \
+	$(SRC_DIR)$(UTILS)ft_strdup.c \
+	$(SRC_DIR)$(UTILS)ft_strlcpy.c \
+	$(SRC_DIR)$(UTILS)ft_strlen.c \
+	$(SRC_DIR)get_next_line.c \
+	$(SRC_DIR)map_utils.c \
+	$(SRC_DIR)math_helper.c \
+	$(SRC_DIR)$(IMG)pixel_utils.c \
+	$(SRC_DIR)$(IMG)img_utils.c \
+	$(SRC_DIR)$(IMG)img_utils2.c \
+	$(SRC_DIR)$(PROJ)draw.c \
+	$(SRC_DIR)$(PROJ)project.c \
+	$(SRC_DIR)$(EXIT)error_utils.c \
+	$(SRC_DIR)$(EXIT)exit_utils.c \
+	$(SRC_DIR)$(EXIT)exit_wrappers.c
+
+
 
 # === Object and Dependency files ===
 OBJ := $(SRC:%.c=$(OBJ_DIR)/%.o)

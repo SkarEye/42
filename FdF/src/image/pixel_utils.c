@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 14:11:38 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/31 14:12:29 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/01 15:07:38 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,32 @@ void	set_pixel(t_pixel p, t_data *data)
 		return ;
 	dst = data->addr + (p.y * data->line_length + p.x * (data->bits_pxl / 8));
 	*(unsigned int *)dst = p.color;
+}
+
+void	get_pixel(t_pixel p, t_data *data)
+{
+	char	*color;
+
+	if (!data ||p.x >= data->pxl_w|| p.x < 0 || p.y >= data->pxl_h || p.y < 0)
+		return ;
+	color = data->addr + p.y * data->line_length + p.x * (data->bits_pxl / 8);
+	p.color = *(unsigned int *)color;
+}
+void	scale_pixel(t_pixel p, int scale, t_data *dst)
+{
+	int	i;
+	int	j;
+
+	if (!dst)
+		return ;
+	j = 0;
+	while (j < scale)
+	{
+		i = 0;
+		while (i < scale)
+			set_pixel((t_pixel){p.x + i++, p.y + j, p.color}, dst);
+		j++;
+	}
 }
 
 unsigned int	blend_colors(unsigned int src_c, unsigned int dst_c, double t)

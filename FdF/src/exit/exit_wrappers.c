@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit_wrappers.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:31:43 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/30 10:31:24 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/09/01 14:03:09 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include <fcntl.h>
 
 #include "structures.h"
 #include "utils.h"
@@ -49,13 +50,10 @@ char	**xsplit(const char *s, char c, t_debug dbg, t_fdf *fdf)
 	return (ptr);
 }
 
-void	xfree(void **ptr)
+void	xfree(void *ptr)
 {
-	if (ptr && *ptr)
-	{
-		free(*ptr);
-		*ptr = NULL;
-	}
+	if (ptr)
+		free(ptr);
 }
 
 int	xopen(const char *filename, int flags, t_debug dbg, t_fdf *fdf)

@@ -6,14 +6,13 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 14:16:02 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/31 14:18:17 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/01 12:32:02 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <math.h>
-
 #include "structures.h"
 #include "image.h"
+#include "math_helper.h"
 
 typedef struct s_b_line
 {

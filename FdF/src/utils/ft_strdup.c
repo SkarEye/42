@@ -1,25 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free_strtab.c                                   :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/07 16:10:56 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/13 16:20:47 by macarnie         ###   ########.fr       */
+/*   Created: 2025/08/06 11:15:13 by mattcarniel       #+#    #+#             */
+/*   Updated: 2025/08/06 11:15:43 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stddef.h>
 #include <stdlib.h>
 
-void	ft_free_strtab(char **strtab)
+#include "utils.h"
+
+char	*ft_strdup(const char *src)
 {
 	size_t	i;
+	char	*dst;
 
-	if (!strtab)
-		return ;
+	dst = (char *)malloc((ft_strlen(src) + 1) * (sizeof(char)));
+	if (!dst)
+		return (NULL);
 	i = 0;
-	while (strtab[i])
-		free(strtab[i++]);
-	free(strtab);
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	dst[i] = '\0';
+	return (dst);
 }

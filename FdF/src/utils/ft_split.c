@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:15:16 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/30 09:56:17 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/09/01 12:11:29 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,18 @@ size_t	ft_countwords(char const *s, char c)
 			i++;
 	}
 	return (count);
+}
+
+void	ft_free_strtab(char **strtab)
+{
+	size_t	i;
+
+	if (!strtab)
+		return ;
+	i = 0;
+	while (strtab[i])
+		free(strtab[i++]);
+	free(strtab);
 }
 
 char	**ft_split(char const *s, char c)

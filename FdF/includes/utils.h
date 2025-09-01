@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 12:23:51 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/30 09:57:02 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/09/01 14:04:18 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,17 @@
 
 # include <stddef.h>
 
+int	ft_atoi(const char *str);
+unsigned int	ft_htoui(const char *str);
+size_t	ft_itoa(int n);
+size_t	ft_sitoa(char *dst, int n);
+void	*ft_bzero(void *s, size_t n);
 size_t	ft_countwords(char const *s, char c);
 char	**ft_split(char const *s, char c);
 void	ft_free_strtab(char **strtab);
+char	*ft_join(const char *first, const char *last, char c);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strdup(const char *src);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 
