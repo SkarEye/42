@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 12:07:48 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/01 11:10:47 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/03 20:06:37 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,37 @@ void	set_cam(double pos[3], double ang[3], double fov, t_fdf *fdf)
 void	set_isometric_cam(t_fdf *fdf)
 {
 	double	pos[3] = {
-		0, 0, -10};
+		fdf->map_w / 2.0, (fdf->map_w + fdf->map_h) / 2, fdf->map_h / 2};
 	double	ang[3] = {
 		rad(35.264), 0, rad(45)};
+		set_cam(pos, ang, 120, fdf);
+}
+
+void	set_45_cam(t_fdf *fdf)
+{
+	double	pos[3] = {
+		fdf->map_w / 2.0, (fdf->map_w + fdf->map_h) / 2, fdf->map_h / 2};
+	double	ang[3] = {
+		rad(45), 0, rad(45)};
 		set_cam(pos, ang, 120, fdf);
 }
 
 void	set_spawned_cam(t_fdf *fdf)
 {
 	double	pos[3] = {
-		fdf->map_w / 2, 10, fdf->map_h / 2};
+		fdf->map_w / 2, 6, fdf->map_h / 2};
 	double	ang[3] = {
 		rad(-20), 0, 0};
 		set_cam(pos, ang, 120, fdf);
+}
+
+void	set_vertical_cam(t_fdf *fdf)
+{
+	double	pos[3] = {
+		fdf->map_w / 2, 15, fdf->map_h / 2};
+	double	ang[3] = {
+		rad(-90), 0, 0};
+		set_cam(pos, ang, 150, fdf);
 }
 
 t_pixel	project(t_point p, t_fdf *fdf)

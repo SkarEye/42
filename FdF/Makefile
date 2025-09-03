@@ -31,7 +31,7 @@ IMG		:= image/
 PROJ	:= projections/
 UTILS	:= utils/
 SRC := \
-	fdf.c \
+	main.c \
 	$(SRC_DIR)$(UTILS)ft_atoi.c \
 	$(SRC_DIR)$(UTILS)ft_bzero.c \
 	$(SRC_DIR)$(UTILS)ft_htoui.c \

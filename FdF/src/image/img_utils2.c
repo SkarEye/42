@@ -6,12 +6,14 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 13:09:25 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/01 15:08:29 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:26:37 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "image.h"
 
+
+//this func might be wrong
 void	paste_image(t_pixel p, int scale, t_data *src, t_data *dst)
 {
 	t_pixel	s;

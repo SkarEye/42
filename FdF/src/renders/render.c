@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_helper.h                                      :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/31 14:07:49 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/03 15:12:11 by macarnie         ###   ########.fr       */
+/*   Created: 2025/09/03 19:53:24 by macarnie          #+#    #+#             */
+/*   Updated: 2025/09/03 20:02:23 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATH_HELPER_H
+#include "structures.h"
 
-# define MATH_HELPER_H
-
-#include <math.h>
-
-# define INT_MAX	2147483647
-# define INT_MIN	-2147483648
-# define PI	3.14159265358979323846
-
-
-double	rad(double deg);
-double	deg(double rad);
-int		abs(int n);
-
-#endif
+int	render(t_fdf *fdf)
+{
+	clear_image(fdf->data);
+	if (fdf->state == START)
+		render_start(fdf);
+	if (fdf->state == MENU)
+		render_menu(fdf);
+	if (fdf->state == FDF)
+		render_fdf(fdf);
+	if (fdf->state == PAUSE)
+		render_pause(fdf);
+	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->data->img, 0, 0);
+	return (0);
+}

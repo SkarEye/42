@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 14:19:55 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/01 15:11:15 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/03 19:45:08 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,12 @@
 
 #define FDF	"FdF"
 
-int	render(t_fdf *fdf)
-{
-	size_t	i;
-	size_t	j;
-	t_pixel	a;
-	t_pixel	b;
+#include <stdio.h> // for debugging
+#include "utils.h"
+#include <unistd.h> //for usleep
 
-	mlx_clear_window(fdf->mlx, fdf->win);
-	for (j = 0; j < fdf->map_h; j++)
-	{
-		for (i = 0; i < fdf->map_w; i++)
-		{
-			if (i + 1 < fdf->map_w)
-			{
-				a = project(fdf->map[j * fdf->map_w + i], fdf);
-				b = project(fdf->map[j * fdf->map_w + i + 1], fdf);
-				bresenham_line(a, b, fdf);
-			}
-			if (j + 1 < fdf->map_h)
-			{
-				a = project(fdf->map[j * fdf->map_w + i], fdf);
-				b = project(fdf->map[(j + 1) * fdf->map_w + i], fdf);
-				bresenham_line(a, b, fdf);
-			}
-		}
-	}
-	return (0);
-}
+#include <X11/X.h> //for key_loop
+
 
 int	main(int argc, char **argv)
 {
@@ -55,12 +33,17 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (1);
+	ft_bzero(&fdf, sizeof(fdf)); // RM ? Need to at least set stash and line to null
 	fdf.mlx = mlx_init();
 	fdf.win = mlx_new_window(fdf.mlx, PXL_W, PXL_H, FDF);
+	printf("Made window\n");
 	set_map(argv[1], &fdf);
+	printf("Got map\n");
+	fdf.base = make_blank_image(fdf.mlx, PXL_W, PXL_H);	
 	fdf.data = make_blank_image(fdf.mlx, PXL_W, PXL_H);
-	set_isometric_cam(&fdf);
-	mlx_loop_hook(fdf.mlx, render, &fdf);
+	set_vertical_cam(&fdf);
+	mlx_hook(fdf.win, KeyPress, KeyPressMask, handle_key, &fdf);
+	// mlx_loop_hook(fdf.mlx, render, &fdf);
 	mlx_loop(fdf.mlx);
 	return 0;
 }

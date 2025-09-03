@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:27:31 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/31 14:24:11 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/03 19:59:26 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,15 @@ typedef struct	s_data {
 	int		endian;
 }			t_data;
 
+typedef enum e_state
+{
+	START,
+	MENU,
+	FDF,
+	PAUSE,
+	COUNT
+}			t_state;
+
 typedef struct s_fdf
 {
 	void	*mlx;
@@ -65,6 +74,8 @@ typedef struct s_fdf
 
 	t_data	*data;
 	t_data	*base;
+
+	t_state	state;
 
 	char	*stash;
 	char	*line;

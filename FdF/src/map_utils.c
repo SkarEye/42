@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:37:23 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/01 12:24:03 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/03 14:04:42 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include "utils.h"
 #include "get_next_line.h"
 #include "exit_utils.h"
+
+#include <stdio.h> // TO RM
 
 static void	get_map_size(const char *filename, t_fdf *fdf)
 {
@@ -29,7 +31,7 @@ static void	get_map_size(const char *filename, t_fdf *fdf)
 	fdf->map_h = 0;
 	fdf->map_w = 0;
 	while (get_next_line(fd, fdf))
-	{
+	{	
 		arg_count = ft_countwords(fdf->line, ' ');
 		if (fdf->map_w == 0)
 			fdf->map_w = arg_count;

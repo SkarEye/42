@@ -1,28 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   math_helper.h                                      :+:      :+:    :+:   */
+/*   menu.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/31 14:07:49 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/03 15:12:11 by macarnie         ###   ########.fr       */
+/*   Created: 2025/09/03 19:43:34 by macarnie          #+#    #+#             */
+/*   Updated: 2025/09/03 19:43:35 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MATH_HELPER_H
-
-# define MATH_HELPER_H
-
-#include <math.h>
-
-# define INT_MAX	2147483647
-# define INT_MIN	-2147483648
-# define PI	3.14159265358979323846
-
-
-double	rad(double deg);
-double	deg(double rad);
-int		abs(int n);
-
-#endif

@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 17:37:15 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/01 15:07:58 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/03 16:27:43 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_data	*make_blank_image(void *mlx, int width, int height)
 
 	data->pxl_w = width;
 	data->pxl_h = height;
+	clear_image(data);
 	return (data);
 }
 
