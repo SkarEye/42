@@ -6,13 +6,13 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:51:11 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/04 14:59:42 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:25:34 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structures.h"
 
-t_vect3d	set_vect3d(double x, double y, double z)
+t_vect3d	set_vect3d(float x, float y, float z)
 {
 	t_vect3d	vect;
 
@@ -22,10 +22,10 @@ t_vect3d	set_vect3d(double x, double y, double z)
 	return (vect);
 }
 
-t_pov	set_pov(t_vect3d pos, t_vect3d ang, double fov)
+t_pov	set_pov(t_vect3d pos, t_vect3d ang, float fov)
 {
 	t_pov	pov;
-	
+
 	pov.p = pos;
 	pov.a = ang;
 	pov.fov = fov;

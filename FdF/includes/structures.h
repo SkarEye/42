@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:27:31 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/04 14:56:49 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:29:23 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,17 @@
 
 typedef struct s_vect3d
 {
-	double 	x;
-	double	y;
-	double	z;
+	float 	x;
+	float	y;
+	float	z;
 }			t_vect3d;
-
-typedef struct s_point
-{
-	t_vect3d		p;
-	
-	unsigned int	color;
-}			t_point;
 
 typedef struct s_pov
 {
 	t_vect3d	p;
 	t_vect3d	a;
 
-	double		fov;
+	float		fov;
 }			t_pov;
 
 typedef struct s_pixel
@@ -75,7 +68,7 @@ typedef struct e_txt
 	t_pixel			size;
 	unsigned int	color;
 	int				scale;
-	t_align			align;	
+	t_align			align;
 }		t_txt;
 
 
@@ -90,27 +83,28 @@ typedef enum e_state
 
 typedef struct s_fdf
 {
-	void	*mlx;
-	void	*win;
+	void			*mlx;
+	void			*win;
 
-	t_data	*data;
-	t_data	*base;
-	t_data	*font;
+	t_data			*data;
+	t_data			*base;
+	t_data			*font;
 
-	t_state	state;
+	t_state			state;
 
-	char	*stash;
-	char	*line;
+	char			*stash;
+	char			*line;
 
-	t_pov	cam;
+	t_pov			cam;
 
-	size_t	map_w;
-	size_t	map_h;
-	t_point	*map;
+	size_t			map_w;
+	size_t			map_h;
+	t_vect3d		*map;
+	unsigned int 	*colors;
 }			t_fdf;
 
-t_vect3d	set_vect3d(double x, double y, double z);
-t_pov		set_pov(t_vect3d pos, t_vect3d ang, double fov);
+t_vect3d	set_vect3d(float x, float y, float z);
+t_pov		set_pov(t_vect3d pos, t_vect3d ang, float fov);
 t_txt		set_txt(t_pixel size, unsigned int color, int scale, t_align align);
 
 #endif

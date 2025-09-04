@@ -10,7 +10,7 @@
 # === Project name ===
 NAME := fdf
 
-# === Compiler and Flags ===                                                                                        
+# === Compiler and Flags ===
 CC := cc
 CFLAGS := -Wall -Wextra -Werror -Iincludes -Imlx -MMD -MP
 RM := rm -f
@@ -29,6 +29,7 @@ SRC_DIR := src/
 EXIT	:= exit/
 IMG		:= image/
 PROJ	:= projections/
+LOOP	:= loop/
 UTILS	:= utils/
 SRC := \
 	main.c \
@@ -45,11 +46,16 @@ SRC := \
 	$(SRC_DIR)get_next_line.c \
 	$(SRC_DIR)map_utils.c \
 	$(SRC_DIR)math_helper.c \
+	$(SRC_DIR)structures.c \
 	$(SRC_DIR)$(IMG)pixel_utils.c \
 	$(SRC_DIR)$(IMG)img_utils.c \
 	$(SRC_DIR)$(IMG)img_utils2.c \
-	$(SRC_DIR)$(PROJ)draw.c \
-	$(SRC_DIR)$(PROJ)project.c \
+	$(SRC_DIR)$(PROJ)draw_fdf.c \
+	$(SRC_DIR)$(PROJ)draw_text.c \
+	$(SRC_DIR)$(PROJ)text_helper.c \
+	$(SRC_DIR)$(LOOP)fdf.c \
+	$(SRC_DIR)$(LOOP)start.c \
+	$(SRC_DIR)$(LOOP)loop.c \
 	$(SRC_DIR)$(EXIT)error_utils.c \
 	$(SRC_DIR)$(EXIT)exit_utils.c \
 	$(SRC_DIR)$(EXIT)exit_wrappers.c

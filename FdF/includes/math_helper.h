@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 14:07:49 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/03 15:12:11 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:24:56 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@
 # define PI	3.14159265358979323846
 
 
-double	rad(double deg);
-double	deg(double rad);
+float	rad(float deg);
+float	deg(float rad);
 int		abs(int n);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:37:23 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/04 15:20:35 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:29:42 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	get_map_size(const char *filename, t_fdf *fdf)
 	fdf->map_h = 0;
 	fdf->map_w = 0;
 	while (get_next_line(fd, fdf))
-	{	
+	{
 		arg_count = ft_countwords(fdf->line, ' ');
 		if (fdf->map_w == 0)
 			fdf->map_w = arg_count;
@@ -44,27 +44,26 @@ static void	get_map_size(const char *filename, t_fdf *fdf)
 		exit_fdf(loc(F, L), ERR_INVALID_MAP, 1, fdf);
 }
 
-size_t	get_pos(size_t x, size_t z, t_fdf *fdf)
+size_t	pos(size_t x, size_t z, t_fdf *fdf)
 {
-	return (z * fdf->map_w + x);	
+	return (z * fdf->map_w + x);
 }
 
-static void	set_point(int x, int z, const char *str, t_fdf *fdf)
+static void	set_point(size_t x, size_t z, const char *str, t_fdf *fdf)
 {
 	char	*comma;
-	size_t	pos;
+	size_t	i;
 
-	pos = get_pos(x, z, fdf);
-	fdf->map[pos].p.x = x;
-	fdf->map[pos].p.y = ft_atoi(str);
-	fdf->map[pos].p.z = z;
+	i = pos(x, z, fdf);
+	fdf->map[i].x = x;
+	fdf->map[i].y = ft_atoi(str);
+	fdf->map[i].z = z;
 	comma = ft_strchr(str, ',');
 	if (comma)
-		fdf->map[pos].color = ft_htoui(comma + 1);
+		fdf->colors[i] = ft_htoui(comma + 1);
 	else
-		fdf->map[pos].color = 0xFFFFFF;
+		fdf->colors[i] = 0xFFFFFF;
 }
-
 
 void	set_map(const char *filename, t_fdf *fdf)
 {
@@ -72,9 +71,10 @@ void	set_map(const char *filename, t_fdf *fdf)
 	char	**split;
 	size_t	i;
 	size_t	j;
-	
+
 	get_map_size(filename, fdf);
-	fdf->map = xcalloc(sizeof(t_point) * (fdf->map_h * fdf->map_w), loc(F, L), fdf);
+	fdf->map = xcalloc(sizeof(t_vect3d) * (fdf->map_h * fdf->map_w), loc(F, L), fdf);
+	fdf->colors = xcalloc(sizeof(unsigned int) * (fdf->map_h * fdf->map_w), loc(F, L), fdf);
 	fd = xopen(filename, O_RDONLY, loc(F, L), fdf);
 	j = 0;
 	while (get_next_line(fd, fdf))

@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:19:42 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/01 12:36:52 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:25:07 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 #include "math_helper.h"
 
-double	rad(double deg)
+float	rad(float deg)
 {
 	return (deg * PI / 180.0);
 }
 
-double	deg(double rad)
+float	deg(float rad)
 {
 	return (rad * 180.0 / PI);
 }

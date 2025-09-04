@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 14:20:12 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/04 15:00:09 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/04 20:56:35 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ size_t	get_pixel_offset(const char *str, t_txt txt)
 
 	if (txt.align == A_LEFT || txt.align == A_JUSTIFIED)
 		return (0);
-	pixel_offset = txt.size.x - get_line_len(str, txt.size.x / G_W) * G_H;
+	pixel_offset = txt.size.x - get_line_len(str, txt.size.x / (G_W * txt.scale)) * G_W * txt.scale;
 	if (txt.align == A_RIGHT)
 		return (pixel_offset);
 	if (txt.align == A_CENTERED)

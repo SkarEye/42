@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 19:45:15 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/04 12:07:57 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/04 21:32:59 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,34 +72,34 @@ int	handle_fdf(int key, t_fdf *fdf)
 	return (0);
 }
 
+#include <stdio.h>
+
+#include "utils.h"
+
+static void	print_map(t_fdf *fdf)
+{
+	size_t	x, z;
+
+	printf("Printing Map...\n\n");
+	z = 0;
+	while (z < fdf->map_h)
+	{
+		x = 0;
+		while (x < fdf->map_w)
+		{
+			printf("%f ", fdf->map[pos(x, z, fdf)].y);
+			x++;
+		}
+		printf("\n");
+		z++;
+	}
+
+}
+
 int	render_fdf(t_fdf *fdf)
 {
-	size_t	i;
-	size_t	j;
-	t_pixel	a;
-	t_pixel	b;
-
-	j = 0;
-	while (j < fdf->map_h) // j+1 ?????
-	{
-		i = 0;
-		while (i < fdf->map_w)
-		{
-			if (i + 1 < fdf->map_w)
-			{
-				a = project(fdf->map[j * fdf->map_w + i], fdf);
-				b = project(fdf->map[j * fdf->map_w + i + 1], fdf);
-				bresenham_line(a, b, fdf);
-			}
-			if (j + 1 < fdf->map_h)
-			{
-				a = project(fdf->map[j * fdf->map_w + i], fdf);
-				b = project(fdf->map[(j + 1) * fdf->map_w + i], fdf);
-				bresenham_line(a, b, fdf);
-			}
-			i++;
-		}
-		j++;
-	}
+	printf("in render_fdf\n");
+	print_map(fdf);
+	draw_fdf(fdf);
 	return (0);
 }
