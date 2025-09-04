@@ -1,22 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_utils.h                                        :+:      :+:    :+:   */
+/*   render.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/30 13:53:02 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/31 17:03:06 by macarnie         ###   ########.fr       */
+/*   Created: 2025/09/03 19:53:24 by macarnie          #+#    #+#             */
+/*   Updated: 2025/09/04 11:44:43 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MAP_UTILS_H
-# define MAP_UTILS_H
+#include "structures.h"
 
-# include "structures.h"
-
-void	set_point(int x, int y, const char *str, t_fdf *fdf);
-t_point	get_point(int x, int y, t_fdf *fdf);
-void	set_map(const char *filename, t_fdf *fdf);
-
-#endif
+int	render(t_fdf *fdf)
+{
+	clear_image(fdf->data);
+	if (fdf->state == START)
+		render_start(fdf);
+	if (fdf->state == MENU)
+		render_menu(fdf);
+	if (fdf->state == FDF)
+		render_fdf(fdf);
+	if (fdf->state == PAUSE)
+		render_pause(fdf);
+	mlx_put_image_to_window(fdf->mlx, fdf->win, fdf->data->img, 0, 0);
+	return (0);
+}

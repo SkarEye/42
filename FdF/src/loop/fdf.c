@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 19:45:15 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/03 19:56:36 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/04 12:07:57 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,57 @@
 #define ROT_SPEED  0.05
 #define ZOOM_SPEED 5.0
 
-int	render(t_fdf *fdf)
+static void	handle_pos(int key, t_fdf *fdf)
+{
+	if (key == XK_w)
+	{
+		fdf->cam.p.x += cos(fdf->cam.a.y - PI / 2) * MOVE_SPEED;
+		fdf->cam.p.z += sin(fdf->cam.a.y - PI / 2) * MOVE_SPEED;
+	}
+	if (key == XK_a)
+	{
+		fdf->cam.p.x -= cos(fdf->cam.a.y) * MOVE_SPEED;
+		fdf->cam.p.z -= sin(fdf->cam.a.y) * MOVE_SPEED;
+	}
+	if (key == XK_s)
+	{
+		fdf->cam.p.x += cos(fdf->cam.a.y + PI / 2) * MOVE_SPEED;
+		fdf->cam.p.z += sin(fdf->cam.a.y + PI / 2) * MOVE_SPEED;
+	}
+	if (key == XK_d)
+	{
+		fdf->cam.p.x += cos(fdf->cam.a.y) * MOVE_SPEED;
+		fdf->cam.p.z += sin(fdf->cam.a.y) * MOVE_SPEED;
+	}
+	if (key == XK_space)
+		fdf->cam.p.y += MOVE_SPEED;
+	if (key == XK_Shift_L)
+		fdf->cam.p.y -= MOVE_SPEED;
+}
+
+int	handle_fdf(int key, t_fdf *fdf)
+{
+	handle_pos(key, fdf);
+	if (key == XK_Up)
+		fdf->cam.a.x += ROT_SPEED;
+	if (key == XK_Down)
+		fdf->cam.a.x -= ROT_SPEED;
+	if (key == XK_Left)
+		fdf->cam.a.y -= ROT_SPEED;
+	if (key == XK_Right)
+		fdf->cam.a.y += ROT_SPEED;
+	if (key == XK_q)
+		fdf->cam.a.z -= ROT_SPEED;
+	if (key == XK_e)
+		fdf->cam.a.z += ROT_SPEED;
+	if (key == XK_plus || key == XK_equal)
+		fdf->cam.fov -= ZOOM_SPEED;
+	if (key == XK_minus)
+		fdf->cam.fov += ZOOM_SPEED;
+	return (0);
+}
+
+int	render_fdf(t_fdf *fdf)
 {
 	size_t	i;
 	size_t	j;
@@ -51,55 +101,5 @@ int	render(t_fdf *fdf)
 		}
 		j++;
 	}
-	return (0);
-}
-
-static void	handle_pos(int key, t_fdf *fdf)
-{
-	if (key == XK_w)
-	{
-		fdf->cam.x += cos(fdf->cam.v - PI / 2) * MOVE_SPEED;
-		fdf->cam.z += sin(fdf->cam.v - PI / 2) * MOVE_SPEED;
-	}
-	if (key == XK_a)
-	{
-		fdf->cam.x -= cos(fdf->cam.v) * MOVE_SPEED;
-		fdf->cam.z -= sin(fdf->cam.v) * MOVE_SPEED;
-	}
-	if (key == XK_s)
-	{
-		fdf->cam.x += cos(fdf->cam.v + PI / 2) * MOVE_SPEED;
-		fdf->cam.z += sin(fdf->cam.v + PI / 2) * MOVE_SPEED;
-	}
-	if (key == XK_d)
-	{
-		fdf->cam.x += cos(fdf->cam.v) * MOVE_SPEED;
-		fdf->cam.z += sin(fdf->cam.v) * MOVE_SPEED;
-	}
-	if (key == XK_space)
-		fdf->cam.y += MOVE_SPEED;
-	if (key == XK_Shift_L)
-		fdf->cam.y -= MOVE_SPEED;
-}
-
-int	handle_key(int key, t_fdf *fdf)
-{
-	handle_pos(key, fdf);
-	if (key == XK_Up)
-		fdf->cam.u += ROT_SPEED;
-	if (key == XK_Down)
-		fdf->cam.u -= ROT_SPEED;
-	if (key == XK_Left)
-		fdf->cam.v -= ROT_SPEED;
-	if (key == XK_Right)
-		fdf->cam.v += ROT_SPEED;
-	if (key == XK_q)
-		fdf->cam.w -= ROT_SPEED;
-	if (key == XK_e)
-		fdf->cam.w += ROT_SPEED;
-	if (key == XK_plus || key == XK_equal)
-		fdf->cam.fov -= ZOOM_SPEED;
-	if (key == XK_minus)
-		fdf->cam.fov += ZOOM_SPEED;
 	return (0);
 }

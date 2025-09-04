@@ -6,13 +6,13 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 14:11:38 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/01 15:07:38 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/04 13:43:10 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structures.h"
 
-void	set_pixel(t_pixel p, t_data *data)
+void	set_pixel(t_pixel p, unsigned int color, t_data *data)
 {
 	char	*dst;
 
@@ -22,16 +22,16 @@ void	set_pixel(t_pixel p, t_data *data)
 	*(unsigned int *)dst = p.color;
 }
 
-void	get_pixel(t_pixel p, t_data *data)
+unsigned int	get_pixel(t_pixel p, t_data *data)
 {
 	char	*color;
 
 	if (!data ||p.x >= data->pxl_w|| p.x < 0 || p.y >= data->pxl_h || p.y < 0)
-		return ;
+		return (0);
 	color = data->addr + p.y * data->line_length + p.x * (data->bits_pxl / 8);
-	p.color = *(unsigned int *)color;
+	return (*(unsigned int *)color);
 }
-void	scale_pixel(t_pixel p, int scale, t_data *dst)
+void	scale_pixel(t_pixel p, unsigned int color, int scale, t_data *dst)
 {
 	int	i;
 	int	j;
@@ -43,7 +43,7 @@ void	scale_pixel(t_pixel p, int scale, t_data *dst)
 	{
 		i = 0;
 		while (i < scale)
-			set_pixel((t_pixel){p.x + i++, p.y + j, p.color}, dst);
+			set_pixel((t_pixel){p.x + i++, p.y + j}, color, dst);
 		j++;
 	}
 }

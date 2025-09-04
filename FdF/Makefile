@@ -22,7 +22,7 @@ MLX_LIB := $(MLX_DIR)/libmlx.a
 MLX_FLAGS := -L$(MLX_DIR) -lmlx -lXext -lX11 -lm -lz
 
 # === Object folder ===
-OBJ_DIR := objects
+OBJ_DIR := .objects
 
 # === Source files ===
 SRC_DIR := src/

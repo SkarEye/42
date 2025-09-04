@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 12:23:51 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/01 14:04:18 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/04 15:20:27 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,10 @@ char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *src);
 size_t	ft_strlen(const char *s);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+
+size_t	get_next_line(int fd, t_fdf *fdf);
+
+size_t	get_pos(size_t x, size_t z, t_fdf *fdf);
+void	set_map(const char *filename, t_fdf *fdf);
 
 #endif

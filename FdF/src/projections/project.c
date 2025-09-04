@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 12:07:48 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/03 20:06:37 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/04 11:40:53 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,99 +17,81 @@
 
 static void	get_matrix(double m[3][3], t_pov c)
 {
-	double	c_u;
-	double	s_u;
-	double	c_v;
-	double	s_v;
-	double	c_w;
-	double	s_w;
+	double	c_x;
+	double	s_x;
+	double	c_y;
+	double	s_y;
+	double	c_z;
+	double	s_z;
 
-	c_u = cos(c.u);
-	s_u = sin(c.u);
-	c_v = cos(c.v);
-	s_v = sin(c.v);
-	c_w = cos(c.w);
-	s_w = sin(c.w);
-	m[0][0] = c_v * c_w;
-	m[0][1] = -c_v * s_w;
-	m[0][2] = s_v;
-	m[1][0] = s_u * s_v * c_w + c_u * s_w;
-	m[1][1] = -s_u * s_v * s_w + c_u * c_w;
-	m[1][2] = -s_u * c_v;
-	m[2][0] = -c_u * s_v * c_w + s_u * s_w;
-	m[2][1] = c_u * s_v * s_w + s_u * c_w;
-	m[2][2] = c_u * c_v;
+	c_x = cos(c.a.x);
+	s_x = sin(c.a.x);
+	c_y = cos(c.a.y);
+	s_y = sin(c.a.y);
+	c_z = cos(c.a.z);
+	s_z = sin(c.a.z);
+	m[0][0] = c_y * c_z;
+	m[0][1] = -c_y * s_z;
+	m[0][2] = s_y;
+	m[1][0] = s_x * s_y * c_z + c_x * s_z;
+	m[1][1] = -s_x * s_y * s_z + c_x * c_z;
+	m[1][2] = -s_x * c_y;
+	m[2][0] = -c_x * s_y * c_z + s_x * s_z;
+	m[2][1] = c_x * s_y * s_z + s_x * c_z;
+	m[2][2] = c_x * c_y;
 }
 
-void	set_cam(double pos[3], double ang[3], double fov, t_fdf *fdf)
+t_vect3d	set_vect3d(double x, double y, double z)
 {
-	fdf->cam.x = pos[0];
-	fdf->cam.y = pos[1];
-	fdf->cam.z = pos[2];
-	fdf->cam.u = ang[0];
-	fdf->cam.v = ang[1];
-	fdf->cam.w = ang[2];
-	fdf->cam.fov = fov;
+	t_vect3d	vect;
+
+	vect.x = x;
+	vect.y = y;
+	vect.z = z;
+	return (vect);
 }
 
-void	set_isometric_cam(t_fdf *fdf)
+t_pov	set_pov(t_vect3d pos, t_vect3d ang, double fov)
 {
-	double	pos[3] = {
-		fdf->map_w / 2.0, (fdf->map_w + fdf->map_h) / 2, fdf->map_h / 2};
-	double	ang[3] = {
-		rad(35.264), 0, rad(45)};
-		set_cam(pos, ang, 120, fdf);
-}
-
-void	set_45_cam(t_fdf *fdf)
-{
-	double	pos[3] = {
-		fdf->map_w / 2.0, (fdf->map_w + fdf->map_h) / 2, fdf->map_h / 2};
-	double	ang[3] = {
-		rad(45), 0, rad(45)};
-		set_cam(pos, ang, 120, fdf);
-}
-
-void	set_spawned_cam(t_fdf *fdf)
-{
-	double	pos[3] = {
-		fdf->map_w / 2, 6, fdf->map_h / 2};
-	double	ang[3] = {
-		rad(-20), 0, 0};
-		set_cam(pos, ang, 120, fdf);
+	t_pov	pov;
+	
+	pov.p = pos;
+	pov.a = ang;
+	pov.fov = fov;
+	return (pov);
 }
 
 void	set_vertical_cam(t_fdf *fdf)
 {
-	double	pos[3] = {
-		fdf->map_w / 2, 15, fdf->map_h / 2};
-	double	ang[3] = {
-		rad(-90), 0, 0};
-		set_cam(pos, ang, 150, fdf);
+	t_vect3d	pos;
+	t_vect3d	ang;
+
+	pos = set_vect3d(fdf->map_w / 2, 15, fdf->map_h / 2);
+	ang = set_vect3d(rad(-90), 0, 0);
+	set_pov(pos, ang, 120);	
 }
 
-t_pixel	project(t_point p, t_fdf *fdf)
+t_pixel	project(t_vect3d p, unsigned int color, t_fdf *fdf)
 {
-	t_pixel	pxl;
-	t_pov	c;
-	double	px;
-	double	py;
-	double	pz;
-	double	m[3][3];
-	double	scale;
+	t_pov		c;
+	t_vect3d	d;
+	t_pixel		pxl;
+	double		m[3][3];
+	double		scale;
 
 	c = fdf->cam;
 	get_matrix(m, c);
-	px = m[0][0] * (p.x - c.x) + m[0][1] * (p.y - c.y) + m[0][2] * (p.z - c.z);
-	py = m[1][0] * (p.x - c.x) + m[1][1] * (p.y - c.y) + m[1][2] * (p.z - c.z);
-	pz = m[2][0] * (p.x - c.x) + m[2][1] * (p.y - c.y) + m[2][2] * (p.z - c.z);
+	d = set_vect3d(p.x - c.p.x, p.y - c.p.y, p.z - c.p.z);
+	p.x = m[0][0] * d.x + m[0][1] * d.y + m[0][2] * d.z;
+	p.y = m[1][0] * d.x + m[1][1] * d.y + m[1][2] * d.z;
+	p.z = m[2][0] * d.x + m[2][1] * d.y + m[2][2] * d.z;
 	if (c.fov < 70)
 		c.fov = 70;
 	else if (c.fov > 180)
 		c.fov = 180;
-	scale = (0.5 * PXL_W) / tan(rad(c.fov) / 2.0) / (pz + 1.0);
-	pxl.x = px * scale + (PXL_W / 2);
-	pxl.y = py * scale + (PXL_H / 2);
-	pxl.color = p.color;
+	scale = (0.5 * PXL_W) / tan(rad(c.fov) / 2.0) / (d.z + 1.0);
+	pxl.x = d.x * scale + (PXL_W / 2);
+	pxl.y = d.y * scale + (PXL_H / 2);
+	pxl.color = color;
 	return (pxl);
 }

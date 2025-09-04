@@ -9,6 +9,7 @@
 		"keysym.h": "c",
 		"x.h": "c",
 		"image.h": "c",
-		"unistd.h": "c"
+		"unistd.h": "c",
+		"structures.h": "c"
 	}
 }

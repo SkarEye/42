@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 14:19:55 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/03 19:45:08 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/04 12:13:51 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 
 #include "structures.h"
 #include "map_utils.h"
-#include "projections.h"
+#include "loop.h"
 #include "image.h"
 
 #define FDF	"FdF"
 
 #include <stdio.h> // for debugging
-#include "utils.h"
-#include <unistd.h> //for usleep
+#include "utils.h" //for ft_bzero
 
 #include <X11/X.h> //for key_loop
 
@@ -43,7 +42,7 @@ int	main(int argc, char **argv)
 	fdf.data = make_blank_image(fdf.mlx, PXL_W, PXL_H);
 	set_vertical_cam(&fdf);
 	mlx_hook(fdf.win, KeyPress, KeyPressMask, handle_key, &fdf);
-	// mlx_loop_hook(fdf.mlx, render, &fdf);
+	mlx_loop_hook(fdf.mlx, render, &fdf);
 	mlx_loop(fdf.mlx);
 	return 0;
 }

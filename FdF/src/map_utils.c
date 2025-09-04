@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:37:23 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/03 14:04:42 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/04 15:20:35 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 
 #include "structures.h"
 #include "utils.h"
-#include "get_next_line.h"
 #include "exit_utils.h"
-
-#include <stdio.h> // TO RM
 
 static void	get_map_size(const char *filename, t_fdf *fdf)
 {
@@ -47,15 +44,20 @@ static void	get_map_size(const char *filename, t_fdf *fdf)
 		exit_fdf(loc(F, L), ERR_INVALID_MAP, 1, fdf);
 }
 
-void	set_point(int x, int z, const char *str, t_fdf *fdf)
+size_t	get_pos(size_t x, size_t z, t_fdf *fdf)
+{
+	return (z * fdf->map_w + x);	
+}
+
+static void	set_point(int x, int z, const char *str, t_fdf *fdf)
 {
 	char	*comma;
 	size_t	pos;
 
-	pos = z * fdf->map_w + x;
-	fdf->map[pos].x = x;
-	fdf->map[pos].y = ft_atoi(str);
-	fdf->map[pos].z = z;
+	pos = get_pos(x, z, fdf);
+	fdf->map[pos].p.x = x;
+	fdf->map[pos].p.y = ft_atoi(str);
+	fdf->map[pos].p.z = z;
 	comma = ft_strchr(str, ',');
 	if (comma)
 		fdf->map[pos].color = ft_htoui(comma + 1);
@@ -63,12 +65,6 @@ void	set_point(int x, int z, const char *str, t_fdf *fdf)
 		fdf->map[pos].color = 0xFFFFFF;
 }
 
-t_point	get_point(int x, int z, t_fdf *fdf)
-{
-	if (x < 0 || x >= (int)fdf->map_w || z < 0 || z >= (int)fdf->map_h)
-		return ((t_point){0, 0, 0, 0,});
-	return (fdf->map[z * fdf->map_w + x]);
-}
 
 void	set_map(const char *filename, t_fdf *fdf)
 {

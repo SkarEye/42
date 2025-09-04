@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 13:09:25 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/03 16:26:37 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/04 13:39:22 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	paste_image(t_pixel p, int scale, t_data *src, t_data *dst)
 		d.x = p.x;
 		while (s.x < src->pxl_w)
 		{
-			get_pixel(s, src);
+			d.color = get_pixel(s, src);
 			if (s.color != 0x000000)
 				scale_pixel(d, scale, dst);
 			s.x++;
