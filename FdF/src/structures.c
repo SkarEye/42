@@ -6,9 +6,11 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:51:11 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/04 21:25:34 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/15 15:01:43 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <stdbool.h>
 
 #include "structures.h"
 
@@ -22,17 +24,20 @@ t_vect3d	set_vect3d(float x, float y, float z)
 	return (vect);
 }
 
-t_pov	set_pov(t_vect3d pos, t_vect3d ang, float fov)
+t_pov	set_pov(t_vect3d v, t_vect3d r, float fov)
 {
 	t_pov	pov;
 
-	pov.p = pos;
-	pov.a = ang;
+	pov.v = v;
+	pov.r = r;
 	pov.fov = fov;
+	pov.focal = 0;
+	pov.is_fish = false;
+	pov.is_3d = false;
 	return (pov);
 }
 
-t_txt	set_txt(t_pixel size, unsigned int color, int scale, t_align align)
+t_txt	set_txt(t_pos2d size, unsigned int color, int scale, t_align align)
 {
 	t_txt txt;
 

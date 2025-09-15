@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 14:07:49 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/04 21:24:56 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/15 17:14:26 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 float	rad(float deg);
 float	deg(float rad);
+float	normalize_angle(float a);
 int		abs(int n);
 
 #endif

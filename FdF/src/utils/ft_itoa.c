@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 16:44:54 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/21 18:40:54 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/15 15:46:15 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*ft_itoa(int n)
 	else
 		str[0] = '0';
 	str[size--] = '\0';
-	while (n != 0)
+	while (n > 0)
 	{
 		str[size--] = '0' - (n % 10);
 		n /= 10;

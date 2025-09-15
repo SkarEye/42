@@ -47,14 +47,18 @@ SRC := \
 	$(SRC_DIR)map_utils.c \
 	$(SRC_DIR)math_helper.c \
 	$(SRC_DIR)structures.c \
+	$(SRC_DIR)cams.c \
 	$(SRC_DIR)$(IMG)pixel_utils.c \
 	$(SRC_DIR)$(IMG)img_utils.c \
 	$(SRC_DIR)$(IMG)img_utils2.c \
-	$(SRC_DIR)$(PROJ)draw_fdf.c \
+	$(SRC_DIR)$(PROJ)bresenham.c \
+	$(SRC_DIR)$(PROJ)projections.c \
+	$(SRC_DIR)$(PROJ)project.c \
+	$(SRC_DIR)$(PROJ)gyroscope.c \
 	$(SRC_DIR)$(PROJ)draw_text.c \
 	$(SRC_DIR)$(PROJ)text_helper.c \
-	$(SRC_DIR)$(LOOP)fdf.c \
 	$(SRC_DIR)$(LOOP)start.c \
+	$(SRC_DIR)$(LOOP)fdf.c \
 	$(SRC_DIR)$(LOOP)loop.c \
 	$(SRC_DIR)$(EXIT)error_utils.c \
 	$(SRC_DIR)$(EXIT)exit_utils.c \

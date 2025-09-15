@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 13:09:25 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/04 17:11:02 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/10 11:42:07 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 
 //this func might be wrong
-void	paste_image(t_pixel p, int scale, t_data *src, t_data *dst)
+void	paste_image(t_pos2d p, int scale, t_data *src, t_data *dst)
 {
-	t_pixel	s;
-	t_pixel	d;
+	t_pos2d			s;
+	t_pos2d			d;
 	unsigned int	color;
 
 	if (!dst || !src || scale < 1)
@@ -41,23 +41,31 @@ void	paste_image(t_pixel p, int scale, t_data *src, t_data *dst)
 	}
 }
 
-void	outline_image(int size, unsigned int color, t_data *img)
+void	add_image(t_pos2d p, int scale, t_data *src, t_data *dst)
 {
-	t_pixel	p;
+	t_pos2d			s;
+	t_pos2d			d;
+	unsigned int	color;
 
-	if (!img || size < 1)
+	if (!dst || !src || scale < 1)
 		return ;
-	p.y = 0;
-	while (p.y < img->pxl_h)
+	s.y = 0;
+	d.y = p.y;
+	while (s.y < src->pxl_h)
 	{
-		p.x = 0;
-		while (p.x < img->pxl_w)
+		s.x = 0;
+		d.x = p.x;
+		while (s.x < src->pxl_w)
 		{
-			if ((p.x < size || p.x > img->pxl_w - size)
-				&& (p.y < size || p.y > img->pxl_h - size))
-				set_pixel(p, color, img);
-			p.x++;
+			color = get_pixel(s, src) + get_pixel(d, dst);
+			if (color != 0x000000)
+				scale_pixel(d, color, scale, dst);
+			s.x++;
+			d.x += scale;
 		}
-		p.y++;
+		s.y++;
+		d.y += scale;
 	}
 }
+
+

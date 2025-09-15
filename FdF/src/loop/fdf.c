@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 19:45:15 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/04 21:32:59 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/15 19:09:46 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,88 +18,119 @@
 #include "projections.h"
 #include "math_helper.h"
 
-#define MOVE_SPEED 0.5
-#define ROT_SPEED  0.05
-#define ZOOM_SPEED 5.0
+#define MOVE_SPEED	0.01f
+#define ROT_SPEED	0.001f
+#define ZOOM_SPEED	0.05f
+#define FISH_SPEED	0.0005f
+#define	FRICTION	0.995f
 
-static void	handle_pos(int key, t_fdf *fdf)
+static void	handle_pos_inertia(int key, t_fdf *fdf)
 {
-	if (key == XK_w)
-	{
-		fdf->cam.p.x += cos(fdf->cam.a.y - PI / 2) * MOVE_SPEED;
-		fdf->cam.p.z += sin(fdf->cam.a.y - PI / 2) * MOVE_SPEED;
-	}
 	if (key == XK_a)
 	{
-		fdf->cam.p.x -= cos(fdf->cam.a.y) * MOVE_SPEED;
-		fdf->cam.p.z -= sin(fdf->cam.a.y) * MOVE_SPEED;
+		fdf->inertia.v.x -= cosf(fdf->cam.r.y) * MOVE_SPEED;
+		fdf->inertia.v.z -= sinf(fdf->cam.r.y) * MOVE_SPEED;
 	}
 	if (key == XK_s)
 	{
-		fdf->cam.p.x += cos(fdf->cam.a.y + PI / 2) * MOVE_SPEED;
-		fdf->cam.p.z += sin(fdf->cam.a.y + PI / 2) * MOVE_SPEED;
+		fdf->inertia.v.x += cosf(fdf->cam.r.y + PI / 2) * MOVE_SPEED;
+		fdf->inertia.v.z += sinf(fdf->cam.r.y + PI / 2) * MOVE_SPEED;
 	}
 	if (key == XK_d)
 	{
-		fdf->cam.p.x += cos(fdf->cam.a.y) * MOVE_SPEED;
-		fdf->cam.p.z += sin(fdf->cam.a.y) * MOVE_SPEED;
+		fdf->inertia.v.x += cosf(fdf->cam.r.y) * MOVE_SPEED;
+		fdf->inertia.v.z += sinf(fdf->cam.r.y) * MOVE_SPEED;
+	}
+	if (key == XK_w)
+	{
+		fdf->inertia.v.x += cosf(fdf->cam.r.y - PI / 2) * MOVE_SPEED;
+		fdf->inertia.v.z += sinf(fdf->cam.r.y - PI / 2) * MOVE_SPEED;
 	}
 	if (key == XK_space)
-		fdf->cam.p.y += MOVE_SPEED;
+		fdf->inertia.v.y += MOVE_SPEED;
 	if (key == XK_Shift_L)
-		fdf->cam.p.y -= MOVE_SPEED;
+		fdf->inertia.v.y -= MOVE_SPEED;
+}
+
+static void	handle_ang_inertia(int key, t_fdf *fdf)
+{
+	if (key == XK_Up)
+		fdf->inertia.r.x += ROT_SPEED;
+	if (key == XK_Down)
+		fdf->inertia.r.x -= ROT_SPEED;
+	if (key == XK_Left)
+		fdf->inertia.r.y -= ROT_SPEED;
+	if (key == XK_Right)
+		fdf->inertia.r.y += ROT_SPEED;
+	if (key == XK_q)
+		fdf->inertia.r.z -= ROT_SPEED;
+	if (key == XK_e)
+		fdf->inertia.r.z += ROT_SPEED;
+}
+
+static void	apply_inertia(t_fdf *fdf)
+{
+	fdf->cam.v.x += fdf->inertia.v.x;
+	fdf->cam.v.y += fdf->inertia.v.y;
+	fdf->cam.v.z += fdf->inertia.v.z;
+	fdf->cam.r.x += fdf->inertia.r.x;
+	fdf->cam.r.y += fdf->inertia.r.y;
+	fdf->cam.r.z += fdf->inertia.r.z;
+	if (fdf->cam.fov < 0)
+		fdf->cam.fov = 0;
+	else if (fdf->cam.fov > 180)
+		fdf->cam.fov = 180;
+	else
+		fdf->cam.fov += fdf->inertia.fov;
+	fdf->cam.r.x = normalize_angle(fdf->cam.r.x);
+	fdf->cam.r.y = normalize_angle(fdf->cam.r.y);
+	fdf->cam.r.z = normalize_angle(fdf->cam.r.z);
+	fdf->inertia.v.x *= FRICTION;
+	fdf->inertia.v.y *= FRICTION;
+	fdf->inertia.v.z *= FRICTION;
+	fdf->inertia.r.x *= FRICTION;
+	fdf->inertia.r.y *= FRICTION;
+	fdf->inertia.r.z *= FRICTION;
+	fdf->inertia.fov *= FRICTION;
 }
 
 int	handle_fdf(int key, t_fdf *fdf)
 {
-	handle_pos(key, fdf);
-	if (key == XK_Up)
-		fdf->cam.a.x += ROT_SPEED;
-	if (key == XK_Down)
-		fdf->cam.a.x -= ROT_SPEED;
-	if (key == XK_Left)
-		fdf->cam.a.y -= ROT_SPEED;
-	if (key == XK_Right)
-		fdf->cam.a.y += ROT_SPEED;
-	if (key == XK_q)
-		fdf->cam.a.z -= ROT_SPEED;
-	if (key == XK_e)
-		fdf->cam.a.z += ROT_SPEED;
-	if (key == XK_plus || key == XK_equal)
-		fdf->cam.fov -= ZOOM_SPEED;
-	if (key == XK_minus)
-		fdf->cam.fov += ZOOM_SPEED;
+	handle_pos_inertia(key, fdf);
+	handle_ang_inertia(key, fdf);
+	if (key == XK_Insert)
+		fdf->inertia.fov += ZOOM_SPEED;
+	if (key == XK_Delete)
+		fdf->inertia.fov -= ZOOM_SPEED;
+	if (key == XK_F1 && !fdf->cam.is_fish)
+		fdf->cam.is_fish = true;
+	else if (key == XK_F1)
+		fdf->cam.is_fish = false;
+	if (key == XK_F2 && !fdf->cam.is_3d)
+		fdf->cam.is_3d = true;
+	else if (key == XK_F2)
+		fdf->cam.is_3d = false;
+	if (key == XK_F5)
+		set_vertical(fdf);
+	if (key == XK_F6)
+		set_horizontal(fdf);
+	if (key == XK_F7)
+		set_isometric(fdf);
 	return (0);
 }
 
 #include <stdio.h>
 
-#include "utils.h"
-
-static void	print_map(t_fdf *fdf)
-{
-	size_t	x, z;
-
-	printf("Printing Map...\n\n");
-	z = 0;
-	while (z < fdf->map_h)
-	{
-		x = 0;
-		while (x < fdf->map_w)
-		{
-			printf("%f ", fdf->map[pos(x, z, fdf)].y);
-			x++;
-		}
-		printf("\n");
-		z++;
-	}
-
-}
-
 int	render_fdf(t_fdf *fdf)
 {
-	printf("in render_fdf\n");
-	print_map(fdf);
-	draw_fdf(fdf);
+	apply_inertia(fdf);
+	fdf->cam.focal = (0.5 * PXL_W) / tanf(rad(fdf->cam.fov) / 2.0);
+	get_matrix(&fdf->cam);
+	if (fdf->cam.is_3d)
+		draw_3d(fdf);
+	else
+		draw_fdf(fdf->cam, 0, fdf);
+	draw_gyroscope((t_pos2d){10, 10}, 50, fdf);
+	printf("x : %f, y : %f, z : %f\nu : %f, v : %f, w : %f\n\n", fdf->cam.v.x, fdf->cam.v.y, fdf->cam.v.z, fdf->cam.r.x, fdf->cam.r.y, fdf->cam.r.z);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:37:23 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/04 21:29:42 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/15 11:21:09 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,14 @@ static void	set_point(size_t x, size_t z, const char *str, t_fdf *fdf)
 	size_t	i;
 
 	i = pos(x, z, fdf);
-	fdf->map[i].x = x;
-	fdf->map[i].y = ft_atoi(str);
-	fdf->map[i].z = z;
+	fdf->map[i].v.x = x;
+	fdf->map[i].v.y = ft_atoi(str);
+	fdf->map[i].v.z = z;
 	comma = ft_strchr(str, ',');
 	if (comma)
-		fdf->colors[i] = ft_htoui(comma + 1);
+		fdf->map[i].l.c = ft_htoui(comma + 1);
 	else
-		fdf->colors[i] = 0xFFFFFF;
+		fdf->map[i].l.c = 0xFFFFFF;
 }
 
 void	set_map(const char *filename, t_fdf *fdf)
@@ -73,8 +73,7 @@ void	set_map(const char *filename, t_fdf *fdf)
 	size_t	j;
 
 	get_map_size(filename, fdf);
-	fdf->map = xcalloc(sizeof(t_vect3d) * (fdf->map_h * fdf->map_w), loc(F, L), fdf);
-	fdf->colors = xcalloc(sizeof(unsigned int) * (fdf->map_h * fdf->map_w), loc(F, L), fdf);
+	fdf->map = xcalloc(sizeof(t_point) * (fdf->map_h * fdf->map_w), loc(F, L), fdf);
 	fd = xopen(filename, O_RDONLY, loc(F, L), fdf);
 	j = 0;
 	while (get_next_line(fd, fdf))

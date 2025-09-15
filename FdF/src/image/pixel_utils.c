@@ -6,45 +6,63 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 14:11:38 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/04 21:24:18 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/10 12:51:48 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structures.h"
 
-void	set_pixel(t_pixel p, unsigned int color, t_data *data)
+void	set_pixel(t_pos2d p, unsigned int color, t_data *data)
+{
+	char	*dst;
+
+	if (p.x >= data->pxl_w || p.x < 0 || p.y >= data->pxl_h || p.y < 0)
+		return ;
+	if (color > 0xFFFFFF)
+		color = 0xFFFFFF;
+	dst = data->addr + (p.y * data->line_length + p.x * (data->bits_pxl / 8));
+	*(unsigned int *)dst = color;
+}
+
+void	add_pixel(t_pos2d p, unsigned int color, t_data *data)
 {
 	char	*dst;
 
 	if (p.x >= data->pxl_w || p.x < 0 || p.y >= data->pxl_h || p.y < 0)
 		return ;
 	dst = data->addr + (p.y * data->line_length + p.x * (data->bits_pxl / 8));
+	color += *(unsigned int *)dst;
+	if (color > 0xFFFFFF)
+		color = 0xFFFFFF;
 	*(unsigned int *)dst = color;
 }
 
-unsigned int	get_pixel(t_pixel p, t_data *data)
+unsigned int	get_pixel(t_pos2d p, t_data *data)
 {
-	char	*color;
+	char	*src;
 
-	if (!data ||p.x >= data->pxl_w|| p.x < 0 || p.y >= data->pxl_h || p.y < 0)
+	if (!data || p.x >= data->pxl_w|| p.x < 0 || p.y >= data->pxl_h || p.y < 0)
 		return (0);
-	color = data->addr + p.y * data->line_length + p.x * (data->bits_pxl / 8);
-	return (*(unsigned int *)color);
+	src = data->addr + p.y * data->line_length + p.x * (data->bits_pxl / 8);
+	return (*(unsigned int *)src);
 }
-void	scale_pixel(t_pixel p, unsigned int color, int scale, t_data *dst)
+
+void	scale_pixel(t_pos2d pos, unsigned int color, int scale, t_data *dst)
 {
-	int	i;
-	int	j;
+	t_pos2d	t;
 
 	if (!dst)
 		return ;
-	j = 0;
-	while (j < scale)
+	t = pos;
+	while (t.y < pos.y + scale)
 	{
-		i = 0;
-		while (i < scale)
-			set_pixel((t_pixel){p.x + i++, p.y + j}, color, dst);
-		j++;
+		t.x = pos.x;
+		while (t.x < pos.x + scale)
+		{
+			set_pixel(t, color, dst);
+			t.x++;
+		}
+		t.y++;
 	}
 }
 
