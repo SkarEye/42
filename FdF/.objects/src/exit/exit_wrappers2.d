@@ -1,7 +1,5 @@
-.objects/src/exit/error_utils.o: src/exit/error_utils.c includes/utils.h \
+.objects/src/exit/exit_wrappers2.o: src/exit/exit_wrappers2.c \
   includes/structures.h includes/exit_utils.h
-
-includes/utils.h:
 
 includes/structures.h:
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_text.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:50:13 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/16 14:55:33 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/09/16 20:11:30 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,14 @@ static size_t	draw_str(const char *str, t_pos2d pos, t_txt txt, t_fdf *fdf)
 	return (line_len);
 }
 
+/**
+ * @brief Draws a text from a string.
+ *
+ * @param str Character string
+ * @param pos Text block position in window
+ * @param txt Text parameters
+ * @param fdf FDF pointer
+ */
 void	draw_text(const char *str, t_pos2d pos, t_txt txt, t_fdf *fdf)
 {
 	t_pos2d	d;

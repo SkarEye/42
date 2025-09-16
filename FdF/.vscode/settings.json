@@ -15,6 +15,7 @@
 		"vect3d.h": "c",
 		"bresenham.h": "c",
 		"project.h": "c",
-		"ios": "c"
+		"ios": "c",
+		"exit_utils.h": "c"
 	}
 }

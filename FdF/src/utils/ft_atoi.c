@@ -3,13 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 10:29:32 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/09/16 14:35:31 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/09/16 19:30:05 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/**
+ * @brief Converts a string to an integer.
+ *
+ * @param str Character string
+ * @return Converted integer.
+ * @warning Values exceeding INT_MAX & INT_MIN are considered as undefined
+ * @note If the string is invalid, will always return 0.
+ * behavior.
+ */
 int	ft_atoi(const char *str)
 {
 	int		n;

@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 11:11:31 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/27 13:23:41 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 19:58:07 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 
 #include "utils.h"
 
+/**
+ * @brief Copies at most size bytes of a character string into a buffer.
+ *
+ * @param src Character string to copy from
+ * @param dst Character buffer to copy into
+ * @param size Maximum amount of bytes copied
+ * @return Size of src
+ * @note Copies either length of src or size, whichever is smaller.
+ */
 size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;

@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 16:11:00 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/15 18:39:40 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 18:51:36 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 #include "structures.h"
 #include "projections.h"
 
+/**
+ * @brief Draws a gyroscope representing the current view of the user's POV.
+ *
+ * @param pos Gyroscope position in window
+ * @param fdf FDF pointer
+ */
 void	draw_gyroscope(t_pos2d pos, int scale, t_fdf *fdf)
 {
 	t_pixel		o;

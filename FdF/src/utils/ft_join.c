@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:15:14 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/09/01 11:31:11 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 19:41:46 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 
 #include "utils.h"
 
+/**
+ * @brief Joins two character strings together, seperated by a given character.
+ *
+ * @param first First string to join
+ * @param second Second string to join
+ * @param c character seperator
+ * @return Joined string.
+ */
 char	*ft_join(const char *first, const char *last, char c)
 {
 	char	*join;

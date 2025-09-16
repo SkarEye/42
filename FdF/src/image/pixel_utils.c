@@ -3,20 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   pixel_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 14:11:38 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/16 14:56:01 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/09/16 18:36:28 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "structures.h"
 
+/**
+ * @brief Sets a given color value to a pixel.
+ *
+ * @param p Pixel position
+ * @param c Color
+ * @param data Image pointer
+ */
 void	set_pixel(t_pos2d p, unsigned int color, t_data *data)
 {
 	char	*dst;
 
-	if (p.x >= data->pxl_w || p.x < 0 || p.y >= data->pxl_h || p.y < 0)
+	if (!data || p.x >= data->pxl_w || p.x < 0 || p.y >= data->pxl_h || p.y < 0)
 		return ;
 	if (color > 0xFFFFFF)
 		color = 0xFFFFFF;
@@ -24,11 +31,18 @@ void	set_pixel(t_pos2d p, unsigned int color, t_data *data)
 	*(unsigned int *)dst = color;
 }
 
+/**
+ * @brief Adds a given color value to a pixel.
+ *
+ * @param p Pixel position
+ * @param c Color
+ * @param data Image pointer
+ */
 void	add_pixel(t_pos2d p, unsigned int color, t_data *data)
 {
 	char	*dst;
 
-	if (p.x >= data->pxl_w || p.x < 0 || p.y >= data->pxl_h || p.y < 0)
+	if (!data || p.x >= data->pxl_w || p.x < 0 || p.y >= data->pxl_h || p.y < 0)
 		return ;
 	dst = data->addr + (p.y * data->line_length + p.x * (data->bits_pxl / 8));
 	color += *(unsigned int *)dst;
@@ -37,6 +51,13 @@ void	add_pixel(t_pos2d p, unsigned int color, t_data *data)
 	*(unsigned int *)dst = color;
 }
 
+/**
+ * @brief Gives the given color value of a pixel.
+ *
+ * @param p Pixel position
+ * @param data Image pointer
+ * @return Color value of the pixel.
+ */
 unsigned int	get_pixel(t_pos2d p, t_data *data)
 {
 	char	*src;

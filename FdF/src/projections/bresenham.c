@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 14:16:02 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/09/16 14:54:20 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/09/16 18:47:51 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,16 @@ static void	update_bresenham(t_b_line *l)
 	l->e2 = 2 * l->err;
 }
 
+/**
+ * @brief Draws a line between two pixels.
+ *
+ * @param a First pixel
+ * @param b Second pixel
+ * @param c Line color
+ * @param fdf FDF pointer
+ * @note If c is set to 0, then the line will gradually blend colors from the
+ * first to second pixels.
+ */
 void	bresenham(t_pixel a, t_pixel b, unsigned int c, t_fdf *fdf)
 {
 	t_b_line	l;

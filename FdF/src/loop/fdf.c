@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 19:45:15 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/16 15:00:28 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/09/16 20:23:12 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,13 @@ static void	apply_inertia(t_fdf *fdf)
 	fdf->inertia.fov *= FRICTION;
 }
 
+/**
+ * @brief Handles key presses when drawing the wireframe.
+ *
+ * @param key Keypress value
+ * @param fdf FDF pointer
+ * @return 0 for MLX loop.
+ */
 int	handle_fdf(int key, t_fdf *fdf)
 {
 	handle_pos_inertia(key, fdf);
@@ -119,6 +126,12 @@ int	handle_fdf(int key, t_fdf *fdf)
 	return (0);
 }
 
+/**
+ * @brief Renders the wireframe and addons.
+ *
+ * @param fdf FDF pointer
+ * @return 0 for MLX loop.
+ */
 int	render_fdf(t_fdf *fdf)
 {
 	apply_inertia(fdf);

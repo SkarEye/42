@@ -6,12 +6,19 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 18:55:14 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/27 12:24:50 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 19:59:18 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 
+/**
+ * @brief Calculates the length of a given character string.
+ *
+ * @param str Character string
+ * @return Calculated length
+ * @note If str is invalid, still returns 0.
+ */
 size_t	ft_strlen(const char *str)
 {
 	size_t	len;

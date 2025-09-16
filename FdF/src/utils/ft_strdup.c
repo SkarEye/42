@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 11:15:13 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/08/06 11:15:43 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/09/16 19:47:26 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 #include "utils.h"
 
+/**
+ * @brief Duplicates a given character string to new a new address.
+ *
+ * @param str Character string to duplicate
+ * @return Character address of duplicated string.
+ */
 char	*ft_strdup(const char *src)
 {
 	size_t	i;

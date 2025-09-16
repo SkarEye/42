@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_htoui.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 10:29:26 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/09/16 14:35:18 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/09/16 19:35:07 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@ static bool	is_hex(char c)
 	return (false);
 }
 
+/**
+ * @brief Converts a hexadecimal string to an unsigned integer.
+ *
+ * @param str Character string
+ * @return Converted unsigned integer.
+ * @warning Values exceeding UINT_MAX & UINT_MIN are considered as undefined
+ * @note If the string is invalid, will always return 0.
+ * behavior.
+ */
 unsigned int	ft_htoui(const char *str)
 {
 	unsigned int	n;

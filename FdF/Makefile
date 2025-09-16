@@ -50,7 +50,6 @@ SRC := \
 	$(SRC_DIR)cams.c \
 	$(SRC_DIR)$(IMG)pixel_utils.c \
 	$(SRC_DIR)$(IMG)img_utils.c \
-	$(SRC_DIR)$(IMG)img_utils2.c \
 	$(SRC_DIR)$(PROJ)bresenham.c \
 	$(SRC_DIR)$(PROJ)projections.c \
 	$(SRC_DIR)$(PROJ)project.c \
@@ -62,9 +61,8 @@ SRC := \
 	$(SRC_DIR)$(LOOP)loop.c \
 	$(SRC_DIR)$(EXIT)error_utils.c \
 	$(SRC_DIR)$(EXIT)exit_utils.c \
-	$(SRC_DIR)$(EXIT)exit_wrappers.c
-
-
+	$(SRC_DIR)$(EXIT)exit_wrappers.c \
+	$(SRC_DIR)$(EXIT)exit_wrappers2.c
 
 # === Object and Dependency files ===
 OBJ := $(SRC:%.c=$(OBJ_DIR)/%.o)

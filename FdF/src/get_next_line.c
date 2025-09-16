@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/11 11:20:51 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/29 10:01:46 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 20:02:11 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 #include "structures.h"
 #include "utils.h"
-#include "error_utils.h"
 #include "exit_utils.h"
 
 #define BUFFER_SIZE	128
@@ -94,6 +93,13 @@ static size_t	extract_line(t_fdf *fdf)
 	return (i);
 }
 
+/**
+ * @brief Gets next line from an opened file FD.
+ *
+ * @param fd File descpriptor
+ * @param fdf FDF pointer
+ * @return Size of line.
+ */
 size_t	get_next_line(int fd, t_fdf *fdf)
 {
 	if (!fdf->stash || !ft_strchr(fdf->stash, '\n'))

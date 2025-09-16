@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 16:44:54 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/09/15 15:46:15 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 19:41:53 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,12 @@ static size_t	get_pow(int n)
 	return (pow);
 }
 
+/**
+ * @brief Converts into a character string the ASCII digits of an integer.
+ *
+ * @param n Integer to convert
+ * @return Converted character string.
+ */
 char	*ft_itoa(int n)
 {
 	char	*str;
@@ -65,10 +71,12 @@ char	*ft_itoa(int n)
 	return (str);
 }
 
-/***
+/**
+ * @brief Writes into a character buffer the ASCII digits of an integer.
+ *
  * @param dst Destination buffer
- * @param n The integer to convert
- * @return Length of the integer representation
+ * @param n Integer to convert
+ * @return Length of bytes written into dst.
  */
 size_t	ft_sitoa(char *dst, int n)
 {

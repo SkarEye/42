@@ -6,7 +6,7 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/01 15:15:16 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/09/01 12:11:29 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 19:41:41 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,14 @@ void	ft_free_strtab(char **strtab)
 	free(strtab);
 }
 
+/**
+ * @brief Splits a character string into a string array, seperated by a given
+ * character
+ *
+ * @param s String to be split
+ * @param c Character seperator
+ * @return Split string array.
+ */
 char	**ft_split(char const *s, char c)
 {
 	char	**split;

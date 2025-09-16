@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 16:03:27 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/16 14:59:00 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/09/16 20:11:21 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include "utils.h"
 
-#include "error_utils.h"
+#include "exit_utils.h"
 
 #define NO_FILE_CONTEXT 	"no file context"
 #define THREE_DOT			"..."
@@ -29,24 +29,11 @@
 static const char	*get_error_info(t_error err)
 {
 	static const char	*error_msgs[] = {
-		"Success !\n",
-		"Invalid map.\n",
-		"Map not surrounded by walls.\n",
-		"Too many players.\n",
-		"No player found.\n",
-		"Too many exits.\n",
-		"No exit found.\n",
-		"No collectibles found.\n",
-		"Invalid character in map.\n",
-		"Map is not rectangular.\n",
-		"Flood fill failed.\n",
-		"Memory allocation failed.\n",
-		"Failed to open file.\n",
-		"Failed to read file.\n",
-		"No filename provided.\n",
-		"MLX initialization failed.\n",
-		"Invalid file extension.\n",
-		"Unknown error.\n"
+		": Success !\n",
+		": Invalid program arguments.\n",
+		": Filename is null.\n",
+		": Map is invalid.\n",
+		": Unknown error.\n"
 	};
 
 	if (err < 0 || err >= ERR_COUNT)
@@ -83,6 +70,15 @@ static size_t	get_error_message(char *err_msg, t_error err, t_debug dbg)
 	return (i);
 }
 
+/**
+ * @brief Converts a filename and a line value into a (t_debug) structure.
+ *
+ * @param file Filename
+ * @param line Line value
+ * @return (t_debug) struct storing both values
+ * @note Use it with the macros F and L (expanded to __FILE__ and __LINE__)
+ * to get the current filename and line location when called.
+ */
 t_debug	loc(const char *file, int line)
 {
 	t_debug	dbg;
@@ -92,6 +88,13 @@ t_debug	loc(const char *file, int line)
 	return (dbg);
 }
 
+/**
+ * @brief Writes onto the standard output FD a custom error message.
+ *
+ * @param dbg filename and line value
+ * @param err Error type
+ * @param is_silent Boolean determining if the message is printed
+ */
 void	print_error(t_debug dbg, t_error err, bool is_silent)
 {
 	char	str[MSG_LIMIT];

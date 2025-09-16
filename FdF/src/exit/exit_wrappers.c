@@ -6,19 +6,24 @@
 /*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:31:43 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/01 14:03:09 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 18:01:29 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdlib.h>
-#include <fcntl.h>
 
 #include "structures.h"
 #include "utils.h"
-#include "error_utils.h"
 #include "exit_utils.h"
 
+/**
+ * @brief Wrapper function for 'malloc' that safely exits program on error.
+ *
+ * @param size Bytes of memory
+ * @param dbg Filename and line value
+ * @param fdf FDF struct pointer
+ * @return Malloc'ed pointer
+ */
 void	*xmalloc(size_t size, t_debug dbg, t_fdf *fdf)
 {
 	void	*ptr;
@@ -29,6 +34,15 @@ void	*xmalloc(size_t size, t_debug dbg, t_fdf *fdf)
 	return (ptr);
 }
 
+/**
+ * @brief Wrapper function for 'malloc' that safely exits program on error.
+ *
+ * @param size Bytes of memory
+ * @param dbg Filename and line value
+ * @param fdf FDF struct pointer
+ * @return Calloc'ed pointer
+ * @note On success, sets all malloc'ed bytes to zero.
+ */
 void	*xcalloc(size_t size, t_debug dbg, t_fdf *fdf)
 {
 	void	*ptr;
@@ -40,6 +54,16 @@ void	*xcalloc(size_t size, t_debug dbg, t_fdf *fdf)
 	return (ptr);
 }
 
+/**
+ * @brief Wrapper function for 'ft_split' that safely exits program on error.
+ *
+ * @param s Character string
+ * @param c Character seperator
+ * @param dbg Filename and line value
+ * @param fdf FDF struct pointer
+ * @return A character string array split by 'c'.
+ * @note See ft_split for its brief.
+ */
 char	**xsplit(const char *s, char c, t_debug dbg, t_fdf *fdf)
 {
 	char	**ptr;
@@ -50,28 +74,15 @@ char	**xsplit(const char *s, char c, t_debug dbg, t_fdf *fdf)
 	return (ptr);
 }
 
-void	xfree(void *ptr)
+/**
+ * @brief Wrapper function for 'free' that always sets the given pointer to
+ * NULL.
+ *
+ * @param ptr Pointer to the malloc'ed address
+ */
+void	xfree(void **ptr)
 {
-	if (ptr)
-		free(ptr);
-}
-
-int	xopen(const char *filename, int flags, t_debug dbg, t_fdf *fdf)
-{
-	int	fd;
-
-	fd = open(filename, flags);
-	if (fd == -1)
-		exit_fdf(dbg, ERR_PERROR, 1, fdf);
-	return (fd);
-}
-
-void	xclose(int *fd, t_debug dbg, t_fdf *fdf)
-{
-	if (*fd >= 0)
-	{
-		if (close(*fd) == -1)
-			exit_fdf(dbg, ERR_PERROR, 1, fdf);
-		*fd = -1;
-	}
+	if (*ptr)
+		free(*ptr);
+	*ptr = NULL;
 }

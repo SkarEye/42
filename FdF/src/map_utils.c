@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
+/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:37:23 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/16 14:34:03 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/09/16 20:03:58 by macarnie         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,13 @@ static void	get_map_size(const char *filename, t_fdf *fdf)
 		else if (arg_count != fdf->map_w)
 			exit_fdf(loc(F, L), ERR_INVALID_MAP, 1, fdf);
 		fdf->map_h++;
-		xfree(fdf->line);
+		xfree((void **)&fdf->line);
 	}
-	xfree(fdf->stash);
+	xfree((void **)&fdf->stash);
 	fdf->stash = NULL;
 	xclose(&fd, loc(F, L), fdf);
 	if (!fdf->map_w || !fdf->map_h)
 		exit_fdf(loc(F, L), ERR_INVALID_MAP, 1, fdf);
-}
-
-size_t	pos(size_t x, size_t z, t_fdf *fdf)
-{
-	return (z * fdf->map_w + x);
 }
 
 static void	set_point(size_t x, size_t z, const char *str, t_fdf *fdf)
@@ -54,7 +49,7 @@ static void	set_point(size_t x, size_t z, const char *str, t_fdf *fdf)
 	char	*comma;
 	size_t	i;
 
-	i = pos(x, z, fdf);
+	i = z * fdf->map_w + x;
 	fdf->map[i].v.x = x;
 	fdf->map[i].v.y = ft_atoi(str);
 	fdf->map[i].v.z = z;
@@ -65,6 +60,12 @@ static void	set_point(size_t x, size_t z, const char *str, t_fdf *fdf)
 		fdf->map[i].l.c = 0xFFFFFF;
 }
 
+/**
+ * @brief Converts a .fdf file into a (t_point) array stored in the FDF pointer.
+ *
+ * @param filename
+ * @param fdf FDF pointer
+ */
 void	set_map(const char *filename, t_fdf *f)
 {
 	int		fd;
@@ -86,10 +87,10 @@ void	set_map(const char *filename, t_fdf *f)
 			i++;
 		}
 		ft_free_strtab(split);
-		xfree(f->line);
+		xfree((void **)&f->line);
 		j++;
 	}
-	xfree(f->stash);
+	xfree((void **)&f->stash);
 	f->stash = NULL;
 	xclose(&fd, loc(F, L), f);
 }
