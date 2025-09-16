@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_text.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 15:50:13 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/10 11:46:48 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 14:55:33 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	draw_glyph(char c, t_pos2d pos, t_txt txt, t_fdf *fdf)
 		return ;
 	g = get_glyph_position(c);
 	f.y = g.y;
-	d.y = pos.y;;
+	d.y = pos.y;
 	while (f.y < g.y + G_H)
 	{
 		f.x = g.x;
@@ -68,7 +68,7 @@ static size_t	draw_str(const char *str, t_pos2d pos, t_txt txt, t_fdf *fdf)
 	{
 		if (str[i] == ' ' && txt.align == A_JUSTIFIED && count > 0)
 		{
-			pos.x += 	leftover / count;
+			pos.x += leftover / count;
 			leftover -= leftover / count--;
 		}
 		draw_glyph(str[i], pos, txt, fdf);
@@ -83,7 +83,7 @@ void	draw_text(const char *str, t_pos2d pos, t_txt txt, t_fdf *fdf)
 	t_pos2d	d;
 	size_t	i;
 
-	if (!str) //fdf checking?
+	if (!str)
 		return ;
 	d.x = pos.x + get_pixel_offset(str, txt);
 	d.y = pos.y;

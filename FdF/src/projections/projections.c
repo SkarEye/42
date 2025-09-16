@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   projections.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 10:53:50 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/15 18:39:57 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 14:54:09 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,25 @@ void	draw_3d(t_fdf *fdf)
 {
 	t_pov		left_eye;
 	t_pov		right_eye;
+	float		sep;
+
+	sep = sqrtf(fdf->map_w * fdf->map_w + fdf->map_h * fdf->map_h) * 0.02f;
+	left_eye = fdf->cam;
+	right_eye = fdf->cam;
+	left_eye.v.x -= fdf->cam.m[0][0] * sep;
+	left_eye.v.y -= fdf->cam.m[1][0] * sep;
+	left_eye.v.z -= fdf->cam.m[2][0] * sep;
+	right_eye.v.x += fdf->cam.m[0][0] * sep;
+	right_eye.v.y += fdf->cam.m[1][0] * sep;
+	right_eye.v.z += fdf->cam.m[2][0] * sep;
+	draw_fdf(left_eye, 0xFF0000, fdf);
+	draw_fdf(right_eye, 0x00FFFF, fdf);
+}
+/*
+void	draw_3d(t_fdf *fdf)
+{
+	t_pov		left_eye;
+	t_pov		right_eye;
 	t_vect3d	right;
 	t_vect3d	c;
 	t_vect3d	s;
@@ -68,3 +87,4 @@ void	draw_3d(t_fdf *fdf)
 	draw_fdf(left_eye, 0xFF0000, fdf);
 	draw_fdf(right_eye, 0x00FFFF, fdf);
 }
+*/

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cams.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 15:23:46 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/15 19:36:20 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 14:34:43 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ void	set_isometric(t_fdf *fdf)
 
 	dist = sqrtf(fdf->map_w * fdf->map_w + fdf->map_h * fdf->map_h) * 1.5f;
 	fdf->cam.v = set_vect3d(0.707 * dist, 0.577 * dist, 0.707 * dist);
-	fdf->cam.r = set_vect3d(rad(215.264), rad(- 45), 0);
+	fdf->cam.r = set_vect3d(rad(215.264), rad(-45), 0);
 	fdf->cam.fov = 60.0;
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoh.c                                          :+:      :+:    :+:   */
+/*   ft_htoui.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 10:29:26 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/09/01 12:04:27 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 14:35:18 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 static bool	is_hex(char c)
 {
 	if ((c >= '0' && c <= '9')
-	|| (c >= 'a' && c <= 'f')
-	|| (c >= 'A' && c <= 'F'))
+		|| (c >= 'a' && c <= 'f')
+		|| (c >= 'A' && c <= 'F'))
 		return (true);
 	return (false);
 }
@@ -30,7 +30,7 @@ unsigned int	ft_htoui(const char *str)
 	if (!str || !*str)
 		return (0);
 	if (*(str + 1) && *str == '0' && (*(str + 1) == 'x' || *(str + 1) == 'X'))
-    	str += 2;
+		str += 2;
 	n = 0;
 	while (*str && is_hex(*str))
 	{

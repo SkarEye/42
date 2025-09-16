@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   img_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/21 17:37:15 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/03 16:27:43 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 14:58:15 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,34 +42,34 @@ t_data	*make_blank_image(void *mlx, int width, int height)
 	data->img = mlx_new_image(mlx, width, height);
 	if (!data->img)
 		return (xfree(data), NULL);
-
 	data->addr = mlx_get_data_addr(data->img,
-		&data->bits_pxl, &data->line_length, &data->endian);
+			&data->bits_pxl, &data->line_length, &data->endian);
 	if (!data->addr)
 	{
 		mlx_destroy_image(mlx, data->img);
 		return (xfree(data), NULL);
 	}
-
 	data->pxl_w = width;
 	data->pxl_h = height;
 	clear_image(data);
 	return (data);
 }
 
+//error handling ?
 t_data	*get_image_from_xpm(void *mlx, char *file)
 {
 	t_data	*data;
+
 	data = (t_data *)malloc(sizeof(t_data));
 	if (!data)
 	{
-		return (NULL); //Error handling here ?
+		return (NULL);
 	}
 	data->img = mlx_xpm_file_to_image(mlx, file, &data->pxl_w, &data->pxl_h);
 	if (!data->img)
 		return (xfree(data), NULL);
 	data->addr = mlx_get_data_addr(data->img, &data->bits_pxl,
-		&data->line_length, &data->endian);
+			&data->line_length, &data->endian);
 	if (!data->addr)
 		return (free_image(mlx, data), NULL);
 	return (data);

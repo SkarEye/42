@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 16:03:27 by macarnie          #+#    #+#             */
-/*   Updated: 2025/08/27 13:23:10 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 14:59:00 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 
 static const char	*get_error_info(t_error err)
 {
-	static const char *error_msgs[] = {
+	static const char	*error_msgs[] = {
 		"Success !\n",
 		"Invalid map.\n",
 		"Map not surrounded by walls.\n",

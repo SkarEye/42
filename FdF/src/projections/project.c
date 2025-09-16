@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   project.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/15 12:24:52 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/15 18:48:20 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 14:47:32 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,12 @@ static void	project_perspective(t_point *point, t_pov cam)
 
 static void	project_fisheye(t_point *point, t_pov cam)
 {
-	t_vect3d	v, r;
-	float		theta, phi;
+	t_vect3d	v;
+	t_vect3d	r;
+	float		theta;
+	float		phi;
 	float		radius;
+	float		len;
 
 	v.x = point->v.x - cam.v.x;
 	v.y = point->v.y - cam.v.y;
@@ -46,7 +49,7 @@ static void	project_fisheye(t_point *point, t_pov cam)
 	r.x = cam.m[0][0] * v.x + cam.m[0][1] * v.y + cam.m[0][2] * v.z;
 	r.y = cam.m[1][0] * v.x + cam.m[1][1] * v.y + cam.m[1][2] * v.z;
 	r.z = cam.m[2][0] * v.x + cam.m[2][1] * v.y + cam.m[2][2] * v.z;
-	float len = sqrtf(r.x * r.x + r.y * r.y + r.z * r.z);
+	len = sqrtf(r.x * r.x + r.y * r.y + r.z * r.z);
 	if (len < 0.001f)
 	{
 		point->l.is_valid = false;
@@ -86,3 +89,5 @@ void	project(t_point *point, t_pov cam)
 	else
 		project_fisheye(point, cam);
 }
+
+/*look at changing this*/

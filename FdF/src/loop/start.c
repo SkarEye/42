@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 15:53:33 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/15 11:36:44 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 15:00:47 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <X11/keysym.h>
 
 #define PRESS_SPACE "- PRESS SPACE -"
+
 int	render_start(t_fdf *fdf)
 {
 	t_txt	txt;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:37:23 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/15 11:21:09 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 14:34:03 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,31 +65,31 @@ static void	set_point(size_t x, size_t z, const char *str, t_fdf *fdf)
 		fdf->map[i].l.c = 0xFFFFFF;
 }
 
-void	set_map(const char *filename, t_fdf *fdf)
+void	set_map(const char *filename, t_fdf *f)
 {
 	int		fd;
 	char	**split;
 	size_t	i;
 	size_t	j;
 
-	get_map_size(filename, fdf);
-	fdf->map = xcalloc(sizeof(t_point) * (fdf->map_h * fdf->map_w), loc(F, L), fdf);
-	fd = xopen(filename, O_RDONLY, loc(F, L), fdf);
+	get_map_size(filename, f);
+	f->map = xcalloc(sizeof(t_point) * (f->map_h * f->map_w), loc(F, L), f);
+	fd = xopen(filename, O_RDONLY, loc(F, L), f);
 	j = 0;
-	while (get_next_line(fd, fdf))
+	while (get_next_line(fd, f))
 	{
-		split = xsplit(fdf->line, ' ', loc(F, L), fdf);
+		split = xsplit(f->line, ' ', loc(F, L), f);
 		i = 0;
 		while (split[i])
 		{
-			set_point(i, j, split[i], fdf);
+			set_point(i, j, split[i], f);
 			i++;
 		}
 		ft_free_strtab(split);
-		xfree(fdf->line);
+		xfree(f->line);
 		j++;
 	}
-	xfree(fdf->stash);
-	fdf->stash = NULL;
-	xclose(&fd, loc(F, L), fdf);
+	xfree(f->stash);
+	f->stash = NULL;
+	xclose(&fd, loc(F, L), f);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/03 19:45:15 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/15 19:09:46 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 15:00:28 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 #define ROT_SPEED	0.001f
 #define ZOOM_SPEED	0.05f
 #define FISH_SPEED	0.0005f
-#define	FRICTION	0.995f
+#define FRICTION	0.995f
 
 static void	handle_pos_inertia(int key, t_fdf *fdf)
 {
@@ -119,8 +119,6 @@ int	handle_fdf(int key, t_fdf *fdf)
 	return (0);
 }
 
-#include <stdio.h>
-
 int	render_fdf(t_fdf *fdf)
 {
 	apply_inertia(fdf);
@@ -131,6 +129,5 @@ int	render_fdf(t_fdf *fdf)
 	else
 		draw_fdf(fdf->cam, 0, fdf);
 	draw_gyroscope((t_pos2d){10, 10}, 50, fdf);
-	printf("x : %f, y : %f, z : %f\nu : %f, v : %f, w : %f\n\n", fdf->cam.v.x, fdf->cam.v.y, fdf->cam.v.z, fdf->cam.r.x, fdf->cam.r.y, fdf->cam.r.z);
 	return (0);
 }

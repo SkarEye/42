@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   img_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/26 13:09:25 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/10 11:42:07 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 14:56:27 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "image.h"
-
 
 //this func might be wrong
 void	paste_image(t_pos2d p, int scale, t_data *src, t_data *dst)
@@ -67,5 +66,3 @@ void	add_image(t_pos2d p, int scale, t_data *src, t_data *dst)
 		d.y += scale;
 	}
 }
-
-

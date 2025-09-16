@@ -14,6 +14,7 @@
 		"random": "c",
 		"vect3d.h": "c",
 		"bresenham.h": "c",
-		"project.h": "c"
+		"project.h": "c",
+		"ios": "c"
 	}
 }

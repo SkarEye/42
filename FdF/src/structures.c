@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 14:51:11 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/15 15:01:43 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 14:30:20 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,15 @@ t_pov	set_pov(t_vect3d v, t_vect3d r, float fov)
 
 t_txt	set_txt(t_pos2d size, unsigned int color, int scale, t_align align)
 {
-	t_txt txt;
+	t_txt	txt;
 
 	txt.size = size;
 	txt.color = color;
 	if (scale < 1)
 		txt.scale = 1;
 	else
-		txt.scale = scale; //should this be done here ??
-	if (align < A_LEFT ||align > A_UNKNOWN)
+		txt.scale = scale;
+	if (align < A_LEFT || align > A_UNKNOWN)
 		txt.align = A_UNKNOWN;
 	else
 		txt.align = align;

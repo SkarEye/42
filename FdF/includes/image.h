@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   image.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 14:13:20 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/15 11:36:04 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 14:27:33 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "structures.h"
 
-void			set_pixel(t_pos2d pos, unsigned int color,  t_data *data);
+void			set_pixel(t_pos2d pos, unsigned int color, t_data *data);
 void			add_pixel(t_pos2d pos, unsigned int color, t_data *data);
 unsigned int	get_pixel(t_pos2d pos, t_data *data);
 void			scale_pixel(t_pos2d p, unsigned int c, int scale, t_data *dst);

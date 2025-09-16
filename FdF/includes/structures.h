@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 13:27:31 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/15 18:35:46 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 14:54:01 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # define PXL_W	800
 # define PXL_H	600
 
-
 # define G_W			8
 # define G_H			8
 # define FONT_ROW_SIZE	32
@@ -30,7 +29,7 @@
 
 typedef struct s_vect3d
 {
-	float 	x;
+	float	x;
 	float	y;
 	float	z;
 }			t_vect3d;
@@ -54,6 +53,18 @@ typedef struct s_point
 	t_pixel			l;
 }					t_point;
 
+typedef struct s_b_line
+{
+	t_pos2d	p;
+	t_pos2d	dp;
+	t_pos2d	ds;
+
+	int		err;
+	int		e2;
+
+	float	d;
+}			t_b_line;
+
 typedef struct s_pov
 {
 	t_vect3d	v;
@@ -68,7 +79,8 @@ typedef struct s_pov
 	int			is_3d;
 }			t_pov;
 
-typedef struct	s_data {
+typedef struct s_data
+{
 	void	*img;
 	char	*addr;
 	int		pxl_w;
@@ -102,38 +114,18 @@ typedef enum e_state
 	COUNT
 }			t_state;
 
-typedef	enum e_cam
-{
-	CAM_ISO,
-	CAM_VER,
-	CAM_HOR,
-	CAM_COUNT
-}			t_cam;
-
-typedef	enum e_proj
-{
-	PROJ_FDF,
-	PROJ_3D,
-	PROJ_EYE,
-	PROJ_COUNT
-}			t_proj;
-
 typedef struct s_fdf
 {
 	void			*mlx;
 	void			*win;
 
 	t_data			*data;
-	t_data			*base;
 	t_data			*font;
 
 	t_state			state;
 
 	char			*stash;
 	char			*line;
-
-	t_proj			proj_type;
-	t_cam			cam_type;
 
 	t_pov			cam;
 	t_pov			inertia;

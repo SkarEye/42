@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bresenham.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 14:16:02 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/09/15 12:25:29 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 14:54:20 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,9 @@
 #include "image.h"
 #include "math_helper.h"
 
-typedef struct s_b_line
-{
-	t_pos2d	p;
-	t_pos2d	dp;
-	t_pos2d	ds;
-
-	int		err;
-	int		e2;
-
-	float	d;
-}			t_b_line;
-
 static	t_b_line	set_bresenham(t_pos2d a, t_pos2d b)
 {
-	t_b_line l;
+	t_b_line	l;
 
 	l.p = a;
 	l.dp.x = abs(b.x - a.x);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pixel_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 14:11:38 by macarnie          #+#    #+#             */
-/*   Updated: 2025/09/10 12:51:48 by macarnie         ###   ########.fr       */
+/*   Updated: 2025/09/16 14:56:01 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ unsigned int	get_pixel(t_pos2d p, t_data *data)
 {
 	char	*src;
 
-	if (!data || p.x >= data->pxl_w|| p.x < 0 || p.y >= data->pxl_h || p.y < 0)
+	if (!data || p.x >= data->pxl_w || p.x < 0 || p.y >= data->pxl_h || p.y < 0)
 		return (0);
 	src = data->addr + p.y * data->line_length + p.x * (data->bits_pxl / 8);
 	return (*(unsigned int *)src);
