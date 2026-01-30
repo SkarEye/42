@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 13:11:38 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/26 16:59:10 by macarnie         ###   ########.fr       */
+/*   Updated: 2026/01/30 14:16:04 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdatomic.h>
 # include <stdbool.h>
 
-# include "utils.h"
+# include "../../utils/include/utils.h"
 
 # ifndef MAX_PHILOS
 #  define MAX_PHILOS 200
@@ -35,13 +35,10 @@
 #  define MAX_SLEEP_TIME 5000
 # endif
 
-typedef enum e_state
-{
-	THINKING,
-	EATING,
-	SLEEPING,
-	DEAD
-}	t_state;
+typedef unsigned int	t_uint;
+typedef long long		t_ll;
+typedef pthread_mutex_t	t_mutex;
+typedef pthread_t		t_thread;
 
 typedef struct s_sim	t_sim;
 
@@ -52,7 +49,6 @@ typedef struct s_philo
 	int				right_fork;
 	_Atomic(t_uint)	meals_eaten;
 	_Atomic(t_ll)	last_meal_time;
-	t_state			state;
 	t_thread		thread;
 	t_sim			*sim;
 }	t_philo;

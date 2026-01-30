@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:55:43 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/26 16:57:24 by macarnie         ###   ########.fr       */
+/*   Updated: 2026/01/29 15:43:38 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	init_simulation(t_sim *sim)
 		sim->philos[i].right_fork = (i + 1) % sim->n_philos;
 		sim->philos[i].meals_eaten = 0;
 		sim->philos[i].last_meal_time = sim->start_time;
-		sim->philos[i].state = THINKING;
 		sim->philos[i].sim = sim;
 		pthread_mutex_init(&sim->forks[i], NULL);
 		i++;

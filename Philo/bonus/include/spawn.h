@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   spawn.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/20 20:37:03 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/20 20:38:06 by mattcarniel      ###   ########.fr       */
+/*   Created: 2026/01/29 16:36:51 by mattcarniel       #+#    #+#             */
+/*   Updated: 2026/01/29 16:37:29 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#ifndef SPAWN_H
+# define SPAWN_H
 
-#include "../../include/utils.h"
+# include "structures.h"
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t	i;
+int	spawn_table(t_sim *sim);
 
-	if (size == 0)
-		return (ft_strlen(src));
-	i = 0;
-	while (i < size - 1 && src[i])
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (ft_strlen(src));
-}
+#endif

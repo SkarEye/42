@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 13:06:02 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/27 15:06:58 by macarnie         ###   ########.fr       */
+/*   Updated: 2026/01/29 16:37:46 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 #include "../include/structures.h"
 #include "../include/simulation.h"
-#include "../include/error.h"
+#include "../include/spawn.h"
 
 #include <stdio.h>
 
@@ -29,28 +29,15 @@ int	main(int argc, char **argv)
 {
 	t_sim	sim;
 	int		status;
-	t_uint	i;
 
 	status = setup_simulation(&sim, argc, argv);
-	if (status != EXIT_SUCCESS)
+	if (status)
+	{
+		cleanup_mallocs(&sim);
+		cleanup_semaphores(&sim);
 		return (status);
-	i = 0;
-	while (i < sim.n_philos)
-		spawn_child(i++, sim);
-
-
-
-
-}
-{
-	sim.philos = malloc(sizeof(t_philo) * sim.n_philos);
-	if (!sim.philos)
-		return (print_error(loc(F, L), ERR_PERROR, ENOMEM));
-	sim.forks = malloc(sizeof(pthread_mutex_t) * sim.n_philos);
-	if (!sim.forks)
-		return (free_sim(&sim), print_error(loc(F, L), ERR_PERROR, ENOMEM));
-	init_simulation(&sim);
-	status = thread_simulation(&sim);
-	cleanup_sim(&sim);
+	}
+	status = spawn_table(&sim);
+	cleanup_semaphores(&sim);
 	return (status);
 }

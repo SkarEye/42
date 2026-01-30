@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sim_helper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 18:28:35 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/26 16:57:47 by macarnie         ###   ########.fr       */
+/*   Updated: 2026/01/30 12:58:06 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,43 +29,14 @@ t_ll	now_ms(void)
 }
 
 /**
- * @brief Sleep for a given number of milliseconds, as long as simulation is
- * running.
- * @param sim simulation pointer
- * @param ms milliseconds to sleep
+ * @brief Sleep for a given number of milliseconds.
+ * @param ms Number of milliseconds to sleep.
  */
-void	ms_sleep(t_sim *sim, int ms)
+void	ms_sleep(int ms)
 {
-	t_ll	t;
+	t_ll	start_time;
 
-	t = now_ms();
-	while (!get_stop(sim))
-	{
-		if (now_ms() - t >= ms)
-			break ;
-		usleep(500);
-	}
-}
-
-/**
- * @brief Get the stop status of the simulation.
- * @param sim simulation pointer
- * @return true if simulation is stopped, false otherwise.
- */
-bool	get_stop(t_sim *sim)
-{
-	bool	stop;
-
-	stop = sim->stop;
-	return (stop);
-}
-
-/**
- * @brief Set the stop status of the simulation.
- * @param sim simulation pointer
- * @param value value to set
- */
-void	set_stop(t_sim *sim, bool value)
-{
-	sim->stop = value;
+	start_time = now_ms();
+	while (now_ms() - start_time < ms)
+		usleep(100);
 }

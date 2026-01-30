@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   simulation.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:55:43 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/27 15:10:45 by macarnie         ###   ########.fr       */
+/*   Updated: 2026/01/30 12:57:05 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include <stdlib.h>
 #include <errno.h>
 #include <stdbool.h>
@@ -20,15 +21,68 @@
 #include <semaphore.h>
 
 #include "../include/structures.h"
-#include "../include/routine.h"
-#include "../include/monitor.h"
 #include "../include/error.h"
+
+void	cleanup_mallocs(t_sim *sim)
+{
+	if (sim->pids)
+		free(sim->pids);
+	sim->pids = NULL;
+}
+
+void	cleanup_semaphores(t_sim *sim)
+{
+	if (sim->forks && sim->forks != SEM_FAILED)
+		sem_close(sim->forks);
+	if (sim->print_lock && sim->print_lock != SEM_FAILED)
+		sem_close(sim->print_lock);
+	if (sim->stop_lock && sim->stop_lock != SEM_FAILED)
+		sem_close(sim->stop_lock);
+	sem_unlink("/forks");
+	sem_unlink("/print_lock");
+	sem_unlink("/stop_lock");
+}
+
+static int	setup_mallocs(t_sim *sim)
+{
+	sim->pids = malloc(sizeof(pid_t) * sim->n_philos);
+	if (!sim->pids)
+		return (print_error(loc(F, L), ERR_PERROR, EXIT_FAILURE));
+	return (EXIT_SUCCESS);
+}
+
+static int	setup_semaphores(t_sim *sim)
+{
+	sim->forks = NULL;
+	sim->print_lock = NULL;
+	sim->stop_lock = NULL;
+	sem_unlink("/forks");
+	sem_unlink("/print_lock");
+	sem_unlink("/stop_lock");
+	sim->forks = sem_open("/forks", O_CREAT, 0644, sim->n_philos);
+	if (sim->forks == SEM_FAILED)
+		return (print_error(loc(F, L), ERR_PERROR, EXIT_FAILURE));
+	sim->print_lock = sem_open("/print_lock", O_CREAT, 0644, 1);
+	if (sim->print_lock == SEM_FAILED)
+	{
+		cleanup_semaphores(sim);
+		return (print_error(loc(F, L), ERR_PERROR, EXIT_FAILURE));
+	}
+	sim->stop_lock = sem_open("/stop_lock", O_CREAT, 0644, 0);
+	if (sim->stop_lock == SEM_FAILED)
+	{
+		cleanup_semaphores(sim);
+		return (print_error(loc(F, L), ERR_PERROR, EXIT_FAILURE));
+	}
+	return (EXIT_SUCCESS);
+}
 
 int	setup_simulation(t_sim *sim, int argc, char **argv)
 {
 	int	status;
 
-	status = EXIT_SUCCESS;
+	status = 0;
+	memset(sim, 0, sizeof(t_sim));
 	if (argc < 5 || argc > 6)
 		return (print_error(loc(F, L), ERR_INVALID_ARG_COUNT, EXIT_FAILURE));
 	status |= ft_atou_safe(argv[1], &sim->n_philos);
@@ -44,10 +98,10 @@ int	setup_simulation(t_sim *sim, int argc, char **argv)
 		return (print_error(loc(F, L), ERR_NO_PHILOS, EXIT_FAILURE));
 	if (sim->n_philos > MAX_PHILOS)
 		return (print_error(loc(F, L), ERR_TOO_MANY_PHILOS, EXIT_FAILURE));
-	if ((sim->time_to_die > 0 && sim->time_to_die < MAX_DEATH_TIME)
-		&& (sim->time_to_eat > 0 && sim->time_to_eat < MAX_EAT_TIME)
-		&& (sim->time_to_sleep > 0 && sim->time_to_sleep < MAX_SLEEP_TIME))
-		return (EXIT_SUCCESS);
-	sim->forks = sem_open("/forks", O_CREAT, 0644, sim->n_philos);
-	return (print_error(loc(F, L), ERR_BAD_VAL, EXIT_FAILURE));
+	if (!(sim->time_to_die > 0 && sim->time_to_die < MAX_DEATH_TIME)
+		|| !(sim->time_to_eat > 0 && sim->time_to_eat < MAX_EAT_TIME)
+		|| !(sim->time_to_sleep > 0 && sim->time_to_sleep < MAX_SLEEP_TIME))
+		return (print_error(loc(F, L), ERR_BAD_VAL, EXIT_FAILURE));
+	status = setup_mallocs(sim) | setup_semaphores(sim);
+	return (status);
 }
