@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 13:27:20 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/29 16:59:12 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2026/01/31 13:16:24 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	print_action(t_philo *p, t_action action)
 
 	if (sem_wait(p->sim->print_lock) == -1)
 		return ;
-	i = ft_sutoa(buf, now_ms() - p->start_time);
+	i = ft_sutoa(buf, now_ms() - p->sim->start_time);
 	buf[i++] = ' ';
 	i += ft_sitoa(&buf[i], p->id + 1);
 	buf[i++] = ' ';

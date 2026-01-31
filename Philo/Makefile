@@ -89,7 +89,7 @@ all: $(NAME)
 
 # === Bonus target ===
 bonus:
-	@$(MAKE) MODE=bonus re
+	@$(MAKE) MODE=bonus
 
 # === Compilation rules ===
 # - Executable -

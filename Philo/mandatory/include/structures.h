@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 13:11:38 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/30 14:16:04 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2026/01/30 16:43:15 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ struct s_sim
 	t_uint			meal_goal;
 	t_uint			meal_goal_reached;
 	t_uint			threads_created;
+	_Atomic(bool)	start;
 	_Atomic(bool)	stop;
 	bool			monitor;
 	t_mutex			*forks;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: macarnie <macarnie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/24 14:20:41 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/26 16:48:01 by macarnie         ###   ########.fr       */
+/*   Updated: 2026/01/30 17:35:58 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h>
 
 #include "../include/error.h"
-#include "../include/utils.h"
+#include "../../utils/include/utils.h"
 
 #define NO_FILE_CONTEXT 	"no file context"
 #define THREE_DOT			"..."

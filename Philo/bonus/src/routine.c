@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 18:48:13 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/30 12:57:53 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2026/01/31 13:16:02 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ static void	eat_spaghetti(t_philo *p)
 	print_action(p, EAT);
 	ms_sleep(p->sim->time_to_eat);
 	p->meals_eaten++;
+	if (p->sim->meal_goal > 0 && p->meals_eaten == p->sim->meal_goal)
+		sem_post(p->sim->meals_sem);
 	sem_post(p->sim->forks);
 	sem_post(p->sim->forks);
 }
@@ -44,45 +46,50 @@ static void	have_an_existential_crisis(t_philo *p)
 	print_action(p, THINK);
 }
 
-static int	init_philo(t_philo *p, t_sim *sim, uint id)
+static t_philo	*init_philo(t_sim *sim, uint id)
 {
-	int	status;
+	t_philo	*p;
 
+	p = malloc(sizeof(t_philo));
+	if (!p)
+	{
+		print_error(loc(F, L), ERR_PERROR, ENOMEM);
+		return (NULL);
+	}
 	p->sim = sim;
 	p->id = id;
 	p->meals_eaten = 0;
-	p->start_time = now_ms();
-	p->last_meal_time = p->start_time;
-	status = pthread_create(&p->monitor_thread, NULL, &monitor, p);
-	if (status)
-		return (print_error(loc(F, L), ERR_PERROR, status));
-	return (0);
+	p->last_meal_time = p->sim->start_time;
+	if (pthread_create(&p->monitor_thread, NULL, &monitor_philo, p))
+	{
+		free(p);
+		print_error(loc(F, L), ERR_PERROR, ENOMEM);
+		return (NULL);
+	}
+	return (p);
 }
 
 int	routine(t_sim *sim, uint id)
 {
-	t_philo	p;
-	int		status;
+	t_philo	*p;
 
-	status = init_philo(&p, sim, id);
-	if (status)
-		return (status);
+	p = init_philo(sim, id);
+	if (!p)
+		exit(errno);
 	if (sim->n_philos == 1)
 	{
 		sem_wait(sim->forks);
-		print_action(&p, TAKE_FORK);
+		print_action(p, TAKE_FORK);
 		ms_sleep(sim->time_to_die);
-		print_action(&p, DIE);
-		exit(1);
+		return (0);
 	}
 	while (true)
 	{
-		eat_spaghetti(&p);
-		if (sim->meal_goal > 0 && p.meals_eaten >= sim->meal_goal)
-			break ;
-		hit_the_sack(&p);
-		have_an_existential_crisis(&p);
+		eat_spaghetti(p);
+		hit_the_sack(p);
+		have_an_existential_crisis(p);
 	}
+	pthread_join(p->monitor_thread, NULL);
+	free(p);
 	exit(0);
-	return (0);
 }

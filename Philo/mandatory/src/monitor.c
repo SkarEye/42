@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 20:45:24 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/29 15:25:37 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2026/01/30 19:04:48 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ static bool	all_meals_done(t_sim *sim)
 	return (true);
 }
 
+static bool	check_death(t_sim *sim, t_uint i)
+{
+	if (now_ms() - sim->philos[i].last_meal_time >= sim->time_to_die)
+		return (true);
+	return (false);
+}
+
 void	*monitor(void *arg)
 {
 	t_sim	*sim;
@@ -46,7 +53,7 @@ void	*monitor(void *arg)
 		}
 		while (i < sim->n_philos)
 		{
-			if (now_ms() - sim->philos[i].last_meal_time >= sim->time_to_die)
+			if (check_death(sim, i))
 			{
 				print_action(&sim->philos[i], DIE);
 				set_stop(sim, true);

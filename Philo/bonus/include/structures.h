@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 13:11:38 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/30 14:16:35 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2026/01/31 13:15:41 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,12 @@ typedef struct s_sim
 	t_uint			time_to_sleep;
 	t_uint			meal_goal;
 
+	t_ll			start_time;
+
 	sem_t			*forks;
 	sem_t			*print_lock;
-	sem_t			*stop_lock;
+	sem_t			*meals_sem;
+	sem_t			*death_sem;
 
 	pid_t			*pids;
 }	t_sim;
@@ -58,7 +61,6 @@ typedef struct s_philo
 {
 	t_sim			*sim;
 
-	t_ll			start_time;
 	_Atomic(t_ll)	last_meal_time;
 	t_uint			meals_eaten;
 

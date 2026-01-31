@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 11:55:43 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/29 15:43:38 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2026/01/30 16:44:46 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	init_simulation(t_sim *sim)
 
 	i = 0;
 	sim->threads_created = 0;
+	sim->start = false;
 	sim->stop = false;
 	sim->monitor = false;
 	sim->start_time = now_ms();
@@ -92,6 +93,7 @@ int	thread_simulation(t_sim *sim)
 			return (print_error(loc(F, L), ERR_PERROR, status));
 		sim->threads_created++;
 	}
+	sim->start = true;
 	return (status);
 }
 

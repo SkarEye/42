@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 13:06:02 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/29 16:37:46 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2026/01/31 12:13:43 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include "../include/structures.h"
 #include "../include/simulation.h"
 #include "../include/spawn.h"
+#include "../include/monitor.h"
 
 #include <stdio.h>
 
@@ -31,13 +32,17 @@ int	main(int argc, char **argv)
 	int		status;
 
 	status = setup_simulation(&sim, argc, argv);
+
+	//printf("Initialized vals : n_philo : %i, time_to_die : %i, time_to_eat : %i, time_to_sleep : %i, meal_goal : %i\n",
+	//		sim.n_philos, sim.time_to_die, sim.time_to_eat, sim.time_to_sleep, sim.meal_goal);
+
 	if (status)
-	{
-		cleanup_mallocs(&sim);
-		cleanup_semaphores(&sim);
-		return (status);
-	}
+		return (cleanup_simulation(&sim, status));
 	status = spawn_table(&sim);
-	cleanup_semaphores(&sim);
+	if (status)
+		return (cleanup_simulation(&sim, status));
+	status = monitor_table(&sim);
+	if (status)
+		return (cleanup_simulation(&sim, status));
 	return (status);
 }

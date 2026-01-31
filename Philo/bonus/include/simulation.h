@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/20 18:47:46 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/29 16:17:54 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2026/01/30 19:31:26 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 
 # include "structures.h"
 
-void	cleanup_mallocs(t_sim *sim);
-void	cleanup_semaphores(t_sim *sim);
-int		setup_simulation(t_sim *sim, int argc, char **argv);
+int	cleanup_simulation(t_sim *sim, int status);
+int	setup_simulation(t_sim *sim, int argc, char **argv);
 
 #endif

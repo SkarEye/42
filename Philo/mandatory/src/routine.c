@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 18:48:13 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/30 14:15:49 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2026/01/30 16:45:48 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void	*routine(void *arg)
 	t_philo	*p;
 
 	p = (t_philo *)arg;
+	while (!p->sim->start)
+		usleep(100);
 	if (p->sim->n_philos == 1)
 	{
 		pthread_mutex_lock(&p->sim->forks[p->left_fork]);
