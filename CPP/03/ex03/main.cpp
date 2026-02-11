@@ -6,37 +6,41 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 14:56:28 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/12/18 13:48:05 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/12/24 10:15:59 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <string>
 
-#include "ScavTrap.hpp"
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 int	main(void)
 {
-	FragTrap	a;
-	FragTrap	b("BombClap");
+	DiamondTrap	a;
+	DiamondTrap	b("RubyClap");
 
-	for (int i = 0; i < 99; i++)
+	a.whoAmI();
+	b.whoAmI();
+	for (int i = 0; i < 49; i++)
 		a.highFivesGuys();
 	a.attack("something");
 	a.attack("something else");
-	a.takeDamage(1000);
-	a.takeDamage(1);
-	a.attack("anything else");
+	b.takeDamage(1000);
+	b.takeDamage(1);
+	b.attack("anything else");
 
-	FragTrap c(a);
-	FragTrap d = a;
+	a.whoAmI();
+	b.whoAmI();
 
-	c.highFivesGuys();
-	d.highFivesGuys();
+	DiamondTrap c(a);
+	DiamondTrap d = a;
+
+	c.whoAmI();
+	d.whoAmI();
 
 	d = b;
 
-	d.highFivesGuys();
+	d.whoAmI();
 	
 	return (0);
 }

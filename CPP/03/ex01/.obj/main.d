@@ -1,3 +1,3 @@
-.obj/main.o: main.cpp ClapTrap.hpp ScavTrap.hpp
-ClapTrap.hpp:
+.obj/main.o: main.cpp ScavTrap.hpp ClapTrap.hpp
 ScavTrap.hpp:
+ClapTrap.hpp:

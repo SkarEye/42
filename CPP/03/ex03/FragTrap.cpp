@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 09:20:18 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/12/18 13:54:24 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/12/24 10:44:57 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #define ANSI_YELLOW		"\033[33m"
 #define ANSI_FRAGTRAP	ANSI_BOLD << "\033[38;5;218m"
 
-FragTrap::FragTrap(void) : ClapTrap("FragTrap")
+FragTrap::FragTrap(void) : ClapTrap()
 {
 	LOG_DEBUG("[FragTrap] Default constructor called");
 	this->_hitPoints = 100;

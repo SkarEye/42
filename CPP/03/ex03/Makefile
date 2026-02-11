@@ -20,7 +20,7 @@ INC_DIR		= ./
 OBJ_DIR		= .obj
 
 # === Source files ===
-SRC_FILES	= main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
+SRC_FILES	= main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 
 # === Object files ===
 OBJ_FILES	= $(SRC_FILES:.cpp=.o)

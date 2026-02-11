@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 09:20:18 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/12/18 13:01:06 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/12/24 10:44:32 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 ScavTrap::ScavTrap(void) : ClapTrap()
 {
 	LOG_DEBUG("[ScavTrap] Default constructor called");
-	this->_name = "ScavTrap";
 	this->_hitPoints = 100;
 	this->_energyPoints = 50;
 	this->_attackDamage = 20;
@@ -38,25 +37,16 @@ ScavTrap::ScavTrap(const std::string &name) : ClapTrap(name)
 	this->_attackDamage = 20;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &other) :	ClapTrap()
+ScavTrap::ScavTrap(const ScavTrap &other) :	ClapTrap(other)
 {
 	LOG_DEBUG("[ScavTrap] Copy constructor called");
-	this->_name = other._name;
-	this->_hitPoints = other._hitPoints;
-	this->_energyPoints = other._energyPoints;
-	this->_attackDamage = other._attackDamage;
 }
 
 ScavTrap&	ScavTrap::operator=(const ScavTrap &other)
 {
 	LOG_DEBUG("[ScavTrap] Assignment operator called");
 	if (this != &other)
-	{
-		this->_name = other._name;
-		this->_hitPoints = other._hitPoints;
-		this->_energyPoints = other._energyPoints;
-		this->_attackDamage = other._attackDamage;
-	}
+		ClapTrap::operator=(other);
 	return (*this);
 }
 

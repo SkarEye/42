@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/18 09:11:33 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/12/18 13:38:08 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2025/12/19 11:18:37 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 # define FRAGTRAP_HPP
 
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
-class FragTrap : public ClapTrap
+class FragTrap : virtual public ClapTrap
 {
 	public:
 		FragTrap(void);
