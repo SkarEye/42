@@ -6,11 +6,12 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/13 19:58:31 by mattcarniel       #+#    #+#             */
-/*   Updated: 2025/12/13 20:28:39 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2026/02/21 12:43:02 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <sstream>
 
 #include "Point.hpp"
 
@@ -63,6 +64,16 @@ bool	bsp(Point const a, Point const b, Point const c, Point const point);
 #  define LOG_INFO(x) do {} while (0)
 #endif
 
+static bool string_to_float(const std::string &s, float &out)
+{
+	std::stringstream ss(s);
+
+	ss >> out;
+	if (ss.fail() || !ss.eof())
+		return (false);
+	return (true);
+}
+
 int	main(int argc, char **argv)
 {
 	if (argc != 9)
@@ -70,10 +81,25 @@ int	main(int argc, char **argv)
 		LOG_ERROR("This test needs as parameters 4 pairs of Fixed values. Usage ./Fixed <a_x> <a_y> <b_x> <b_y> <c_x> <c_y> <p_x> <p_y>");
 		return (1);
 	}
-	Point	a(std::atoi(argv[1]), std::atoi(argv[2])),
-			b(std::atoi(argv[3]), std::atoi(argv[4])),
-			c(std::atoi(argv[5]), std::atoi(argv[6])),
-			p(std::atoi(argv[7]), std::atoi(argv[8]));
+	
+	float	a_x, a_y, b_x, b_y, c_x, c_y, p_x, p_y;
+
+		if (!string_to_float(argv[1], a_x) || !string_to_float(argv[2], a_y)
+		|| !string_to_float(argv[3], b_x) || !string_to_float(argv[4], b_y)
+		|| !string_to_float(argv[5], c_x) || !string_to_float(argv[6], c_y)
+		|| !string_to_float(argv[7], p_x) || !string_to_float(argv[8], p_y))
+		{
+			LOG_ERROR("Could not successfully convert one or more given arguments into floats");
+			return (1);
+		}
+
+	Point	a(a_x, a_y),
+			b(b_x, b_y),
+			c(c_x, c_y),
+			p(p_x, p_y);
+
+	printf("Initial values are : a_x : %f, a_y : %f, b_x : %f, b_y : %f, c_x : %f, c_y : %f, p_x : %f, p_y : %f.\n", a.x().toFloat(), a.y().toFloat(), b.x().toFloat(), b.y().toFloat(), c.x().toFloat(), c.y().toFloat(), p.x().toFloat(), p.y().toFloat());
+
 
 	LOG_INFO("Printing triangle...");
 	printTriangle(a, b, c, p);

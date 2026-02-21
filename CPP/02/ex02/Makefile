@@ -7,11 +7,11 @@
 # |_______||___|    |___|     |___| |___|
 # === Project name ===
 DIR			= ex02
-NAME		= Fixed_v3
+NAME		= fixed_v3
 
 # === Compiler and Flags ===
 CC			= c++
-CFLAGS		= -Wall -Wextra -Werror -MMD -MP
+CFLAGS		= -Wall -Wextra -Werror -std=c++98 -MMD -MP
 EXPLICIT 	:= 0
 
 # === Directories ===
@@ -45,12 +45,10 @@ CLEAR		= \033[2K
 BUILD		?= Default
 DEBUG_MSG	:=
 
-ifeq ($(BUILD), c98)
-CFLAGS		+= -std=c++98
-else ifeq ($(BUILD), silent)
-CFLAGS		+= -std=c++98 -DSILENT=1
+ifeq ($(BUILD), silent)
+CFLAGS		+= -DSILENT=1
 else ifeq ($(BUILD), debug)
-CFLAGS		+= -g -std=c++98 -DDEBUG=1
+CFLAGS		+= -g -DDEBUG=1
 EXPLICIT	:= 1
 DEBUG_MSG	:= @echo "$(PURPLE)DEBUG mode is activated.$(RESET)"
 else ifneq ($(BUILD), Default)
@@ -105,16 +103,16 @@ re: fclean all
 
 # === Help ===
 help:
-	@echo "Makefile for $(NAME) in $(DIR)\n"
-	@echo "Available targets:"
-	@echo "  all     - Compile the project (default)"
-	@echo "  clean   - Remove object files"
-	@echo "  fclean  - Remove object files and executable"
-	@echo "  re      - Recompile the project"
-	@echo "  help    - Display this help message\n"
-	@echo "Build options:"
-	@echo "  BUILD=c98    - Compile with C++98 standard"
-	@echo "  BUILD=debug  - Compile with debug information\n"
-	@echo "Set EXPLICIT=1 to show detailed compilation output."
+	@echo "Makefile for $(NAME) in $(DIR)\n\n\
+	Available targets:\n\
+	  all     - Compile the project (default)\n\
+	  clean   - Remove object files\n\
+	  fclean  - Remove object files and executable\n\
+	  re      - Recompile the project\n\
+	  help    - Display this help message\n\n\
+	Build options:\n\
+	  BUILD=silent - Execution will suppress output\n\
+	  BUILD=debug  - Compile with debug information\n\n\
+	Set EXPLICIT=1 to show detailed compilation output."
 
 .PHONY: all clean fclean re help
