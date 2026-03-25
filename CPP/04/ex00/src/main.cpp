@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 18:44:12 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/06 13:59:26 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2026/02/26 12:02:52 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@
 
 int	main(void)
 {
-	LOG_INFO("Starting polymorphic calls through base class pointers test (1/9)...");
+	LOG_INFO("Starting polymorphic calls through base class pointers test (1/9)...\n");
 	{
 		const Animal*	meta = new Animal();
 		const Animal*	volt = new Dog();
 		const Animal*	pawz = new Cat();
 
-		LOG_INFO("'meta' type: " + meta->getType());
+		std::cout << "'meta' type: " << meta->getType() << '\n';
 		meta->makeSound();
 		// Calls Animal::makeSound because dynamic type is Animal
-		LOG_INFO("'volt' type: " + volt->getType());
+		std::cout << "'volt' type: " + volt->getType() << '\n';
 		volt->makeSound();
 		// Virtual dispatch to Dog::makeSound
-		LOG_INFO("'pawz' type: " + pawz->getType());
+		std::cout << "'pawz' type: " + pawz->getType() << '\n';
 		pawz->makeSound();
 		// Virtual dispatch to Cat::makeSound
 		
@@ -44,24 +44,24 @@ int	main(void)
 		delete pawz;
 	}
 	std::cout << '\n';
-	LOG_INFO("Starting Concrete class instances test (2/9)...");
+	LOG_INFO("Starting Concrete class instances test (2/9)...\n");
 	{
 		Animal	animal;
 		Dog		dog;
 		Cat		cat;
 
-		LOG_INFO("'animal' type: " + animal.getType());
+		std::cout << "'animal' type: " + animal.getType() << '\n';
 		animal.makeSound();
 		// Will output Animal sound
-		LOG_INFO("'dog' type: " + dog.getType());
+		std::cout << "'dog' type: " + dog.getType() << '\n';
 		dog.makeSound();
 		// Will output Dog sound
-		LOG_INFO("'cat' type: " + cat.getType());
+		std::cout << "'cat' type: " + cat.getType() << '\n';
 		cat.makeSound();
 		// Will output Cat sound
 	}
 	std::cout << '\n';
-	LOG_INFO("Starting array of base class pointers test (3/9)...");
+	LOG_INFO("Starting array of base class pointers test (3/9)...\n");
 	{
 		const Animal*	animals[4];
 		for (size_t i = 0; i < 4; i++)
@@ -73,20 +73,20 @@ int	main(void)
 		}
 		for (size_t i = 0; i < 4; i++)
 		{
-			LOG_INFO("#" + std::to_string(i) + " type: " + animals[i]->getType());
+			std::cout << "#" + std::to_string(i) + " type: " + animals[i]->getType() << '\n';
 			animals[i]->makeSound();
 		}
 		for (size_t i = 0; i < 4; i++)
 			delete animals[i];
 	}
 	std::cout << '\n';
-	LOG_INFO("Starting Animal assignment operator test (4/9)...");
+	LOG_INFO("Starting Animal assignment operator test (4/9)...\n");
 	{
 		Animal*	animal1 = new Dog();
 		Animal*	animal2 = new Cat();
 		*animal1 = *animal2;
 
-		LOG_INFO("'animal1' type after assignment: " + animal1->getType());
+		std::cout << "'animal1' type after assignment: " + animal1->getType() << '\n';
 		animal1->makeSound();
 		// Assignment only copies the Animal subobject (_type).
 		// The dynamic type remains Dog, so virtual dispatch still calls Dog::makeSound().
@@ -95,45 +95,46 @@ int	main(void)
 		delete animal2;
 	}
 	std::cout << '\n';
-	LOG_INFO("Starting inherited class assignment operator test (5/9)...");
+	LOG_INFO("Starting inherited class assignment operator test (5/9)...\n");
 	{
 		Cat	cat1;
 		Cat	cat2;
 
 		cat1 = cat2;
 
-		LOG_INFO("'cat1' type after assignment: " + cat1.getType());
+		std::cout << "'cat1' type after assignment: " + cat1.getType() << '\n';
 		cat1.makeSound();
 		// Will output Cat sound
 	}
 	std::cout << '\n';
-	LOG_INFO("Starting slicing detection test (6/9)...");
+	LOG_INFO("Starting slicing detection test (6/9)..\n");
 	{
 		Cat	cat;
 		Animal	animal = cat;
 		// Object slicing: only the Animal part is copied, derived behavior is lost
 
-		LOG_INFO("'animal' type after slicing: " + animal.getType());
+		std::cout << "'animal' type after slicing: " + animal.getType() << '\n';
 		animal.makeSound();
 	}
 	std::cout << '\n';
-	LOG_INFO("Starting Copy constructor test (7/9)...");
+	LOG_INFO("Starting Copy constructor test (7/9)...\n");
 	{
 		Cat	cat1;
 		Cat	cat2(cat1);
 
-		LOG_INFO("'cat2' type after copy construction: " + cat2.getType());
-		cat2.makeSound(); // Will output Cat sound
+		std::cout << "'cat2' type after copy construction: " + cat2.getType() << '\n';
+		cat2.makeSound();
+		// Will output Cat sound
 	}
 	std::cout << '\n';
-	LOG_INFO("Starting WrongAnimal polymorphism test (8/9)...");
+	LOG_INFO("Starting WrongAnimal polymorphism test (8/9)...\n");
 	{
 		const WrongAnimal*	wrongMeta = new WrongAnimal();
 		const WrongAnimal*	wrongPawz = new WrongCat();
 
-		LOG_INFO("'wrongMeta' type: " + wrongMeta->getType());
+		std::cout << "'wrongMeta' type: " + wrongMeta->getType() << '\n';
 		wrongMeta->makeSound();
-		LOG_INFO("'wrongPawz' type: " + wrongPawz->getType());
+		std::cout << "'wrongPawz' type: " + wrongPawz->getType() << '\n';
 		wrongPawz->makeSound();
 		// makeSound() is not virtual in WrongAnimal,
 		// so the base class implementation is called even for WrongCat
@@ -142,18 +143,18 @@ int	main(void)
 		delete wrongPawz;
 	}
 	std::cout << '\n';
-	LOG_INFO("Starting self-assignment test... (9/9)");
+	LOG_INFO("Starting self-assignment test (9/9)...\n");
 	{
 		Dog	dog;
 		Dog	&ref = dog;
 
 		ref = dog;	
-		LOG_INFO("'dog' type after self-assignment: " + ref.getType());
+		std::cout << "'dog' type after self-assignment: " + ref.getType() << '\n';
 		ref.makeSound();
 		// Self-assignment should be safely handled by operator= (no state corruption)
 
 	}
 	std::cout << '\n';
-	LOG_SUCCESS("All tests completed.");
+	LOG_SUCCESS("All tests completed.\n");
 	return (0);
 }

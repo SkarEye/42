@@ -11,7 +11,7 @@ NAME		= fallout
 
 # === Compiler and Flags ===
 CC			= c++
-CFLAGS		= -Wall -Wextra -Werror -MMD -MP
+CFLAGS		= -Wall -Wextra -Werror -std=c++98 -MMD -MP
 EXPLICIT 	:= 0
 
 # === Directories ===
@@ -20,7 +20,7 @@ INC_DIR		= include
 OBJ_DIR		= .obj
 
 # === Source files ===
-SRC_FILES	= main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
+SRC_FILES	= main.cpp Animal.cpp Cat.cpp Dog.cpp Brain.cpp
 
 # === Object files ===
 OBJ_FILES	= $(SRC_FILES:.cpp=.o)
@@ -48,17 +48,15 @@ CLEAR		= \033[2K
 BUILD		?= Default
 DEBUG_MSG	:=
 
-ifeq ($(BUILD), c98)
-CFLAGS		+= -std=c++98
-else ifeq ($(BUILD), silent)
+ifeq ($(BUILD), silent)
 CFLAGS		+= -std=c++98 -DSILENT=1
 DEBUG_MSG	:= @echo "$(GRAY)SILENT mode is activated.$(RESET)"
 else ifeq ($(BUILD), debug)
-CFLAGS		+= -g -std=c++98 -DDEBUG=1
+CFLAGS		+= -g -DDEBUG=1
 EXPLICIT	:= 1
 DEBUG_MSG	:= @echo "$(PURPLE)DEBUG mode is activated.$(RESET)"
 else ifneq ($(BUILD), Default)
-$(error Unknown BUILD option: '$(BUILD)'. Valid options are: c98, debug, Default)
+$(error Unknown BUILD option: '$(BUILD)'. Valid options are: debug, Default)
 endif
 
 # === Default target ===
@@ -67,7 +65,7 @@ all: $(NAME)
 # === Compilation rules ===
 # - Executable -
 $(NAME): $(OBJ)
-	@echo "$(BLUE)Compiling [$(NAME)]...$(RESET)"
+	@echo "$(CLEAR)$(BLUE)Compiling [$(NAME)]...$(RESET)"
 	@$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^
 	@echo "$(GREEN)$(NAME) compiled successfully!$(RESET)"
 	$(DEBUG_MSG)
@@ -75,12 +73,13 @@ $(NAME): $(OBJ)
 # - Objects -
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(OBJ_DIR)
-	@echo "$(YELLOW)Compiling $<...$(RESET)"
-	@echo "$(GRAY)$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@$(RESET)"
-	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-	@if [ $(EXPLICIT) -eq 0 ]; then \
-		printf "$(UP)$(CLEAR)$(UP)$(CLEAR)"; \
+	@if [ $(EXPLICIT) -eq 1 ]; then \
+		echo "$(YELLOW)Compiling $<...$(RESET)";\
+		echo "$(GRAY)$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@$(RESET)";\
+	else \
+		echo "$(CLEAR)$(YELLOW)Compiling $<...$(RESET)$(UP)";\
 	fi
+	@$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 # - Dependencies -
 -include $(DEP)
@@ -109,17 +108,17 @@ re: fclean all
 
 # === Help ===
 help:
-	@echo "Makefile for $(NAME) in $(DIR)\n"
-	@echo "Available targets:"
-	@echo "  all     - Compile the project (default)"
-	@echo "  clean   - Remove object files"
-	@echo "  fclean  - Remove object files and executable"
-	@echo "  re      - Recompile the project"
-	@echo "  help    - Display this help message\n"
-	@echo "Build options:"
-	@echo "  BUILD=c98    - Compile with C++98 standard"
-	@echo "  BUILD=silent - Execution will suppress output"
-	@echo "  BUILD=debug  - Execution will show debug information\n"
-	@echo "Set EXPLICIT=1 to show detailed compilation output."
+	@echo "Makefile for $(NAME) in $(DIR)\n\n\
+	Available targets:\n\
+	  all     - Compile the project (default)\n\
+	  clean   - Remove object files\n\
+	  fclean  - Remove object files and executable\n\
+	  re      - Recompile the project\n\
+	  help    - Display this help message\n\n\
+	Build options:\n\
+	  BUILD=silent - Execution will suppress output\n\
+	  BUILD=debug  - Compile with debug information\n\n\
+	Set EXPLICIT=1 to show detailed compilation output."
+
 
 .PHONY: all clean fclean re help

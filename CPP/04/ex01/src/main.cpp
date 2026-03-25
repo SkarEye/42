@@ -6,154 +6,106 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 18:44:12 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/06 13:59:26 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2026/02/26 14:54:02 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
+#include <string>
 
 #include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
 
-#include "WrongAnimal.hpp"
-#include "WrongCat.hpp"
-
 #include "Ansi.hpp"
 
 int	main(void)
 {
-	LOG_INFO("Starting polymorphic calls through base class pointers test (1/9)...");
+	LOG_INFO("Starting Brain basic set/get test (1/7)...\n");
 	{
-		const Animal*	meta = new Animal();
-		const Animal*	volt = new Dog();
-		const Animal*	pawz = new Cat();
+		Cat cat;
 
-		LOG_INFO("'meta' type: " + meta->getType());
-		meta->makeSound();
-		// Calls Animal::makeSound because dynamic type is Animal
-		LOG_INFO("'volt' type: " + volt->getType());
-		volt->makeSound();
-		// Virtual dispatch to Dog::makeSound
-		LOG_INFO("'pawz' type: " + pawz->getType());
-		pawz->makeSound();
-		// Virtual dispatch to Cat::makeSound
-		
-		delete meta;
-		delete volt;
-		delete pawz;
+		cat.setIdea(0, "Think about lasagnas");
+		cat.setIdea(1, "Wonder if today is Monday");
+
+		std::cout << "Idea[0]: " << cat.getIdea(0) << '\n';
+		std::cout << "Idea[1]: " << cat.getIdea(1) << '\n';
+		std::cout << "Idea[2]: " << cat.getIdea(2) << '\n';
+		std::cout << "Idea[-1]: " << cat.getIdea(-1) << '\n';
+		std::cout << "Idea[101]: " << cat.getIdea(101) << '\n';
+
 	}
 	std::cout << '\n';
-	LOG_INFO("Starting Concrete class instances test (2/9)...");
+	LOG_INFO("Starting deep copy test via copy constructor (2/7)...\n");
 	{
-		Animal	animal;
-		Dog		dog;
-		Cat		cat;
+		Cat original;
+		original.setIdea(0, "I want fish kibble");
 
-		LOG_INFO("'animal' type: " + animal.getType());
-		animal.makeSound();
-		// Will output Animal sound
-		LOG_INFO("'dog' type: " + dog.getType());
-		dog.makeSound();
-		// Will output Dog sound
-		LOG_INFO("'cat' type: " + cat.getType());
-		cat.makeSound();
-		// Will output Cat sound
+		Cat copy(original);
+
+		original.setIdea(0, "Actually... I want chicken kibble");
+
+		std::cout << "Original's idea[0]: " << original.getIdea(0) << '\n';
+		std::cout << "Copy's idea[0]: " << copy.getIdea(0) << '\n';
+		// If deep copy is correct, copy should still say "I want fish kibble"
 	}
 	std::cout << '\n';
-	LOG_INFO("Starting array of base class pointers test (3/9)...");
+	LOG_INFO("Starting deep copy test via assignment operator (3/7)...\n");
 	{
-		const Animal*	animals[4];
-		for (size_t i = 0; i < 4; i++)
+		Dog dog1;
+		Dog dog2;
+
+		dog1.setIdea(0, "Chase own tail");
+
+		dog2 = dog1;
+
+		dog1.setIdea(0, "Obnoxiously bark instead");
+
+		std::cout << "dog1 idea[0]: " << dog1.getIdea(0) << '\n';
+		std::cout << "dog2 idea[0]: " << dog2.getIdea(0) << '\n';
+		// dog2 should still say "Chase own tail"
+	}
+	std::cout << '\n';
+	LOG_INFO("Starting subject-style array test (5/7)...\n");
+	{
+		const int size = 10;
+		Animal* animals[size];
+
+		for (int i = 0; i < size; i++)
 		{
-			if (i % 2 == 0)
+			if (i < size / 2)
 				animals[i] = new Dog();
 			else
 				animals[i] = new Cat();
 		}
-		for (size_t i = 0; i < 4; i++)
-		{
-			LOG_INFO("#" + std::to_string(i) + " type: " + animals[i]->getType());
-			animals[i]->makeSound();
-		}
-		for (size_t i = 0; i < 4; i++)
+
+		for (int i = 0; i < size; i++)
 			delete animals[i];
 	}
 	std::cout << '\n';
-	LOG_INFO("Starting Animal assignment operator test (4/9)...");
-	{
-		Animal*	animal1 = new Dog();
-		Animal*	animal2 = new Cat();
-		*animal1 = *animal2;
 
-		LOG_INFO("'animal1' type after assignment: " + animal1->getType());
-		animal1->makeSound();
-		// Assignment only copies the Animal subobject (_type).
-		// The dynamic type remains Dog, so virtual dispatch still calls Dog::makeSound().
-
-		delete animal1;
-		delete animal2;
-	}
-	std::cout << '\n';
-	LOG_INFO("Starting inherited class assignment operator test (5/9)...");
-	{
-		Cat	cat1;
-		Cat	cat2;
-
-		cat1 = cat2;
-
-		LOG_INFO("'cat1' type after assignment: " + cat1.getType());
-		cat1.makeSound();
-		// Will output Cat sound
-	}
-	std::cout << '\n';
-	LOG_INFO("Starting slicing detection test (6/9)...");
-	{
-		Cat	cat;
-		Animal	animal = cat;
-		// Object slicing: only the Animal part is copied, derived behavior is lost
-
-		LOG_INFO("'animal' type after slicing: " + animal.getType());
-		animal.makeSound();
-	}
-	std::cout << '\n';
-	LOG_INFO("Starting Copy constructor test (7/9)...");
-	{
-		Cat	cat1;
-		Cat	cat2(cat1);
-
-		LOG_INFO("'cat2' type after copy construction: " + cat2.getType());
-		cat2.makeSound(); // Will output Cat sound
-	}
-	std::cout << '\n';
-	LOG_INFO("Starting WrongAnimal polymorphism test (8/9)...");
-	{
-		const WrongAnimal*	wrongMeta = new WrongAnimal();
-		const WrongAnimal*	wrongPawz = new WrongCat();
-
-		LOG_INFO("'wrongMeta' type: " + wrongMeta->getType());
-		wrongMeta->makeSound();
-		LOG_INFO("'wrongPawz' type: " + wrongPawz->getType());
-		wrongPawz->makeSound();
-		// makeSound() is not virtual in WrongAnimal,
-		// so the base class implementation is called even for WrongCat
-
-		delete wrongMeta;
-		delete wrongPawz;
-	}
-	std::cout << '\n';
-	LOG_INFO("Starting self-assignment test... (9/9)");
+	LOG_INFO("Starting self-assignment Brain safety test (6/7)...\n");
 	{
 		Dog	dog;
+
+		dog.setIdea(0, "Slobber everywhere");
+
 		Dog	&ref = dog;
 
-		ref = dog;	
-		LOG_INFO("'dog' type after self-assignment: " + ref.getType());
-		ref.makeSound();
-		// Self-assignment should be safely handled by operator= (no state corruption)
-
+		std::cout << "idea[0] after self-assignment: " << ref.getIdea(0) << '\n';
 	}
 	std::cout << '\n';
-	LOG_SUCCESS("All tests completed.");
-	return (0);
+	LOG_INFO("Starting pointer comparison test (7/7)...\n");
+	{
+		Cat cat1;
+		Cat cat2(cat1);
+
+		cat1.setIdea(0, "Fish");
+		cat2.setIdea(0, "Bird");
+
+		std::cout << "cat1 idea: " << cat1.getIdea(0) << '\n';
+		std::cout << "cat2 idea: " << cat2.getIdea(0) << '\n';
+	}
+	std::cout << '\n';
+	LOG_SUCCESS("All tests completed.\n");
 }

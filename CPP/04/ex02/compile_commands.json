@@ -1,0 +1,87 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-std=c++98",
+      "-Iinclude",
+      "-c",
+      "-o",
+      ".obj/main.o",
+      "src/main.cpp"
+    ],
+    "directory": "/Users/mattcarniel/Desktop/42/42Git/CPP/04/ex02",
+    "file": "/Users/mattcarniel/Desktop/42/42Git/CPP/04/ex02/src/main.cpp",
+    "output": "/Users/mattcarniel/Desktop/42/42Git/CPP/04/ex02/.obj/main.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-std=c++98",
+      "-Iinclude",
+      "-c",
+      "-o",
+      ".obj/Animal.o",
+      "src/Animal.cpp"
+    ],
+    "directory": "/Users/mattcarniel/Desktop/42/42Git/CPP/04/ex02",
+    "file": "/Users/mattcarniel/Desktop/42/42Git/CPP/04/ex02/src/Animal.cpp",
+    "output": "/Users/mattcarniel/Desktop/42/42Git/CPP/04/ex02/.obj/Animal.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-std=c++98",
+      "-Iinclude",
+      "-c",
+      "-o",
+      ".obj/Cat.o",
+      "src/Cat.cpp"
+    ],
+    "directory": "/Users/mattcarniel/Desktop/42/42Git/CPP/04/ex02",
+    "file": "/Users/mattcarniel/Desktop/42/42Git/CPP/04/ex02/src/Cat.cpp",
+    "output": "/Users/mattcarniel/Desktop/42/42Git/CPP/04/ex02/.obj/Cat.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-std=c++98",
+      "-Iinclude",
+      "-c",
+      "-o",
+      ".obj/Dog.o",
+      "src/Dog.cpp"
+    ],
+    "directory": "/Users/mattcarniel/Desktop/42/42Git/CPP/04/ex02",
+    "file": "/Users/mattcarniel/Desktop/42/42Git/CPP/04/ex02/src/Dog.cpp",
+    "output": "/Users/mattcarniel/Desktop/42/42Git/CPP/04/ex02/.obj/Dog.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-std=c++98",
+      "-Iinclude",
+      "-c",
+      "-o",
+      ".obj/Brain.o",
+      "src/Brain.cpp"
+    ],
+    "directory": "/Users/mattcarniel/Desktop/42/42Git/CPP/04/ex02",
+    "file": "/Users/mattcarniel/Desktop/42/42Git/CPP/04/ex02/src/Brain.cpp",
+    "output": "/Users/mattcarniel/Desktop/42/42Git/CPP/04/ex02/.obj/Brain.o"
+  }
+]

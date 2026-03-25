@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 18:26:21 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/05 19:17:13 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2026/02/26 11:40:14 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,30 @@ Cat::Cat(void)
 {
 	LOG_DEBUG("[Cat] Default constructor called");
 	this->_type = "Cat";
+	this->_brain = new Brain();
 }
 
 Cat::Cat(const Cat& other) : Animal(other)
 {
 	LOG_DEBUG("[Cat] Copy constructor called");
+	_brain = new Brain(*other._brain);
 }
 
 Cat::~Cat()
 {
 	LOG_DEBUG("[Cat] Destructor called");
+	delete this->_brain;
 }
 
 Cat&	Cat::operator=(const Cat& other)
 {
 	LOG_DEBUG("[Cat] Copy assignment operator called");
 	if (this != &other)
-		this->_type = other._type;
+	{
+		Animal::operator=(other);
+		delete this->_brain;
+		this->_brain = new Brain(*other._brain);
+	}
 	return (*this);
 }
 
@@ -43,4 +50,14 @@ void	Cat::makeSound() const
 				<< "Purrr..."
 				<< ANSI_RESET
 				<< '\n';
+}
+
+void	Cat::setIdea(int const index, const std::string& idea)
+{
+	this->_brain->setIdea(index, idea);
+}
+
+std::string	Cat::getIdea(int const index) const
+{
+	return (this->_brain->getIdea(index));
 }

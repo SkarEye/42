@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 15:08:19 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/05 19:16:23 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2026/02/26 12:01:56 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,7 @@
 					<< "[SUCCESS] " \
 					<< ANSI_RESET << ANSI_GREEN \
 					<< x \
-					<< ANSI_RESET \
-					<<std::endl; \
+					<< ANSI_RESET; \
 	} while (0)
 #  define LOG_WARNING(x) \
 	do { \
@@ -91,8 +90,7 @@
 					<< "[WARNING] " \
 					<< ANSI_RESET << ANSI_YELLOW \
 					<< x \
-					<< ANSI_RESET \
-					<<std::endl; \
+					<< ANSI_RESET; \
 	} while (0)
 #  define LOG_ERROR(x) \
 	do { \
@@ -100,8 +98,7 @@
 					<< "[ERROR] " \
 					<< ANSI_RESET << ANSI_RED \
 					<< x \
-					<< ANSI_RESET \
-					<<std::endl; \
+					<< ANSI_RESET; \
 	} while (0)
 #  define LOG_INFO(x) \
 	do { \
@@ -109,8 +106,7 @@
 					<< "[INFO] " \
 					<< ANSI_RESET << ANSI_CYAN \
 					<< x \
-					<< ANSI_RESET \
-					<<std::endl; \
+					<< ANSI_RESET; \
 	} while (0)
 # else
 #  define LOG_SUCCESS(x) do {} while (0)
@@ -118,4 +114,4 @@
 #  define LOG_ERROR(x) do {} while (0)
 #  define LOG_INFO(x) do {} while (0)
 # endif
-#endif 
+#endif

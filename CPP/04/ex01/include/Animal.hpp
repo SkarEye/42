@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 14:15:40 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/01/05 19:12:30 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2026/02/26 14:27:50 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class Animal
 		Animal&			operator=(const Animal& other);
 
 		std::string		getType() const;
-		virtual void	makeSound() const;
+		virtual void	makeSound() const = 0;
 };
 
 #endif
