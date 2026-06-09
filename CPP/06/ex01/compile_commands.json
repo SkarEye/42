@@ -1,0 +1,19 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-std=c++98",
+      "-Iinc",
+      "-c",
+      "-o",
+      ".obj/Serializer.o",
+      "src/Serializer.cpp"
+    ],
+    "directory": "/Users/mattcarniel/Desktop/42/42Git/CPP/06/ex01",
+    "file": "/Users/mattcarniel/Desktop/42/42Git/CPP/06/ex01/src/Serializer.cpp",
+    "output": "/Users/mattcarniel/Desktop/42/42Git/CPP/06/ex01/.obj/Serializer.o"
+  }
+]

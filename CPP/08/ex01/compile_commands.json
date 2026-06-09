@@ -1,0 +1,19 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-std=c++98",
+      "-Iinc",
+      "-c",
+      "-o",
+      ".obj/Span.o",
+      "src/Span.cpp"
+    ],
+    "directory": "/Users/mattcarniel/Desktop/42/42Git/CPP/08/ex01",
+    "file": "/Users/mattcarniel/Desktop/42/42Git/CPP/08/ex01/src/Span.cpp",
+    "output": "/Users/mattcarniel/Desktop/42/42Git/CPP/08/ex01/.obj/Span.o"
+  }
+]

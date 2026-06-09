@@ -6,7 +6,7 @@
 /*   By: mattcarniel <mattcarniel@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/12 16:32:14 by mattcarniel       #+#    #+#             */
-/*   Updated: 2026/02/21 15:20:22 by mattcarniel      ###   ########.fr       */
+/*   Updated: 2026/06/02 12:41:59 by mattcarniel      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,32 +50,31 @@ bool	bsp(Point const a, Point const b, Point const c, Point const p)
 	return (!(has_neg && has_pos));
 }
 
+void	printTriangle(Point const a, Point const b, Point const c, Point const point)
+{
+	Fixed	max_x = Fixed::max(a.x(), Fixed::max(b.x(), c.x())),
+			min_x = Fixed::min(a.x(), Fixed::min(b.x(), c.x())),
+			max_y = Fixed::max(a.y(), Fixed::max(b.y(), c.y())),
+			min_y = Fixed::min(a.y(), Fixed::min(b.y(), c.y())),
+			step_x = (max_x - min_x) / Fixed(GRID_SIZE),
+			step_y = (max_y - min_y) / Fixed(GRID_SIZE);
 
-// void	printTriangle(Point const a, Point const b, Point const c, Point const point)
-// {
-// 	Fixed	max_x = Fixed::max(a.x(), Fixed::max(b.x(), c.x())),
-// 			min_x = Fixed::min(a.x(), Fixed::min(b.x(), c.x())),
-// 			max_y = Fixed::max(a.y(), Fixed::max(b.y(), c.y())),
-// 			min_y = Fixed::min(a.y(), Fixed::min(b.y(), c.y())),
-// 			step_x = (max_x - min_x) / Fixed(GRID_SIZE),
-// 			step_y = (max_y - min_y) / Fixed(GRID_SIZE);
+	for (int y = GRID_SIZE; y > 0; y--)
+	{
+		for (int x = 0; x < GRID_SIZE * 2; x++)
+		{
+			Point pixel(
+			min_x + Fixed(x) * step_x / 2,
+			min_y + Fixed(y) * step_y);
 
-// 	for (int y = GRID_SIZE; y > 0; y--)
-// 	{
-// 		for (int x = 0; x < GRID_SIZE * 2; x++)
-// 		{
-// 			Point pixel(
-// 			min_x + Fixed(x) * step_x / 2,
-// 			min_y + Fixed(y) * step_y);
-
-// 			if ((pixel.x() - point.x()).abs() < step_x.abs()
-// 			&& (pixel.y() - point.y()).abs() < step_y.abs())
-// 				std::cout << ANSI_RED << 'o' << ANSI_RESET;
-// 			else if (bsp(a, b, c, pixel))
-// 				std::cout << 'o';
-// 			else
-// 			 	std::cout << '.';
-// 		}
-// 		std::cout << '\n';
-// 	}
-// }
+			if ((pixel.x() - point.x()).abs() < step_x.abs()
+			&& (pixel.y() - point.y()).abs() < step_y.abs())
+				std::cout << ANSI_RED << 'o' << ANSI_RESET;
+			else if (bsp(a, b, c, pixel))
+				std::cout << 'o';
+			else
+			 	std::cout << '.';
+		}
+		std::cout << '\n';
+	}
+}

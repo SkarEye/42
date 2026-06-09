@@ -1,0 +1,19 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-std=c++98",
+      "-Iinc",
+      "-c",
+      "-o",
+      ".obj/Base.o",
+      "src/Base.cpp"
+    ],
+    "directory": "/Users/mattcarniel/Desktop/42/42Git/CPP/06/ex02",
+    "file": "/Users/mattcarniel/Desktop/42/42Git/CPP/06/ex02/src/Base.cpp",
+    "output": "/Users/mattcarniel/Desktop/42/42Git/CPP/06/ex02/.obj/Base.o"
+  }
+]

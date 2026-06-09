@@ -1,0 +1,19 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-std=c++98",
+      "-Iinc",
+      "-c",
+      "-o",
+      ".obj/ScalarConverter.o",
+      "src/ScalarConverter.cpp"
+    ],
+    "directory": "/Users/mattcarniel/Desktop/42/42Git/CPP/06/ex00",
+    "file": "/Users/mattcarniel/Desktop/42/42Git/CPP/06/ex00/src/ScalarConverter.cpp",
+    "output": "/Users/mattcarniel/Desktop/42/42Git/CPP/06/ex00/.obj/ScalarConverter.o"
+  }
+]

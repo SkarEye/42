@@ -1,0 +1,19 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-std=c++98",
+      "-Iinc",
+      "-c",
+      "-o",
+      ".obj/Intern.o",
+      "src/Intern.cpp"
+    ],
+    "directory": "/Users/mattcarniel/Desktop/42/42Git/CPP/05/ex03",
+    "file": "/Users/mattcarniel/Desktop/42/42Git/CPP/05/ex03/src/Intern.cpp",
+    "output": "/Users/mattcarniel/Desktop/42/42Git/CPP/05/ex03/.obj/Intern.o"
+  }
+]

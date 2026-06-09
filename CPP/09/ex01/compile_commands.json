@@ -1,0 +1,36 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-std=c++98",
+      "-Iinc",
+      "-c",
+      "-o",
+      ".obj/RPN.o",
+      "src/RPN.cpp"
+    ],
+    "directory": "/Users/mattcarniel/Desktop/42/42Git/CPP/09/ex01",
+    "file": "/Users/mattcarniel/Desktop/42/42Git/CPP/09/ex01/src/RPN.cpp",
+    "output": "/Users/mattcarniel/Desktop/42/42Git/CPP/09/ex01/.obj/RPN.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-std=c++98",
+      "-Iinc",
+      "-c",
+      "-o",
+      ".obj/main.o",
+      "src/main.cpp"
+    ],
+    "directory": "/Users/mattcarniel/Desktop/42/42Git/CPP/09/ex01",
+    "file": "/Users/mattcarniel/Desktop/42/42Git/CPP/09/ex01/src/main.cpp",
+    "output": "/Users/mattcarniel/Desktop/42/42Git/CPP/09/ex01/.obj/main.o"
+  }
+]

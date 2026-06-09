@@ -1,0 +1,19 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/c++",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-std=c++98",
+      "-Iinc",
+      "-c",
+      "-o",
+      ".obj/Bureaucrat.o",
+      "src/Bureaucrat.cpp"
+    ],
+    "directory": "/Users/mattcarniel/Desktop/42/42Git/CPP/05/ex01",
+    "file": "/Users/mattcarniel/Desktop/42/42Git/CPP/05/ex01/src/Bureaucrat.cpp",
+    "output": "/Users/mattcarniel/Desktop/42/42Git/CPP/05/ex01/.obj/Bureaucrat.o"
+  }
+]
